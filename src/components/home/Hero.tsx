@@ -5,13 +5,13 @@ import Background3D from './Background3D';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-slate-900 via-blue-900 to-indigo-900">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* 3D Background */}
       <Background3D />
       
       {/* Content overlay */}
-      <div className="relative z-10 container text-white pt-32 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div className="relative z-10 container text-white h-full flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -21,7 +21,7 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20"
+              className="inline-flex items-center bg-primary/20 rounded-full px-6 py-3 mb-8 border border-accent/30"
             >
               <Shield size={20} className="text-accent mr-3" />
               <span className="text-sm font-medium">Trusted Cybersecurity Experts</span>
@@ -62,49 +62,11 @@ const Hero = () => {
               </Link>
               <Link 
                 to="/services" 
-                className="btn bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg font-semibold transition-all duration-300"
+                className="btn bg-primary/30 border-2 border-white/30 text-white hover:bg-primary/50 px-8 py-4 text-lg font-semibold transition-all duration-300"
               >
                 Explore Our Services
                 <ChevronRight size={20} className="ml-2" />
               </Link>
-            </motion.div>
-
-            {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="flex flex-wrap items-center mt-16 gap-x-12 gap-y-6"
-            >
-              <div className="flex items-center group">
-                <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-secondary/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 border border-white/20 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-2xl font-bold text-accent">15+</span>
-                </div>
-                <div>
-                  <span className="text-sm text-gray-300 block">Years of</span>
-                  <span className="text-white font-semibold">Experience</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center group">
-                <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-secondary/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 border border-white/20 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-2xl font-bold text-accent">200+</span>
-                </div>
-                <div>
-                  <span className="text-sm text-gray-300 block">Projects</span>
-                  <span className="text-white font-semibold">Delivered</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center group">
-                <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-secondary/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 border border-white/20 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-xl font-bold text-accent">24/7</span>
-                </div>
-                <div>
-                  <span className="text-sm text-gray-300 block">Support</span>
-                  <span className="text-white font-semibold">Available</span>
-                </div>
-              </div>
             </motion.div>
           </motion.div>
 
@@ -150,7 +112,7 @@ const Hero = () => {
                 </svg>
               </motion.div>
 
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-white/20">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-secondary/10 rounded-2xl"></div>
                 <img 
                   src="https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 

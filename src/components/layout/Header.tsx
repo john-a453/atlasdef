@@ -1,21 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Shield, Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
   };
 
   useEffect(() => {
@@ -45,15 +37,7 @@ const Header = () => {
   return (
     <header className={headerClasses}>
       <div className="container flex items-center justify-between">
-        <Link 
-          to="/" 
-          className="flex items-center space-x-2"
-          onClick={() => {
-            if (location.pathname === '/') {
-              scrollToTop();
-            }
-          }}
-        >
+        <Link to="/" className="flex items-center space-x-2">
           <Shield className={`w-8 h-8 ${isScrolled ? 'text-primary' : 'text-white'}`} />
           <span className={`text-xl font-bold font-poppins ${isScrolled ? 'text-primary' : 'text-white'}`}>
             Atlas Defenders
@@ -62,15 +46,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">
-          <NavLink 
-            to="/" 
-            className={navLinkClasses}
-            onClick={() => {
-              if (location.pathname === '/') {
-                scrollToTop();
-              }
-            }}
-          >
+          <NavLink to="/" className={navLinkClasses}>
             Home
           </NavLink>
           <NavLink to="/services" className={navLinkClasses}>
@@ -118,12 +94,7 @@ const Header = () => {
             <NavLink
               to="/"
               className={navLinkClasses}
-              onClick={() => {
-                setIsOpen(false);
-                if (location.pathname === '/') {
-                  scrollToTop();
-                }
-              }}
+              onClick={() => setIsOpen(false)}
             >
               Home
             </NavLink>

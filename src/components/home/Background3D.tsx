@@ -19,7 +19,7 @@ const Background3D = () => {
   // Floating network nodes
   const NetworkNode = ({ delay, x, y, size = 'w-3 h-3' }: { delay: number, x: string, y: string, size?: string }) => (
     <motion.div
-      className={`absolute ${size} bg-accent/30 rounded-full backdrop-blur-sm border border-accent/50`}
+      className={`absolute ${size} bg-accent/30 rounded-full border border-accent/50`}
       style={{ left: x, top: y }}
       animate={{
         y: [0, -20, 0],
@@ -246,35 +246,6 @@ const Background3D = () => {
           <rect width="100%" height="100%" fill="url(#circuit)"/>
         </svg>
       </div>
-
-      {/* Glowing orbs */}
-      <motion.div
-        className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-accent/20 to-secondary/20 blur-xl"
-        style={{ left: "20%", top: "60%" }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      
-      <motion.div
-        className="absolute w-24 h-24 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 blur-xl"
-        style={{ right: "15%", top: "30%" }}
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.4, 0.7, 0.4],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
     </div>
   );
 };

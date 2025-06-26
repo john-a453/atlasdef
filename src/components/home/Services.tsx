@@ -72,7 +72,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
 
 const Services = () => {
   return (
-    <section id="services" className="section bg-background">
+    <section id="services" className="py-16 md:py-24 bg-background">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

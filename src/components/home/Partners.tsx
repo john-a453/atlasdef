@@ -73,7 +73,7 @@ const Partners = () => {
               <img 
                 src={partner.logo} 
                 alt={`${partner.name} logo`} 
-                className="max-h-12 max-w-full object-contain grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
+                className="max-h-12 max-w-full object-contain transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
               />
             </div>
           ))}
