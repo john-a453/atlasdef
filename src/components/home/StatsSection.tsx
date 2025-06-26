@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { Clock, Folder, Headphones, Shield, Award, Users, Zap } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import { FaHourglassHalf, FaCheckCircle, FaUsers } from "react-icons/fa";
 
 interface CounterProps {
   end: number;
@@ -431,315 +432,127 @@ const SupportDisplay = () => {
   );
 };
 
-const StatsSection = () => {
-  const { ref: sectionRef, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: false
-  });
+const stats = [
+  {
+    icon: <FaHourglassHalf size={32} className="text-cyber-blue" />, // Experience
+    label: "Years of Experience",
+    value: 15,
+    suffix: "",
+    progressColor: "bg-cyber-blue",
+  },
+  {
+    icon: <FaCheckCircle size={32} className="text-green-400" />, // Projects
+    label: "Projects Delivered",
+    value: 120,
+    suffix: "+",
+    progressColor: "bg-green-400",
+  },
+  {
+    icon: <FaUsers size={32} className="text-navy-500" />, // Clients
+    label: "Clients Satisfied",
+    value: 60,
+    suffix: "+",
+    progressColor: "bg-navy-500",
+  },
+];
+
+const AnimatedStatCard = ({ icon, label, value, suffix, progressColor, delay }) => {
+  const [count, setCount] = useState(0);
+  const [progress, setProgress] = useState(0);
   const controls = useAnimation();
-  const titleControls = useAnimation();
-  const [activeTab, setActiveTab] = useState('main');
-  
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
+
   useEffect(() => {
     if (inView) {
-      controls.start('visible');
-      titleControls.start('visible');
-    } else {
-      controls.start('hidden');
-      titleControls.start('hidden');
-    }
-  }, [inView, controls, titleControls]);
-
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+      controls.start("visible");
+      let start = 0;
+      const duration = 1.6; // seconds
+      const startTime = performance.now();
+      function animate(now) {
+        const elapsed = (now - startTime) / 1000;
+        const t = Math.min(elapsed / duration, 1);
+        const current = Math.round(t * value);
+        setCount(current);
+        setProgress(t);
+        if (t < 1) requestAnimationFrame(animate);
       }
+      requestAnimationFrame(animate);
     }
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: -30, filter: 'blur(8px)' },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
-  };
-  
-  const tabVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-        delay: 0.6
-      }
-    }
-  };
-  
-  const backgroundVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 1.5 }
-    }
-  };
-  
-  // Additional stats for the expanded view
-  const additionalStats = [
-    {
-      id: 'clients',
-      icon: Users,
-      end: 150,
-      suffix: '+',
-      label: 'Satisfied Clients',
-      color: 'bg-blue-500',
-      description: 'Businesses that trust our services'
-    },
-    {
-      id: 'certifications',
-      icon: Award,
-      end: 25,
-      suffix: '+',
-      label: 'Industry Certifications',
-      color: 'bg-purple-500',
-      description: 'Professional qualifications'
-    },
-    {
-      id: 'response',
-      icon: Zap,
-      end: 30,
-      suffix: 'min',
-      label: 'Avg. Response Time',
-      color: 'bg-amber-500',
-      description: 'Fast incident response'
-    },
-    {
-      id: 'security',
-      icon: Shield,
-      end: 99,
-      suffix: '%',
-      label: 'Security Success Rate',
-      color: 'bg-red-500',
-      description: 'Proven protection record'
-    }
-  ];
+  }, [inView, value]);
 
   return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Dynamic background with animated gradient */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-b from-[#0a1f3d] to-[#192333] z-0"
-        variants={backgroundVariants}
-        initial="hidden"
-        animate="visible"
+    <motion.div
+      ref={ref}
+      className="relative flex flex-col items-center bg-white/10 rounded-2xl shadow-xl p-6 m-2 w-full max-w-xs min-w-[220px] group overflow-hidden"
+      initial={{ opacity: 0, y: 40, scale: 0.9 }}
+      animate={controls}
+      variants={{ visible: { opacity: 1, y: 0, scale: 1, transition: { delay } } }}
+      whileHover={{ scale: 1.04, boxShadow: "0 8px 32px 0 rgba(34,197,94,0.15)", borderColor: "#22d3ee" }}
+      transition={{ type: "spring", stiffness: 120, damping: 14 }}
+    >
+      {/* Glow background */}
+      <motion.div
+        className="absolute -inset-2 rounded-2xl bg-cyber-blue opacity-20 blur-2xl z-0"
+        animate={{ opacity: [0.18, 0.28, 0.18] }}
+        transition={{ duration: 2.5, repeat: Infinity, repeatType: "mirror" }}
       />
-      
-      {/* Animated grid pattern */}
-      <motion.div 
-        className="absolute inset-0 opacity-10 z-0"
-        style={{
-          backgroundImage: `radial-gradient(circle, rgba(99, 102, 241, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '30px 30px'
-        }}
-        animate={{
-          backgroundPosition: ['0px 0px', '30px 30px'],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: 'linear'
-        }}
-      />
-      
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden z-0">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 rounded-full bg-secondary opacity-20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 0.5, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 5 + Math.random() * 10,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: 'easeInOut',
-            }}
-          />
-        ))}
-      </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
+      {/* Icon */}
+      <motion.div className="mb-3 z-10" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: delay + 0.1, type: "spring", stiffness: 200 }}>
+        {icon}
+      </motion.div>
+      {/* Number */}
+      <motion.div className="text-4xl font-extrabold text-white flex items-baseline z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: delay + 0.2 }}>
+        {count}
+        <span className="text-cyber-blue text-2xl font-bold ml-1">{suffix}</span>
+      </motion.div>
+      {/* Label */}
+      <motion.div className="text-base text-white/80 font-medium mt-1 mb-2 z-10 text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: delay + 0.3 }}>
+        {label}
+      </motion.div>
+      {/* Progress Bar */}
+      <motion.div className="w-full h-2 bg-white/10 rounded-full overflow-hidden mt-2 z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: delay + 0.4 }}>
         <motion.div
-          ref={sectionRef}
-          className="text-center mb-12"
-          variants={titleVariants}
-          initial="hidden"
-          animate={titleControls}
-        >
-          <motion.div 
-            className="inline-block mb-2 px-4 py-1 rounded-full bg-secondary/10 border border-secondary/20"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.8 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <span className="text-secondary text-sm font-medium">Proven Excellence</span>
-          </motion.div>
-          
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-text-light mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            Our Track Record
-          </motion.h2>
-          
-          <motion.p 
-            className="text-text-light text-opacity-80 max-w-2xl mx-auto text-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            Delivering excellence in cybersecurity and IT solutions with proven results
-          </motion.p>
-        </motion.div>
-        
-        {/* Tab navigation for expanded stats */}
-        <motion.div 
-          className="flex justify-center mb-10"
-          variants={tabVariants}
-          initial="hidden"
-          animate={controls}
-        >
-          <div className="inline-flex bg-primary/50 backdrop-blur-sm rounded-full p-1 border border-gray-800">
-            <motion.button
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'main' ? 'bg-secondary text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
-              onClick={() => setActiveTab('main')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Key Metrics
-            </motion.button>
-            <motion.button
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'expanded' ? 'bg-secondary text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
-              onClick={() => setActiveTab('expanded')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Detailed Stats
-            </motion.button>
-          </div>
-        </motion.div>
+          className={`h-full rounded-full ${progressColor}`}
+          style={{ width: `${Math.round(progress * 100)}%` }}
+          initial={{ width: 0 }}
+          animate={{ width: `${Math.round(progress * 100)}%` }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+};
 
-        <AnimatePresence mode="wait">
-          {activeTab === 'main' ? (
-            <motion.div
-              key="main"
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-              variants={sectionVariants}
-              initial="hidden"
-              animate={controls}
-              exit={{ opacity: 0, y: 20, transition: { duration: 0.3 } }}
-            >
-              <Counter
-                end={15}
-                duration={2}
-                label="Years of Experience"
-                suffix="+"
-                icon={Clock}
-                color="bg-blue-500"
-                delay={0}
-                description="Dedicated to cybersecurity excellence"
-              />
-              <Counter
-                end={200}
-                duration={2.5}
-                label="Projects Delivered"
-                suffix="+"
-                icon={Folder}
-                color="bg-purple-500"
-                delay={0.2}
-                description="Successful implementations"
-              />
-              <SupportDisplay />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="expanded"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-              variants={sectionVariants}
-              initial="hidden"
-              animate={controls}
-              exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
-            >
-              {additionalStats.map((stat, index) => (
-                <Counter
-                  key={stat.id}
-                  end={stat.end}
-                  duration={2 + (index * 0.2)}
-                  label={stat.label}
-                  suffix={stat.suffix}
-                  icon={stat.icon}
-                  color={stat.color}
-                  delay={index * 0.1}
-                  description={stat.description}
-                />
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-        
-        {/* Call to action button */}
-        <motion.div 
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ 
-            opacity: inView ? 1 : 0, 
-            y: inView ? 0 : 20 
-          }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-        >
-          <motion.a 
-            href="/about" 
-            className="inline-flex items-center px-6 py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-full transition-all duration-300 group"
-            whileHover={{ scale: 1.05, boxShadow: '0 10px 25px -5px rgba(99, 102, 241, 0.4)' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Learn More About Our Success
-            <motion.span 
-              className="ml-2"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ 
-                duration: 1, 
-                repeat: Infinity, 
-                repeatType: 'loop',
-                ease: 'easeInOut' 
-              }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </motion.span>
-          </motion.a>
-        </motion.div>
-      </div>
+const StatsSection = () => {
+  return (
+    <section className="w-full flex flex-col items-center py-16 px-4 bg-gradient-to-b from-navy-900/90 to-navy-800/80">
+      <motion.h2
+        className="text-3xl md:text-4xl font-bold text-white mb-10 text-center"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+      >
+        ATLAS Defenders by the Numbers
+      </motion.h2>
+      <motion.div
+        className="flex flex-col md:flex-row justify-center items-center gap-6 w-full max-w-4xl"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.18,
+            },
+          },
+        }}
+      >
+        {stats.map((stat, i) => (
+          <AnimatedStatCard key={stat.label} {...stat} delay={i * 0.18} />
+        ))}
+      </motion.div>
     </section>
   );
 };
