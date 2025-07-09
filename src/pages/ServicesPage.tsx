@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Network, Shield, Wifi, Server, Cloud, LineChart, CheckCircle as CircleCheck } from 'lucide-react';
 import VeeamBackup from '../components/services/VeeamBackup';
+import GridServices from '../components/services/GridServices';
 
 const ServicesPage = () => {
   useEffect(() => {
@@ -91,7 +92,7 @@ const ServicesPage = () => {
         'Log aggregation and analysis',
         'Network traffic analysis and anomaly detection'
       ],
-      image: 'https://images.pexels.com/photos/92904/pexels-photo-92904.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      image: 'https://images.pexels.com/photos/92904/pexels-photo-92904.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1'
     }
   ];
 
@@ -120,8 +121,11 @@ const ServicesPage = () => {
         </div>
       </section>
 
+      {/* Grid Interactive Services Section */}
+      <GridServices />
+
       {/* Services Detail Section */}
-      <section className="py-16">
+      <section className="py-16 bg-white">
         <div className="container">
           {services.map((service, index) => {
             const { id, icon: Icon, title, description, features, image } = service;

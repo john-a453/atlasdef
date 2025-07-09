@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Hero from '../components/home/Hero';
 import CounterSection from '../components/home/CounterSection';
-import Services from '../components/home/Services';
+import ServicesCarousel from '../components/home/ServicesCarousel';
 import Industries from '../components/home/Industries';
 import Partners from '../components/home/Partners';
 import Testimonials from '../components/home/Testimonials';
@@ -16,7 +16,7 @@ const HomePage = () => {
     <>
       <Hero />
       <CounterSection />
-      <Services />
+      <ServicesCarousel />
       <Industries />
       <Partners />
       <Testimonials />

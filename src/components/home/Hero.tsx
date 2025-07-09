@@ -2,8 +2,15 @@ import { motion } from 'framer-motion';
 import { Shield, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Background3D from './Background3D';
+import TypewriterText from './TypewriterText';
 
 const Hero = () => {
+  const typingMessages = [
+    "Precision. Protection. Performance.",
+    "Where performance meets protection.",
+    "Empower your business with trusted IT."
+  ];
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* 3D Background */}
@@ -38,12 +45,40 @@ const Hero = () => {
                 Digital Future
               </span>
             </motion.h1>
+
+            {/* Typing Animation */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="mb-6"
+            >
+              <TypewriterText 
+                sentences={typingMessages}
+                typingSpeed={80}
+                deletingSpeed={40}
+                pauseDuration={2500}
+                className="text-2xl md:text-3xl lg:text-4xl text-white font-poppins"
+              />
+            </motion.div>
+
+            {/* Static Subheading */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mb-8"
+            >
+              <p className="text-lg text-gray-300 font-medium">
+                — Atlas Defenders
+              </p>
+            </motion.div>
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-xl text-gray-200 mb-10 max-w-xl leading-relaxed"
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-lg text-gray-200 mb-10 max-w-xl leading-relaxed"
             >
               Atlas Defenders provides enterprise-grade IT and cybersecurity solutions to protect your organization's most valuable digital assets in an evolving threat landscape.
             </motion.p>
@@ -51,7 +86,7 @@ const Hero = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
               className="flex flex-col sm:flex-row gap-6"
             >
               <Link 
