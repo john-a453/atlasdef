@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Hero from '../components/home/Hero';
-import CounterSection from '../components/home/CounterSection';
+import ProfessionalStats from '../components/home/ProfessionalStats';
 import ServicesCarousel from '../components/home/ServicesCarousel';
 import Industries from '../components/home/Industries';
 import Partners from '../components/home/Partners';
@@ -15,7 +15,7 @@ const HomePage = () => {
   return (
     <>
       <Hero />
-      <CounterSection />
+      <ProfessionalStats />
       <ServicesCarousel />
       <Industries />
       <Partners />
