@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Professional Datacenter Background */}
+      {/* Professional Datacenter Background with Cybersecurity Overlay */}
       <div className="absolute inset-0">
         <img 
           src="https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1"
           alt="Professional IT Datacenter"
           className="w-full h-full object-cover"
         />
-        {/* Dark overlay for text readability - matching Atek style */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/50"></div>
+        {/* Professional cybersecurity gradient overlay - top-left to bottom-right */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-900/80 to-indigo-900/85"></div>
       </div>
 
       {/* Floating geometric shapes - exact Atek style */}

@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import Hero from '../components/home/Hero';
-import FeatureCards from '../components/home/FeatureCards';
-import WaveTransition from '../components/home/WaveTransition';
 import PremiumServicesSection from '../components/home/PremiumServicesSection';
 import ProfessionalStats from '../components/home/ProfessionalStats';
 import Industries from '../components/home/Industries';
@@ -17,8 +15,6 @@ const HomePage = () => {
   return (
     <>
       <Hero />
-      <FeatureCards />
-      <WaveTransition />
       <PremiumServicesSection />
       <Industries />
       <Partners />
