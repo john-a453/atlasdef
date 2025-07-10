@@ -19,7 +19,9 @@ import {
   FileText,
   Users,
   Target,
-  AlertTriangle
+  AlertTriangle,
+  Activity,
+  Cpu
 } from 'lucide-react';
 
 const ServicesPage = () => {
@@ -27,36 +29,109 @@ const ServicesPage = () => {
     document.title = 'Our Expertise. Your Advantage. | Atlas Defenders';
   }, []);
 
-  const [expandedSection, setExpandedSection] = useState<string | null>('network');
-  const [activeNavItem, setActiveNavItem] = useState('network');
+  const [expandedSection, setExpandedSection] = useState<string | null>('infrastructure');
+  const [activeNavItem, setActiveNavItem] = useState('infrastructure');
 
   const serviceCategories = [
     {
-      id: 'network',
-      icon: Network,
-      title: 'Professional Network Architecture & Infrastructure',
-      subtitle: 'Enterprise-Grade Network Solutions',
-      description: 'High availability enterprise networks with spine-leaf architecture, dual-core redundancy, and advanced routing protocols.',
-      features: [
-        'Spine-Leaf, dual-core, redundant distribution architecture',
-        'BGP, OSPF, MPLS, VRF, route redistribution protocols',
-        'SD-WAN & hybrid WAN implementations',
-        'QoS, multicast, IP SLA optimization',
-        'Secure WiFi 6/7, VLANs, 802.1X, NAC deployment'
+      id: 'infrastructure',
+      icon: Server,
+      title: 'Infrastructure Solutions',
+      subtitle: 'Enterprise Infrastructure Excellence',
+      description: 'Comprehensive infrastructure services from data center design to performance optimization, covering all aspects of modern IT infrastructure.',
+      services: [
+        {
+          title: 'Next-Generation Data Centers',
+          description: 'Design, build, and modernize full-scale data centers with optimal energy and performance standards.',
+          category: 'Core Infrastructure Services'
+        },
+        {
+          title: 'Network Engineering',
+          description: 'Professional routing, switching, BGP, MPLS, VLANs, and SD-WAN implementations.',
+          category: 'Core Infrastructure Services'
+        },
+        {
+          title: 'Cloud Integration',
+          description: 'Hybrid and multi-cloud integration across AWS, Azure, GCP, and OCI.',
+          category: 'Core Infrastructure Services'
+        },
+        {
+          title: 'Virtualization',
+          description: 'VMware, Proxmox, Nutanix, and XCP-ng setups for optimized virtual environments.',
+          category: 'Core Infrastructure Services'
+        },
+        {
+          title: 'Server Administration',
+          description: 'Expert administration for Windows Server, Linux, Active Directory, and user access policies.',
+          category: 'Infrastructure Operations'
+        },
+        {
+          title: 'Infrastructure Monitoring',
+          description: 'Real-time infrastructure observability using Zabbix, Prometheus, Grafana, and PRTG.',
+          category: 'Infrastructure Operations'
+        },
+        {
+          title: 'Backup & Disaster Recovery',
+          description: 'Veeam-powered data protection, RTO/RPO strategies, and business continuity planning.',
+          category: 'Infrastructure Operations'
+        },
+        {
+          title: 'Performance Optimization',
+          description: 'Infrastructure tuning, load balancing, and uptime assurance.',
+          category: 'Infrastructure Operations'
+        }
       ],
       technologies: [
         { name: 'Cisco', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/1200px-Cisco_logo.svg.png' },
-        { name: 'Juniper', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Juniper_Networks_logo.svg/2560px-Juniper_Networks_logo.svg.png' },
-        { name: 'Huawei', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Huawei.svg/2560px-Huawei.svg.png' },
-        { name: 'Ubiquiti', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Ubiquiti_Networks_2016.svg/2560px-Ubiquiti_Networks_2016.svg.png' },
-        { name: 'Aruba', logo: 'https://cdn.1min30.com/wp-content/uploads/2018/07/Aruba-logo.jpg' }
+        { name: 'VMware', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vmware.svg/1024px-Vmware.svg.png' },
+        { name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/2560px-Amazon_Web_Services_Logo.svg.png' },
+        { name: 'Azure', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/2560px-Microsoft_Azure_Logo.svg.png' },
+        { name: 'Proxmox', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Proxmox-logo.svg/2560px-Proxmox-logo.svg.png' }
       ],
       gradient: 'from-blue-600 to-indigo-700',
-      image: 'https://images.pexels.com/photos/2881229/pexels-photo-2881229.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
+      image: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
+    },
+    {
+      id: 'cybersecurity',
+      icon: Shield,
+      title: 'Cybersecurity Services',
+      subtitle: 'Comprehensive Security Operations',
+      description: 'Full-spectrum cybersecurity including defensive security, offensive operations, and governance risk & compliance.',
+      services: [
+        {
+          title: 'Defensive Security',
+          description: 'Modern cyber defense using XDR, EDR, SIEM, IDS/IPS, and behavioral detection to ensure proactive threat prevention and response.',
+          category: 'Security Operations'
+        },
+        {
+          title: 'Offensive Security',
+          description: 'Advanced penetration testing services covering web, network, mobile, cloud, and physical attack simulations.',
+          category: 'Security Operations'
+        },
+        {
+          title: 'SOC as a Service',
+          description: '24/7 managed Security Operations Center with incident detection, alerting, and escalation.',
+          category: 'Security Operations'
+        },
+        {
+          title: 'Compliance & GRC',
+          description: 'Support for ISO 27001, NIST, GDPR, and comprehensive Governance, Risk & Compliance services.',
+          category: 'Security Operations'
+        }
+      ],
+      technologies: [
+        { name: 'Wazuh', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Wazuh_logo.svg/2560px-Wazuh_logo.svg.png' },
+        { name: 'CrowdStrike', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/CrowdStrike_logo.svg/2560px-CrowdStrike_logo.svg.png' },
+        { name: 'Cortex', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Palo_Alto_Networks_logo.svg/2560px-Palo_Alto_Networks_logo.svg.png' },
+        { name: 'SentinelOne', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/SentinelOne_logo.svg/2560px-SentinelOne_logo.svg.png' },
+        { name: 'Suricata', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Suricata_logo.svg/2560px-Suricata_logo.svg.png' }
+      ],
+      gradient: 'from-red-600 to-pink-700',
+      image: 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
     },
     {
       id: 'firewall',
-      icon: Shield,
+      icon: Lock,
       title: 'Firewall & Edge Security Architecture',
       subtitle: 'Next-Generation Security Perimeter',
       description: 'Advanced NGFW deployment with transparent and routed modes, comprehensive IPS/IDS, and redundant security architectures.',
@@ -74,123 +149,31 @@ const ServicesPage = () => {
         { name: 'OPNsense', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/OPNsense_logo.png/1200px-OPNsense_logo.png' },
         { name: 'Sophos', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Sophos_logo.svg/2560px-Sophos_logo.svg.png' }
       ],
-      gradient: 'from-red-600 to-pink-700',
+      gradient: 'from-orange-600 to-red-700',
       image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
     },
     {
-      id: 'virtualization',
-      icon: Server,
-      title: 'Virtualization & System Administration',
-      subtitle: 'Enterprise Hypervisor Solutions',
-      description: 'Comprehensive virtualization platforms with Linux & Windows Server administration, clustering, and container support.',
+      id: 'wireless',
+      icon: Wifi,
+      title: 'Wireless Solutions',
+      subtitle: 'Enterprise Wireless Networks',
+      description: 'Achieve full wireless coverage with modern Wi-Fi 6/6E mesh networks. We plan and deploy Ubiquiti, TP-Link Omada, Cisco Meraki, and Aruba solutions.',
       features: [
-        'Hypervisors: VMware, Proxmox, XCP-NG, Hyper-V',
-        'Linux & Windows Server: RHEL, Ubuntu, AD, DNS, GPO',
-        'Resource management, clustering, security hardening',
-        'Container support: Docker, LXD, Kubernetes',
-        'High availability and disaster recovery setup'
+        'Wi-Fi 6/6E mesh network deployment',
+        'Ubiquiti, TP-Link Omada, Cisco Meraki solutions',
+        'Handover optimization and seamless roaming',
+        'Secure access for corporate and guest VLANs',
+        'Wireless site surveys and capacity planning'
       ],
       technologies: [
-        { name: 'VMware', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vmware.svg/1024px-Vmware.svg.png' },
-        { name: 'Proxmox', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Proxmox-logo.svg/2560px-Proxmox-logo.svg.png' },
-        { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png' },
-        { name: 'Red Hat', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Red_Hat_logo.svg/2560px-Red_Hat_logo.svg.png' },
-        { name: 'XCP-ng', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/XCP-ng_logo.svg/2560px-XCP-ng_logo.svg.png' }
+        { name: 'Ubiquiti', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Ubiquiti_Networks_2016.svg/2560px-Ubiquiti_Networks_2016.svg.png' },
+        { name: 'TP-Link', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/TP-Link_logo.svg/2560px-TP-Link_logo.svg.png' },
+        { name: 'Cisco Meraki', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/1200px-Cisco_logo.svg.png' },
+        { name: 'Aruba', logo: 'https://cdn.1min30.com/wp-content/uploads/2018/07/Aruba-logo.jpg' },
+        { name: 'Huawei', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Huawei.svg/2560px-Huawei.svg.png' }
       ],
       gradient: 'from-purple-600 to-violet-700',
-      image: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
-    },
-    {
-      id: 'cloud',
-      icon: Cloud,
-      title: 'Cloud Computing & Integration',
-      subtitle: 'Multi-Cloud Architecture Excellence',
-      description: 'Comprehensive cloud deployments with landing zone creation, network peering, IAM, and secure hybrid architectures.',
-      features: [
-        'AWS, Azure, GCP, OCI deployments and migrations',
-        'Landing zone creation, network peering, IAM setup',
-        'Bastion hosts, NAT gateways, private endpoints',
-        'Secure hybrid & multi-cloud architecture design',
-        'Cloud backups and disaster recovery plans'
-      ],
-      technologies: [
-        { name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/2560px-Amazon_Web_Services_Logo.svg.png' },
-        { name: 'Azure', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/2560px-Microsoft_Azure_Logo.svg.png' },
-        { name: 'Google Cloud', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/2560px-Google_Cloud_logo.svg.png' },
-        { name: 'Oracle Cloud', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png' },
-        { name: 'Nutanix', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Nutanix_logo.svg/2560px-Nutanix_logo.svg.png' }
-      ],
-      gradient: 'from-emerald-600 to-teal-700',
-      image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
-    },
-    {
-      id: 'monitoring',
-      icon: LineChart,
-      title: 'Monitoring & Observability',
-      subtitle: 'Real-Time Infrastructure Intelligence',
-      description: 'Advanced monitoring solutions with real-time alerts, NetFlow analysis, log correlation, and custom dashboards for SLA management.',
-      features: [
-        'Monitoring platforms: Zabbix, Prometheus, Grafana, PRTG',
-        'Real-time alerts, uptime checks, NetFlow, SNMP monitoring',
-        'Log correlation with Wazuh/Splunk/ELK stack',
-        'Custom dashboards for SLA & infrastructure health',
-        'Performance analytics and capacity planning'
-      ],
-      technologies: [
-        { name: 'Zabbix', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Zabbix_logo.svg/2560px-Zabbix_logo.svg.png' },
-        { name: 'Grafana', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Grafana_icon.svg/1024px-Grafana_icon.svg.png' },
-        { name: 'Prometheus', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/2560px-Prometheus_software_logo.svg.png' },
-        { name: 'PRTG', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/PRTG_Network_Monitor_Logo.png/1200px-PRTG_Network_Monitor_Logo.png' },
-        { name: 'Splunk', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Splunk_logo.svg/2560px-Splunk_logo.svg.png' }
-      ],
-      gradient: 'from-orange-600 to-amber-700',
-      image: 'https://images.pexels.com/photos/92904/pexels-photo-92904.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
-    },
-    {
-      id: 'backup',
-      icon: HardDrive,
-      title: 'Backup & Disaster Recovery (DR)',
-      subtitle: 'Enterprise Data Protection',
-      description: 'Comprehensive backup solutions with immutable storage, cloud integration, and verified disaster recovery strategies.',
-      features: [
-        'Enterprise backup: Veeam, Bacula, Acronis, Wasabi',
-        'Immutable backups and ransomware protection',
-        'Backup to S3/Cloud + on-premises hybrid solutions',
-        'RTO/RPO strategy optimization',
-        'DR simulation tests and business continuity planning'
-      ],
-      technologies: [
-        { name: 'Veeam', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Veeam_logo.png' },
-        { name: 'Acronis', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Acronis_logo.svg/2560px-Acronis_logo.svg.png' },
-        { name: 'Bacula', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Bacula_logo.svg/2560px-Bacula_logo.svg.png' },
-        { name: 'Wasabi', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Wasabi_logo.svg/2560px-Wasabi_logo.svg.png' },
-        { name: 'Commvault', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Commvault_logo.svg/2560px-Commvault_logo.svg.png' }
-      ],
-      gradient: 'from-slate-600 to-gray-700',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
-    },
-    {
-      id: 'cybersecurity',
-      icon: Eye,
-      title: 'Cybersecurity Services',
-      subtitle: 'Comprehensive Security Operations',
-      description: 'Full-spectrum cybersecurity including offensive security, defensive operations, and governance risk & compliance.',
-      features: [
-        'Offensive Security: Web, Mobile, Network, Cloud pentesting',
-        'Defensive Security: SOC as a Service, XDR/EDR solutions',
-        'Red Team engagements and phishing simulations',
-        'SIEM correlation, forensic response, patch management',
-        'GRC: ISO 27001, GDPR, HIPAA, NIST CSF compliance'
-      ],
-      technologies: [
-        { name: 'Wazuh', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Wazuh_logo.svg/2560px-Wazuh_logo.svg.png' },
-        { name: 'CrowdStrike', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/CrowdStrike_logo.svg/2560px-CrowdStrike_logo.svg.png' },
-        { name: 'Cortex', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Palo_Alto_Networks_logo.svg/2560px-Palo_Alto_Networks_logo.svg.png' },
-        { name: 'SentinelOne', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/SentinelOne_logo.svg/2560px-SentinelOne_logo.svg.png' },
-        { name: 'Suricata', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Suricata_logo.svg/2560px-Suricata_logo.svg.png' }
-      ],
-      gradient: 'from-indigo-600 to-blue-700',
-      image: 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
+      image: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
     },
     {
       id: 'enterprise',
@@ -229,6 +212,97 @@ const ServicesPage = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  };
+
+  const renderInfrastructureServices = (category: any) => {
+    const coreServices = category.services.filter((service: any) => service.category === 'Core Infrastructure Services');
+    const operationsServices = category.services.filter((service: any) => service.category === 'Infrastructure Operations');
+
+    return (
+      <div className="space-y-8">
+        {/* Core Infrastructure Services */}
+        <div>
+          <h5 className="text-lg font-bold text-primary mb-4 flex items-center">
+            <Cpu size={20} className="mr-2" />
+            Core Infrastructure Services
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {coreServices.map((service: any, i: number) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.1 }}
+                className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors duration-300"
+              >
+                <h6 className="font-semibold text-primary mb-2">{service.title}</h6>
+                <p className="text-gray-600 text-sm">{service.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Infrastructure Operations */}
+        <div>
+          <h5 className="text-lg font-bold text-primary mb-4 flex items-center">
+            <Activity size={20} className="mr-2" />
+            Infrastructure Operations
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {operationsServices.map((service: any, i: number) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: (i + 4) * 0.1 }}
+                className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors duration-300"
+              >
+                <h6 className="font-semibold text-primary mb-2">{service.title}</h6>
+                <p className="text-gray-600 text-sm">{service.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderCybersecurityServices = (category: any) => {
+    return (
+      <div className="space-y-4">
+        {category.services.map((service: any, i: number) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: i * 0.1 }}
+            className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors duration-300"
+          >
+            <h6 className="font-semibold text-primary mb-2">{service.title}</h6>
+            <p className="text-gray-600 text-sm">{service.description}</p>
+          </motion.div>
+        ))}
+      </div>
+    );
+  };
+
+  const renderStandardServices = (category: any) => {
+    return (
+      <ul className="space-y-3 mb-8">
+        {category.features.map((feature: string, i: number) => (
+          <motion.li
+            key={i}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: i * 0.1 }}
+            className="flex items-start"
+          >
+            <div className="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></div>
+            <span className="text-gray-700">{feature}</span>
+          </motion.li>
+        ))}
+      </ul>
+    );
   };
 
   return (
@@ -317,7 +391,7 @@ const ServicesPage = () => {
               className="flex flex-col sm:flex-row gap-6"
             >
               <button 
-                onClick={() => scrollToSection('network')}
+                onClick={() => scrollToSection('infrastructure')}
                 className="group inline-flex items-center bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl transition-all duration-300 transform hover:scale-105"
               >
                 <span>Explore Our Services</span>
@@ -455,24 +529,18 @@ const ServicesPage = () => {
                                     {category.description}
                                   </p>
                                   
-                                  <h4 className="text-xl font-bold text-primary mb-4">Key Capabilities</h4>
-                                  <ul className="space-y-3 mb-8">
-                                    {category.features.map((feature, i) => (
-                                      <motion.li
-                                        key={i}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 0.3, delay: i * 0.1 }}
-                                        className="flex items-start"
-                                      >
-                                        <div className="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                        <span className="text-gray-700">{feature}</span>
-                                      </motion.li>
-                                    ))}
-                                  </ul>
+                                  <h4 className="text-xl font-bold text-primary mb-4">
+                                    {category.id === 'infrastructure' ? 'Service Categories' : 
+                                     category.id === 'cybersecurity' ? 'Security Services' : 'Key Capabilities'}
+                                  </h4>
+                                  
+                                  {/* Render services based on category type */}
+                                  {category.id === 'infrastructure' && renderInfrastructureServices(category)}
+                                  {category.id === 'cybersecurity' && renderCybersecurityServices(category)}
+                                  {category.id !== 'infrastructure' && category.id !== 'cybersecurity' && renderStandardServices(category)}
 
                                   {/* Technology Logos */}
-                                  <h4 className="text-xl font-bold text-primary mb-4">Technologies & Partners</h4>
+                                  <h4 className="text-xl font-bold text-primary mb-4 mt-8">Technologies & Partners</h4>
                                   <div className="flex flex-wrap gap-4">
                                     {category.technologies.map((tech, i) => (
                                       <motion.div

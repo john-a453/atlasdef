@@ -75,12 +75,57 @@ const Header = () => {
 
   // UniFi-style services data structure
   const servicesData = {
+    infrastructure: {
+      title: 'Infrastructure Solutions',
+      services: [
+        {
+          title: 'Next-Generation Data Centers',
+          subtitle: 'Design, build, and modernize full-scale data centers with optimal energy and performance standards',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          ),
+          link: '/services#infrastructure'
+        },
+        {
+          title: 'Network Engineering',
+          subtitle: 'Professional routing, switching, BGP, MPLS, VLANs, and SD-WAN implementations',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+            </svg>
+          ),
+          link: '/services#infrastructure'
+        },
+        {
+          title: 'Cloud Integration',
+          subtitle: 'Hybrid and multi-cloud integration across AWS, Azure, GCP, and OCI',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+            </svg>
+          ),
+          link: '/services#infrastructure'
+        },
+        {
+          title: 'Virtualization',
+          subtitle: 'VMware, Proxmox, Nutanix, and XCP-ng setups for optimized virtual environments',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          ),
+          link: '/services#infrastructure'
+        }
+      ]
+    },
     cybersecurity: {
       title: 'Cybersecurity Solutions',
       services: [
         {
-          title: 'SOC as a Service',
-          subtitle: '24/7 Security Operations Center',
+          title: 'Defensive Security',
+          subtitle: 'Modern cyber defense using XDR, EDR, SIEM, IDS/IPS, and behavioral detection to ensure proactive threat prevention and response',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -89,8 +134,8 @@ const Header = () => {
           link: '/services#cybersecurity'
         },
         {
-          title: 'Penetration Testing',
-          subtitle: 'Web, Network & Mobile Security Assessment',
+          title: 'Offensive Security',
+          subtitle: 'Advanced penetration testing services covering web, network, mobile, cloud, and physical attack simulations',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -99,114 +144,70 @@ const Header = () => {
           link: '/services#cybersecurity'
         },
         {
+          title: 'SOC as a Service',
+          subtitle: '24/7 managed Security Operations Center with incident detection, alerting, and escalation',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          ),
+          link: '/services#cybersecurity'
+        },
+        {
           title: 'Compliance & GRC',
-          subtitle: 'ISO 27001, NIST, GDPR Management',
+          subtitle: 'Support for ISO 27001, NIST, GDPR, and comprehensive Governance, Risk & Compliance services',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           ),
           link: '/services#cybersecurity'
-        },
-        {
-          title: 'Threat Intelligence',
-          subtitle: 'Advanced Threat Detection & Response',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          ),
-          link: '/services#cybersecurity'
         }
       ]
     },
-    infrastructure: {
-      title: 'Infrastructure Solutions',
+    operations: {
+      title: 'Infrastructure Operations',
       services: [
         {
-          title: 'Network Engineering',
-          subtitle: 'MPLS, BGP, SD-WAN, VLAN Configuration',
+          title: 'Server Administration',
+          subtitle: 'Expert administration for Windows Server, Linux, Active Directory, and user access policies',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
             </svg>
           ),
-          link: '/services#network'
+          link: '/services#infrastructure'
         },
-        {
-          title: 'Data Center Setup',
-          subtitle: 'Full Infrastructure Deployment & Migration',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          ),
-          link: '/services#virtualization'
-        },
-        {
-          title: 'Cloud Integration',
-          subtitle: 'AWS, Azure, GCP, Oracle Cloud Solutions',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-            </svg>
-          ),
-          link: '/services#cloud'
-        },
-        {
-          title: 'Virtualization',
-          subtitle: 'VMware, Proxmox, Hyper-V, XCP-ng',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          ),
-          link: '/services#virtualization'
-        }
-      ]
-    },
-    monitoring: {
-      title: 'Monitoring & Administration',
-      services: [
         {
           title: 'Infrastructure Monitoring',
-          subtitle: 'Zabbix, Prometheus, Grafana, PRTG',
+          subtitle: 'Real-time infrastructure observability using Zabbix, Prometheus, Grafana, and PRTG',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
           ),
-          link: '/services#monitoring'
-        },
-        {
-          title: 'Server Administration',
-          subtitle: 'Windows, Linux, Active Directory',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-            </svg>
-          ),
-          link: '/services#virtualization'
+          link: '/services#infrastructure'
         },
         {
           title: 'Backup & Recovery',
-          subtitle: 'Veeam, Business Continuity Planning',
+          subtitle: 'Veeam-powered data protection, RTO/RPO strategies, and business continuity planning',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
             </svg>
           ),
-          link: '/services#backup'
+          link: '/services#infrastructure'
         },
         {
           title: 'Performance Optimization',
-          subtitle: 'System Tuning & Capacity Planning',
+          subtitle: 'Infrastructure tuning, load balancing, and uptime assurance',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           ),
-          link: '/services#monitoring'
+          link: '/services#infrastructure'
         }
       ]
     },
@@ -444,9 +445,9 @@ const Header = () => {
 
   // UniFi-style navigation categories
   const categories = [
-    { id: 'cybersecurity', label: 'Cybersecurity' },
     { id: 'infrastructure', label: 'Infrastructure' },
-    { id: 'monitoring', label: 'Monitoring' },
+    { id: 'cybersecurity', label: 'Cybersecurity' },
+    { id: 'operations', label: 'Operations' },
     { id: 'development', label: 'Development' }
   ];
 
