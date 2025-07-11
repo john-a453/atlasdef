@@ -114,51 +114,51 @@ const Header = () => {
     isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
   }`;
 
-  // UniFi-style services data structure with infrastructure carousel
+  // Optimized services data structure with reduced content for better dropdown height
   const servicesData = {
     cybersecurity: {
       title: 'Cybersecurity Solutions',
       services: [
         {
-          title: 'Defensive Security',
-          subtitle: 'Modern cyber defense using XDR, EDR, SIEM, IDS/IPS, and behavioral detection to ensure proactive threat prevention and response',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-          ),
-          link: '/services#cybersecurity'
-        },
-        {
-          title: 'Offensive Security',
-          subtitle: 'Advanced penetration testing services covering web, network, mobile, cloud, and physical attack simulations',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          ),
-          link: '/services#cybersecurity'
-        },
-        {
           title: 'SOC as a Service',
-          subtitle: '24/7 managed Security Operations Center with incident detection, alerting, and escalation',
+          subtitle: '24/7 Security Operations Center',
           icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>
           ),
-          link: '/services#cybersecurity'
+          link: '/services/cybersecurity/soc-service'
+        },
+        {
+          title: 'Penetration Testing',
+          subtitle: 'Advanced Security Assessment',
+          icon: (
+            <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          ),
+          link: '/services/cybersecurity/penetration-testing'
+        },
+        {
+          title: 'Threat Detection',
+          subtitle: 'XDR & EDR Solutions',
+          icon: (
+            <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          ),
+          link: '/services/cybersecurity/threat-detection'
         },
         {
           title: 'Compliance & GRC',
-          subtitle: 'Support for ISO 27001, NIST, GDPR, and comprehensive Governance, Risk & Compliance services',
+          subtitle: 'ISO 27001, NIST, GDPR',
           icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           ),
-          link: '/services#cybersecurity'
+          link: '/services/cybersecurity/compliance-grc'
         }
       ]
     },
@@ -168,87 +168,87 @@ const Header = () => {
         // First slide (4 services)
         [
           {
-            title: 'Next-Generation Data Centers',
-            subtitle: 'Design, build, and modernize full-scale data centers with optimal energy and performance standards',
+            title: 'Data Center Design',
+            subtitle: 'Next-Gen Infrastructure',
             icon: (
-              <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
             ),
-            link: '/services#infrastructure'
+            link: '/services/infrastructure/data-center-design'
           },
           {
             title: 'Network Engineering',
-            subtitle: 'Professional routing, switching, BGP, MPLS, VLANs, and SD-WAN implementations',
+            subtitle: 'BGP, MPLS, SD-WAN',
             icon: (
-              <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
               </svg>
             ),
-            link: '/services#infrastructure'
+            link: '/services/infrastructure/network-engineering'
           },
           {
             title: 'Cloud Integration',
-            subtitle: 'Hybrid and multi-cloud integration across AWS, Azure, GCP, and OCI',
+            subtitle: 'AWS, Azure, GCP, OCI',
             icon: (
-              <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
               </svg>
             ),
-            link: '/services#infrastructure'
+            link: '/services/infrastructure/cloud-integration'
           },
           {
             title: 'Virtualization',
-            subtitle: 'VMware, Proxmox, Nutanix, and XCP-ng setups for optimized virtual environments',
+            subtitle: 'VMware, Proxmox, Nutanix',
             icon: (
-              <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             ),
-            link: '/services#infrastructure'
+            link: '/services/infrastructure/virtualization'
           }
         ],
         // Second slide (4 services)
         [
           {
             title: 'Server Administration',
-            subtitle: 'Expert administration for Windows Server, Linux, Active Directory, and user access policies',
+            subtitle: 'Windows, Linux, AD',
             icon: (
-              <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
               </svg>
             ),
-            link: '/services#infrastructure'
+            link: '/services/infrastructure/server-administration'
           },
           {
             title: 'Infrastructure Monitoring',
-            subtitle: 'Real-time infrastructure observability using Zabbix, Prometheus, Grafana, and PRTG',
+            subtitle: 'Zabbix, Prometheus, Grafana',
             icon: (
-              <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
             ),
-            link: '/services#infrastructure'
+            link: '/services/infrastructure/monitoring'
           },
           {
             title: 'Backup & Recovery',
-            subtitle: 'Veeam-powered data protection, RTO/RPO strategies, and business continuity planning',
+            subtitle: 'Veeam-powered BDR',
             icon: (
-              <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
               </svg>
             ),
-            link: '/services#infrastructure'
+            link: '/services/infrastructure/backup-recovery'
           },
           {
             title: 'Performance Optimization',
-            subtitle: 'Infrastructure tuning, load balancing, and uptime assurance',
+            subtitle: 'Load Balancing & Tuning',
             icon: (
-              <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             ),
-            link: '/services#infrastructure'
+            link: '/services/infrastructure/performance-optimization'
           }
         ]
       ]
@@ -258,43 +258,43 @@ const Header = () => {
       services: [
         {
           title: 'Web Development',
-          subtitle: 'Full-Stack Applications & Platforms',
+          subtitle: 'Full-Stack Applications',
           icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
           ),
-          link: '/services#enterprise'
+          link: '/services/development/web-development'
         },
         {
           title: 'Mobile Development',
-          subtitle: 'iOS & Android Applications',
+          subtitle: 'iOS & Android Apps',
           icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
             </svg>
           ),
-          link: '/services#enterprise'
+          link: '/services/development/mobile-development'
         },
         {
           title: 'DevOps & CI/CD',
-          subtitle: 'Docker, Kubernetes, Automation',
+          subtitle: 'Docker, Kubernetes',
           icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
           ),
-          link: '/services#enterprise'
+          link: '/services/development/devops-cicd'
         },
         {
           title: 'Enterprise Software',
-          subtitle: 'ERP, CRM, HRMS Solutions',
+          subtitle: 'ERP, CRM, HRMS',
           icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
           ),
-          link: '/services#enterprise'
+          link: '/services/development/enterprise-software'
         }
       ]
     }
@@ -516,7 +516,7 @@ const Header = () => {
             Home
           </NavLink>
           
-          {/* UniFi-Style Services Mega Dropdown */}
+          {/* Optimized Services Mega Dropdown */}
           <div 
             className="relative"
             ref={servicesRef}
@@ -535,7 +535,7 @@ const Header = () => {
               />
             </button>
 
-            {/* UniFi-Style Services Mega Dropdown */}
+            {/* Optimized Services Mega Dropdown with Fixed Height */}
             <AnimatePresence>
               {showServicesDropdown && (
                 <motion.div
@@ -544,24 +544,24 @@ const Header = () => {
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.2 }}
                   className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[900px] bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden z-50"
-                  style={{ marginLeft: '-150px' }}
+                  style={{ marginLeft: '-150px', maxHeight: '80vh' }}
                 >
-                  <div className="flex">
-                    {/* Left Sidebar - Exact UniFi Style */}
-                    <div className="w-56 bg-white border-r border-gray-200">
+                  <div className="flex h-full">
+                    {/* Left Sidebar - Compact */}
+                    <div className="w-52 bg-white border-r border-gray-200 flex-shrink-0">
                       <div className="p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-6">Our Services</h3>
-                        <nav className="space-y-1">
+                        <h3 className="text-base font-semibold text-gray-900 mb-4">Our Services</h3>
+                        <nav className="space-y-2">
                           {categories.map((category) => (
                             <button
                               key={category.id}
                               onMouseEnter={() => {
                                 setSelectedCategory(category.id);
                                 if (category.id === 'infrastructure') {
-                                  setCurrentInfraSlide(0); // Reset to first slide when entering infrastructure
+                                  setCurrentInfraSlide(0);
                                 }
                               }}
-                              className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+                              className={`w-full text-left px-3 py-3 text-sm rounded-md transition-colors duration-200 ${
                                 selectedCategory === category.id
                                   ? 'bg-blue-50 text-blue-700 font-medium'
                                   : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
@@ -573,7 +573,7 @@ const Header = () => {
                         </nav>
                       </div>
                       
-                      {/* Bottom Links - UniFi Style */}
+                      {/* Bottom Links - Compact */}
                       <div className="border-t border-gray-200 p-6">
                         <div className="space-y-3">
                           <Link 
@@ -590,26 +590,12 @@ const Header = () => {
                           >
                             Resources
                           </Link>
-                          <Link 
-                            to="/industries"
-                            className="block text-sm text-gray-600 hover:text-gray-700"
-                            onClick={() => setShowServicesDropdown(false)}
-                          >
-                            Case Studies
-                          </Link>
-                          <Link 
-                            to="/contact"
-                            className="block text-sm text-gray-600 hover:text-gray-700"
-                            onClick={() => setShowServicesDropdown(false)}
-                          >
-                            Site Map
-                          </Link>
                         </div>
                       </div>
                     </div>
 
-                    {/* Main Content Area - Exact UniFi Style */}
-                    <div className="flex-1 p-8">
+                    {/* Main Content Area - Optimized Height */}
+                    <div className="flex-1 p-8 overflow-y-auto" style={{ maxHeight: '80vh' }}>
                       <AnimatePresence mode="wait">
                         <motion.div
                           key={selectedCategory}
@@ -618,7 +604,7 @@ const Header = () => {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <div className="flex items-center justify-between mb-8">
+                          <div className="flex items-center justify-between mb-6">
                             <h4 className="text-xl font-semibold text-gray-900">
                               {servicesData[selectedCategory as keyof typeof servicesData].title}
                             </h4>
@@ -628,40 +614,39 @@ const Header = () => {
                               <div className="flex items-center space-x-2">
                                 <button
                                   onClick={handlePrevSlide}
-                                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                                  className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
                                     currentInfraSlide === 0 
                                       ? 'bg-blue-100 text-blue-600' 
                                       : 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600'
                                   }`}
                                 >
-                                  <ChevronLeft size={16} />
+                                  <ChevronLeft size={12} />
                                 </button>
                                 
-                                {/* Slide Indicators */}
                                 <div className="flex space-x-1">
-                                  <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                                  <div className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
                                     currentInfraSlide === 0 ? 'bg-blue-600' : 'bg-gray-300'
                                   }`} />
-                                  <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                                  <div className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
                                     currentInfraSlide === 1 ? 'bg-blue-600' : 'bg-gray-300'
                                   }`} />
                                 </div>
                                 
                                 <button
                                   onClick={handleNextSlide}
-                                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                                  className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
                                     currentInfraSlide === 1 
                                       ? 'bg-blue-100 text-blue-600' 
                                       : 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600'
                                   }`}
                                 >
-                                  <ChevronRight size={16} />
+                                  <ChevronRight size={12} />
                                 </button>
                               </div>
                             )}
                           </div>
 
-                          {/* Service Grid - Infrastructure Carousel or Regular Grid */}
+                          {/* Service Grid - Compact Layout */}
                           {selectedCategory === 'infrastructure' ? (
                             <div className="relative overflow-hidden">
                               <motion.div
@@ -670,7 +655,7 @@ const Header = () => {
                               >
                                 {servicesData.infrastructure.services.map((slideServices, slideIndex) => (
                                   <div key={slideIndex} className="w-full flex-shrink-0">
-                                    <div className="grid grid-cols-2 gap-8">
+                                    <div className="grid grid-cols-2 gap-4">
                                       {slideServices.map((service, index) => (
                                         <motion.div
                                           key={service.title}
@@ -685,22 +670,18 @@ const Header = () => {
                                             onClick={() => setShowServicesDropdown(false)}
                                           >
                                             <div className="flex flex-col items-center text-center p-6 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                                              {/* Icon */}
                                               <div className="mb-4">
                                                 {service.icon}
                                               </div>
                                               
-                                              {/* Title */}
-                                              <h5 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                                              <h5 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
                                                 {service.title}
                                               </h5>
                                               
-                                              {/* Subtitle */}
                                               <p className="text-sm text-gray-600 mb-4 leading-relaxed">
                                                 {service.subtitle}
                                               </p>
                                               
-                                              {/* Learn More Link - Exact UniFi Style */}
                                               <div className="text-blue-600 text-sm font-medium group-hover:text-blue-700 transition-colors duration-200 flex items-center">
                                                 Learn More
                                                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -717,8 +698,8 @@ const Header = () => {
                               </motion.div>
                             </div>
                           ) : (
-                            /* Regular Grid for other categories */
-                            <div className="grid grid-cols-2 gap-8">
+                            /* Regular Grid for other categories - Compact */
+                            <div className="grid grid-cols-2 gap-6">
                               {servicesData[selectedCategory as keyof typeof servicesData].services.map((service: any, index: number) => (
                                 <motion.div
                                   key={service.title}
@@ -733,22 +714,18 @@ const Header = () => {
                                     onClick={() => setShowServicesDropdown(false)}
                                   >
                                     <div className="flex flex-col items-center text-center p-6 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                                      {/* Icon */}
                                       <div className="mb-4">
                                         {service.icon}
                                       </div>
                                       
-                                      {/* Title */}
-                                      <h5 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                                      <h5 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
                                         {service.title}
                                       </h5>
                                       
-                                      {/* Subtitle */}
                                       <p className="text-sm text-gray-600 mb-4 leading-relaxed">
                                         {service.subtitle}
                                       </p>
                                       
-                                      {/* Learn More Link - Exact UniFi Style */}
                                       <div className="text-blue-600 text-sm font-medium group-hover:text-blue-700 transition-colors duration-200 flex items-center">
                                         Learn More
                                         <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -770,7 +747,7 @@ const Header = () => {
             </AnimatePresence>
           </div>
 
-          {/* UniFi-Style Industries Mega Dropdown */}
+          {/* Industries Mega Dropdown - Same optimization */}
           <div 
             className="relative"
             ref={industriesRef}
@@ -789,7 +766,6 @@ const Header = () => {
               />
             </button>
 
-            {/* UniFi-Style Industries Mega Dropdown */}
             <AnimatePresence>
               {showIndustriesDropdown && (
                 <motion.div
@@ -798,19 +774,18 @@ const Header = () => {
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.2 }}
                   className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[900px] bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden z-50"
-                  style={{ marginLeft: '-150px' }}
+                  style={{ marginLeft: '-150px', maxHeight: '80vh' }}
                 >
-                  <div className="flex">
-                    {/* Left Sidebar - Exact UniFi Style */}
-                    <div className="w-56 bg-white border-r border-gray-200">
+                  <div className="flex h-full">
+                    <div className="w-52 bg-white border-r border-gray-200 flex-shrink-0">
                       <div className="p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-6">Industries We Serve</h3>
-                        <nav className="space-y-1">
+                        <h3 className="text-base font-semibold text-gray-900 mb-4">Industries We Serve</h3>
+                        <nav className="space-y-2">
                           {industryCategories.map((category) => (
                             <button
                               key={category.id}
                               onMouseEnter={() => setSelectedIndustry(category.id)}
-                              className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+                              className={`w-full text-left px-3 py-3 text-sm rounded-md transition-colors duration-200 ${
                                 selectedIndustry === category.id
                                   ? 'bg-blue-50 text-blue-700 font-medium'
                                   : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
@@ -821,44 +796,9 @@ const Header = () => {
                           ))}
                         </nav>
                       </div>
-                      
-                      {/* Bottom Links - UniFi Style */}
-                      <div className="border-t border-gray-200 p-6">
-                        <div className="space-y-3">
-                          <Link 
-                            to="/about"
-                            className="block text-sm text-blue-600 hover:text-blue-700 font-medium"
-                            onClick={() => setShowIndustriesDropdown(false)}
-                          >
-                            How It Works?
-                          </Link>
-                          <Link 
-                            to="/partners"
-                            className="block text-sm text-gray-600 hover:text-gray-700"
-                            onClick={() => setShowIndustriesDropdown(false)}
-                          >
-                            Resources
-                          </Link>
-                          <Link 
-                            to="/services"
-                            className="block text-sm text-gray-600 hover:text-gray-700"
-                            onClick={() => setShowIndustriesDropdown(false)}
-                          >
-                            Case Studies
-                          </Link>
-                          <Link 
-                            to="/contact"
-                            className="block text-sm text-gray-600 hover:text-gray-700"
-                            onClick={() => setShowIndustriesDropdown(false)}
-                          >
-                            Site Map
-                          </Link>
-                        </div>
-                      </div>
                     </div>
 
-                    {/* Main Content Area - Exact UniFi Style */}
-                    <div className="flex-1 p-8">
+                    <div className="flex-1 p-8 overflow-y-auto" style={{ maxHeight: '80vh' }}>
                       <AnimatePresence mode="wait">
                         <motion.div
                           key={selectedIndustry}
@@ -867,12 +807,11 @@ const Header = () => {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <h4 className="text-xl font-semibold text-gray-900 mb-8">
+                          <h4 className="text-xl font-semibold text-gray-900 mb-6">
                             {industriesData[selectedIndustry as keyof typeof industriesData].title}
                           </h4>
 
-                          {/* Industry Grid - Exact UniFi Layout */}
-                          <div className="grid grid-cols-2 gap-8">
+                          <div className="grid grid-cols-2 gap-6">
                             {industriesData[selectedIndustry as keyof typeof industriesData].industries.map((industry, index) => (
                               <motion.div
                                 key={industry.title}
@@ -887,22 +826,18 @@ const Header = () => {
                                   onClick={() => setShowIndustriesDropdown(false)}
                                 >
                                   <div className="flex flex-col items-center text-center p-6 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                                    {/* Icon */}
                                     <div className="mb-4">
                                       {industry.icon}
                                     </div>
                                     
-                                    {/* Title */}
-                                    <h5 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                                    <h5 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
                                       {industry.title}
                                     </h5>
                                     
-                                    {/* Subtitle */}
                                     <p className="text-sm text-gray-600 mb-4 leading-relaxed">
                                       {industry.subtitle}
                                     </p>
                                     
-                                    {/* Learn More Link - Exact UniFi Style */}
                                     <div className="text-blue-600 text-sm font-medium group-hover:text-blue-700 transition-colors duration-200 flex items-center">
                                       Learn More
                                       <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
