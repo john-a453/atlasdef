@@ -75,51 +75,6 @@ const Header = () => {
 
   // UniFi-style services data structure
   const servicesData = {
-    infrastructure: {
-      title: 'Infrastructure Solutions',
-      services: [
-        {
-          title: 'Next-Generation Data Centers',
-          subtitle: 'Design, build, and modernize full-scale data centers with optimal energy and performance standards',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
-          ),
-          link: '/services#infrastructure'
-        },
-        {
-          title: 'Network Engineering',
-          subtitle: 'Professional routing, switching, BGP, MPLS, VLANs, and SD-WAN implementations',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-            </svg>
-          ),
-          link: '/services#infrastructure'
-        },
-        {
-          title: 'Cloud Integration',
-          subtitle: 'Hybrid and multi-cloud integration across AWS, Azure, GCP, and OCI',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-            </svg>
-          ),
-          link: '/services#infrastructure'
-        },
-        {
-          title: 'Virtualization',
-          subtitle: 'VMware, Proxmox, Nutanix, and XCP-ng setups for optimized virtual environments',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          ),
-          link: '/services#infrastructure'
-        }
-      ]
-    },
     cybersecurity: {
       title: 'Cybersecurity Solutions',
       services: [
@@ -166,9 +121,49 @@ const Header = () => {
         }
       ]
     },
-    operations: {
-      title: 'Infrastructure Operations',
+    infrastructure: {
+      title: 'Infrastructure Solutions',
       services: [
+        {
+          title: 'Next-Generation Data Centers',
+          subtitle: 'Design, build, and modernize full-scale data centers with optimal energy and performance standards',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          ),
+          link: '/services#infrastructure'
+        },
+        {
+          title: 'Network Engineering',
+          subtitle: 'Professional routing, switching, BGP, MPLS, VLANs, and SD-WAN implementations',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+            </svg>
+          ),
+          link: '/services#infrastructure'
+        },
+        {
+          title: 'Cloud Integration',
+          subtitle: 'Hybrid and multi-cloud integration across AWS, Azure, GCP, and OCI',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+            </svg>
+          ),
+          link: '/services#infrastructure'
+        },
+        {
+          title: 'Virtualization',
+          subtitle: 'VMware, Proxmox, Nutanix, and XCP-ng setups for optimized virtual environments',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          ),
+          link: '/services#infrastructure'
+        },
         {
           title: 'Server Administration',
           subtitle: 'Expert administration for Windows Server, Linux, Active Directory, and user access policies',
@@ -445,9 +440,8 @@ const Header = () => {
 
   // UniFi-style navigation categories
   const categories = [
-    { id: 'infrastructure', label: 'Infrastructure' },
     { id: 'cybersecurity', label: 'Cybersecurity' },
-    { id: 'operations', label: 'Operations' },
+    { id: 'infrastructure', label: 'Infrastructure' },
     { id: 'development', label: 'Development' }
   ];
 
