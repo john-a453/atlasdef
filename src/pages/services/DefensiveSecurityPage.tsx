@@ -1569,6 +1569,56 @@ const DefensiveSecurityPage = () => {
         </div>
       </section>
 
+      {/* Security Excellence Certified Section */}
+      <section className="py-20 bg-white">
+        <div className="container max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+              Security Excellence Certified
+            </h2>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              Showcasing our commitment to excellence with industry-recognized certifications that ensure top-tier security solutions
+            </p>
+          </motion.div>
+
+          {/* Professional Certification Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex justify-center items-center space-x-12"
+          >
+            {/* CISSP */}
+            <img src="/Logos/CISSP_logo.png" alt="CISSP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* CISM */}
+            <img src="/Logos/CISM_logo.svg" alt="CISM" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* CISA */}
+            <img src="/Logos/CISA_Logo.svg" alt="CISA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* OSDA */}
+            <img src="/Logos/osda_logo.svg" alt="OSDA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* CySA+ */}
+            <img src="/Logos/cysa+_logo.png" alt="CySA+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* CDSA */}
+            <img src="/Logos/CDSA_logo.svg" alt="CDSA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* Security+ */}
+            <img src="/Logos/security+_logo.png" alt="Security+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-primary via-secondary to-accent text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
