@@ -27,7 +27,7 @@ const OffensiveSecurityPage = () => {
                   Offensive Security Services
                 </span>
               </div>
-              
+
               <h1 className="text-5xl lg:text-7xl font-black mb-6 leading-tight">
                 <span className="text-white">Uncover the</span>
                 <br />
@@ -35,9 +35,9 @@ const OffensiveSecurityPage = () => {
                 <br />
                 <span className="text-white">Before Attackers Do</span>
               </h1>
-              
+
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Atlas Defenders simulates real-world cyberattacks to discover your weaknesses before hackers do. 
+                Atlas Defenders simulates real-world cyberattacks to discover your weaknesses before hackers do.
                 Our certified red team experts use advanced techniques to test your defenses.
               </p>
 
@@ -49,7 +49,7 @@ const OffensiveSecurityPage = () => {
                   <span>Request a Red Team Assessment</span>
                   <ArrowRight size={20} className="ml-3" />
                 </Link>
-                
+
                 <Link
                   to="/contact"
                   className="group inline-flex items-center bg-transparent border-2 border-red-500 text-red-400 hover:bg-red-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
@@ -110,13 +110,13 @@ const OffensiveSecurityPage = () => {
                 What Is Offensive Security?
               </h2>
               <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                Offensive security is the proactive approach to cybersecurity. Our certified experts simulate 
-                real-world cyberattacks to detect vulnerabilities in your systems, applications, cloud, and 
+                Offensive security is the proactive approach to cybersecurity. Our certified experts simulate
+                real-world cyberattacks to detect vulnerabilities in your systems, applications, cloud, and
                 employees — before real adversaries exploit them.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Unlike traditional security assessments, offensive security testing uses the same tools, 
-                techniques, and procedures as actual attackers. This approach provides a realistic view of 
+                Unlike traditional security assessments, offensive security testing uses the same tools,
+                techniques, and procedures as actual attackers. This approach provides a realistic view of
                 your security posture and helps prioritize remediation efforts based on actual risk.
               </p>
             </motion.div>
@@ -134,7 +134,7 @@ const OffensiveSecurityPage = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">Red Team Simulation</h3>
                 <p className="text-red-100 mb-6">
-                  Our red team exercises simulate advanced persistent threats, testing your organization's 
+                  Our red team exercises simulate advanced persistent threats, testing your organization's
                   ability to detect, respond to, and recover from sophisticated attacks.
                 </p>
                 <div className="space-y-3">
@@ -158,8 +158,8 @@ const OffensiveSecurityPage = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-white">
-        <div className="container">
+      <section className="py-20 bg-gray-50">
+        <div className="container max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -167,72 +167,308 @@ const OffensiveSecurityPage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Our Offensive Security Services
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
               Comprehensive offensive security testing across all attack vectors and platforms.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Web Application Penetration Testing',
-                description: 'Simulate attacks against your websites using OWASP and zero-day discovery techniques.',
-                features: ['OWASP Top 10 Testing', 'Zero-day Discovery', 'Business Logic Flaws', 'Authentication Bypass']
-              },
-              {
-                title: 'Mobile Application Testing',
-                description: 'Evaluate Android & iOS apps against OWASP Mobile Top 10.',
-                features: ['iOS Security Testing', 'Android Penetration', 'Mobile API Testing', 'Runtime Analysis']
-              },
-              {
-                title: 'API Penetration Testing',
-                description: 'Test your APIs against abuse, insecure endpoints, and authorization bypass.',
-                features: ['REST API Testing', 'GraphQL Security', 'Authorization Bypass', 'Rate Limiting Tests']
-              },
-              {
-                title: 'Network & Infrastructure Testing',
-                description: 'Simulate external and internal attacks to find misconfigurations and escalation vectors.',
-                features: ['External Penetration', 'Internal Network Testing', 'Privilege Escalation', 'Lateral Movement']
-              },
-              {
-                title: 'Cloud Security Assessment',
-                description: 'AWS, Azure & GCP red teaming — IAM misconfigurations, public buckets, exposed secrets.',
-                features: ['Multi-Cloud Testing', 'IAM Misconfigurations', 'Container Security', 'Serverless Testing']
-              },
-              {
-                title: 'Social Engineering Simulations',
-                description: 'Phishing, vishing, USB drop, and physical breach attempts.',
-                features: ['Phishing Campaigns', 'Vishing Attacks', 'USB Drop Tests', 'Pretexting Scenarios']
-              }
-            ].map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 group hover:border-red-200"
-              >
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+          {/* First Row - 3 Services */}
+          <div className="grid lg:grid-cols-3 gap-16 mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              {/* Professional Web Security Icon */}
+              <div className="w-16 h-16 mx-auto mb-6 relative">
+                <svg viewBox="0 0 64 64" className="w-full h-full text-red-600">
+                  <circle cx="32" cy="32" r="4" fill="currentColor" />
+                  <circle cx="16" cy="16" r="3" fill="currentColor" />
+                  <circle cx="48" cy="16" r="3" fill="currentColor" />
+                  <circle cx="16" cy="48" r="3" fill="currentColor" />
+                  <circle cx="48" cy="48" r="3" fill="currentColor" />
+                  <path d="M32 28 L32 36 M28 32 L36 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M32 8 L32 24 M8 32 L24 32 M32 40 L32 56 M40 32 L56 32" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M20 20 L28 28 M44 20 L36 28 M20 44 L28 36 M44 44 L36 36" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 min-h-[64px] flex items-center justify-center">
+                Web Application Penetration Testing
+              </h3>
+              <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Simulate attacks against your websites using OWASP and zero-day discovery techniques.
+              </p>
+              <ul className="text-left space-y-2">
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">OWASP Top 10 Testing</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Zero-day Discovery</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Business Logic Flaws</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Authentication Bypass</span>
+                </li>
+              </ul>
+            </motion.div>
 
-                <ul className="space-y-3 mb-6">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start">
-                      <CheckCircle size={16} className="text-red-500 mr-3 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              {/* Professional Mobile Security Icon */}
+              <div className="w-16 h-16 mx-auto mb-6 relative">
+                <svg viewBox="0 0 64 64" className="w-full h-full text-red-600">
+                  <rect x="18" y="8" width="28" height="48" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <rect x="22" y="16" width="20" height="28" fill="currentColor" opacity="0.1" />
+                  <circle cx="32" cy="50" r="2" fill="currentColor" />
+                  <path d="M26 12 L38 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M28 20 L36 20 M28 24 L36 24 M28 28 L32 28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <circle cx="38" cy="32" r="2" fill="currentColor" />
+                  <path d="M24 36 L40 36 M24 40 L36 40" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 min-h-[64px] flex items-center justify-center">
+                Mobile Application Testing
+              </h3>
+              <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Evaluate Android & iOS apps against OWASP Mobile Top 10.
+              </p>
+              <ul className="text-left space-y-2">
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">iOS Security Testing</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Android Penetration</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Mobile API Testing</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Runtime Analysis</span>
+                </li>
+              </ul>
+            </motion.div>
 
-                <button className="w-full bg-red-50 hover:bg-red-100 text-red-600 font-semibold py-3 px-4 rounded-lg transition-all duration-300 group-hover:bg-red-600 group-hover:text-white">
-                  Learn More →
-                </button>
-              </motion.div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              {/* Professional API Security Icon */}
+              <div className="w-16 h-16 mx-auto mb-6 relative">
+                <svg viewBox="0 0 64 64" className="w-full h-full text-red-600">
+                  <rect x="8" y="20" width="48" height="24" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="20" cy="32" r="3" fill="currentColor" />
+                  <circle cx="32" cy="32" r="3" fill="currentColor" />
+                  <circle cx="44" cy="32" r="3" fill="currentColor" />
+                  <path d="M23 32 L29 32 M35 32 L41 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M32 8 L32 20 M32 44 L32 56" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M16 8 L16 20 M48 8 L48 20 M16 44 L16 56 M48 44 L48 56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <circle cx="16" cy="6" r="2" fill="currentColor" />
+                  <circle cx="32" cy="6" r="2" fill="currentColor" />
+                  <circle cx="48" cy="6" r="2" fill="currentColor" />
+                  <circle cx="16" cy="58" r="2" fill="currentColor" />
+                  <circle cx="32" cy="58" r="2" fill="currentColor" />
+                  <circle cx="48" cy="58" r="2" fill="currentColor" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 min-h-[64px] flex items-center justify-center">
+                API Penetration Testing
+              </h3>
+              <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Test your APIs against abuse, insecure endpoints, and authorization bypass.
+              </p>
+              <ul className="text-left space-y-2">
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">REST API Testing</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">GraphQL Security</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Authorization Bypass</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Rate Limiting Tests</span>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+
+          {/* Second Row - 3 Services */}
+          <div className="grid lg:grid-cols-3 gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              {/* Professional Network Security Icon */}
+              <div className="w-16 h-16 mx-auto mb-6 relative">
+                <svg viewBox="0 0 64 64" className="w-full h-full text-red-600">
+                  <circle cx="32" cy="32" r="6" fill="currentColor" />
+                  <circle cx="16" cy="16" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="48" cy="16" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="16" cy="48" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="48" cy="48" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <path d="M20 20 L26 26 M44 20 L38 26 M20 44 L26 38 M44 44 L38 38" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="16" cy="16" r="2" fill="currentColor" />
+                  <circle cx="48" cy="16" r="2" fill="currentColor" />
+                  <circle cx="16" cy="48" r="2" fill="currentColor" />
+                  <circle cx="48" cy="48" r="2" fill="currentColor" />
+                  <path d="M8 32 L24 32 M40 32 L56 32 M32 8 L32 24 M32 40 L32 56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 min-h-[64px] flex items-center justify-center">
+                Network & Infrastructure Testing
+              </h3>
+              <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Simulate external and internal attacks to find misconfigurations and escalation vectors.
+              </p>
+              <ul className="text-left space-y-2">
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">External Penetration</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Internal Network Testing</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Privilege Escalation</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Lateral Movement</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              {/* Professional Cloud Security Icon */}
+              <div className="w-16 h-16 mx-auto mb-6 relative">
+                <svg viewBox="0 0 64 64" className="w-full h-full text-red-600">
+                  <path d="M16 40 C12 40 8 36 8 32 C8 28 12 24 16 24 C18 20 22 16 28 16 C34 16 38 20 40 24 C44 24 48 28 48 32 C48 36 44 40 40 40 Z" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="20" cy="32" r="2" fill="currentColor" />
+                  <circle cx="32" cy="32" r="2" fill="currentColor" />
+                  <circle cx="44" cy="32" r="2" fill="currentColor" />
+                  <path d="M22 32 L30 32 M34 32 L42 32" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M32 44 L32 52 M28 48 L36 48" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="16" cy="48" r="1.5" fill="currentColor" />
+                  <circle cx="24" cy="48" r="1.5" fill="currentColor" />
+                  <circle cx="40" cy="48" r="1.5" fill="currentColor" />
+                  <circle cx="48" cy="48" r="1.5" fill="currentColor" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 min-h-[64px] flex items-center justify-center">
+                Cloud Security Assessment
+              </h3>
+              <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                AWS, Azure & GCP red teaming — IAM misconfigurations, public buckets, exposed secrets.
+              </p>
+              <ul className="text-left space-y-2">
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Multi-Cloud Testing</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">IAM Misconfigurations</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Container Security</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Serverless Testing</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              {/* Professional Social Engineering Icon */}
+              <div className="w-16 h-16 mx-auto mb-6 relative">
+                <svg viewBox="0 0 64 64" className="w-full h-full text-red-600">
+                  <circle cx="32" cy="20" r="8" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <path d="M32 28 C28 28 24 32 24 36 L24 44 L40 44 L40 36 C40 32 36 28 32 28 Z" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="32" cy="20" r="4" fill="currentColor" />
+                  <path d="M16 52 L48 52 M20 48 L44 48" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="12" cy="56" r="2" fill="currentColor" />
+                  <circle cx="20" cy="56" r="2" fill="currentColor" />
+                  <circle cx="32" cy="56" r="2" fill="currentColor" />
+                  <circle cx="44" cy="56" r="2" fill="currentColor" />
+                  <circle cx="52" cy="56" r="2" fill="currentColor" />
+                  <path d="M8 8 L16 16 M48 8 L56 16 M8 16 L16 8 M48 16 L56 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 min-h-[64px] flex items-center justify-center">
+                Social Engineering Simulations
+              </h3>
+              <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Phishing, vishing, USB drop, and physical breach attempts.
+              </p>
+              <ul className="text-left space-y-2">
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Phishing Campaigns</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Vishing Attacks</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">USB Drop Tests</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm">Pretexting Scenarios</span>
+                </li>
+              </ul>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -250,7 +486,7 @@ const OffensiveSecurityPage = () => {
               Ready to Uncover the Gaps in Your Security?
             </h2>
             <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Don't wait for a breach to happen. Get proactive protection with our comprehensive 
+              Don't wait for a breach to happen. Get proactive protection with our comprehensive
               offensive security services.
             </p>
 
@@ -262,7 +498,7 @@ const OffensiveSecurityPage = () => {
                 <span>Book a Free Consultation</span>
                 <ArrowRight size={20} className="ml-3" />
               </Link>
-              
+
               <Link
                 to="/contact"
                 className="group inline-flex items-center bg-transparent border-2 border-red-500 text-red-400 hover:bg-red-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
