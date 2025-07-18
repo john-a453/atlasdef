@@ -572,6 +572,56 @@ const OffensiveSecurityPage = () => {
         </div>
       </section>
 
+      {/* Our Offensive Security Certifications Section */}
+      <section className="py-20 bg-white">
+        <div className="container max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Our Offensive Security Certifications
+            </h2>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              Our red team experts hold industry-leading offensive security certifications, ensuring advanced penetration testing and ethical hacking capabilities
+            </p>
+          </motion.div>
+
+          {/* Professional Certification Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex justify-center items-center flex-wrap gap-8 lg:gap-12"
+          >
+            {/* eJPTv2 */}
+            <img src="/Logos/ejptv2_logo.svg" alt="eJPTv2" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* eCPPT */}
+            <img src="/Logos/ecppt_logo.svg" alt="eCPPT" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* OSCP */}
+            <img src="/Logos/oscp_logo.svg" alt="OSCP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* OSEP */}
+            <img src="/Logos/osep_logo.svg" alt="OSEP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* OSWP */}
+            <img src="/Logos/oswp_logo.svg" alt="OSWP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* CRTP */}
+            <img src="/Logos/crtp_logo.svg" alt="CRTP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+            {/* CRTE */}
+            <img src="/Logos/crte_logo.svg" alt="CRTE" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Call to Action Section */}
       <section className="py-20 bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white relative overflow-hidden">
         <div className="container relative z-10 text-center">
