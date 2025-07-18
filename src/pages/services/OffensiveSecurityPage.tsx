@@ -167,6 +167,9 @@ const OffensiveSecurityPage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Our Offensive Security Services
+            </h2>
             <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
               Comprehensive offensive security testing across all attack vectors and platforms.
             </p>
@@ -179,7 +182,7 @@ const OffensiveSecurityPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="text-center"
+              className="text-center bg-white rounded-xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300"
             >
               {/* Professional Web Security Icon */}
               <div className="w-16 h-16 mx-auto mb-6 relative">
@@ -198,24 +201,40 @@ const OffensiveSecurityPage = () => {
                 Web Application Penetration Testing
               </h3>
               <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-6 px-4">
                 Simulate attacks against your websites using OWASP and zero-day discovery techniques.
               </p>
-              <ul className="text-left space-y-2">
+              <ul className="text-left space-y-3 px-4">
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">OWASP Top 10 Testing</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Zero-day Discovery</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Business Logic Flaws</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Authentication Bypass</span>
                 </li>
               </ul>
@@ -226,7 +245,7 @@ const OffensiveSecurityPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-center"
+              className="text-center bg-white rounded-xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300"
             >
               {/* Professional Mobile Security Icon */}
               <div className="w-16 h-16 mx-auto mb-6 relative">
@@ -244,24 +263,40 @@ const OffensiveSecurityPage = () => {
                 Mobile Application Testing
               </h3>
               <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-6 px-4">
                 Evaluate Android & iOS apps against OWASP Mobile Top 10.
               </p>
-              <ul className="text-left space-y-2">
+              <ul className="text-left space-y-3 px-4">
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">iOS Security Testing</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Android Penetration</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Mobile API Testing</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Runtime Analysis</span>
                 </li>
               </ul>
@@ -272,7 +307,7 @@ const OffensiveSecurityPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-center"
+              className="text-center bg-white rounded-xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300"
             >
               {/* Professional API Security Icon */}
               <div className="w-16 h-16 mx-auto mb-6 relative">
@@ -296,24 +331,40 @@ const OffensiveSecurityPage = () => {
                 API Penetration Testing
               </h3>
               <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-6 px-4">
                 Test your APIs against abuse, insecure endpoints, and authorization bypass.
               </p>
-              <ul className="text-left space-y-2">
+              <ul className="text-left space-y-3 px-4">
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">REST API Testing</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">GraphQL Security</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Authorization Bypass</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Rate Limiting Tests</span>
                 </li>
               </ul>
@@ -327,7 +378,7 @@ const OffensiveSecurityPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="text-center"
+              className="text-center bg-white rounded-xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300"
             >
               {/* Professional Network Security Icon */}
               <div className="w-16 h-16 mx-auto mb-6 relative">
@@ -349,24 +400,40 @@ const OffensiveSecurityPage = () => {
                 Network & Infrastructure Testing
               </h3>
               <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-6 px-4">
                 Simulate external and internal attacks to find misconfigurations and escalation vectors.
               </p>
-              <ul className="text-left space-y-2">
+              <ul className="text-left space-y-3 px-4">
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">External Penetration</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Internal Network Testing</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Privilege Escalation</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Lateral Movement</span>
                 </li>
               </ul>
@@ -377,7 +444,7 @@ const OffensiveSecurityPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               viewport={{ once: true }}
-              className="text-center"
+              className="text-center bg-white rounded-xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300"
             >
               {/* Professional Cloud Security Icon */}
               <div className="w-16 h-16 mx-auto mb-6 relative">
@@ -398,24 +465,40 @@ const OffensiveSecurityPage = () => {
                 Cloud Security Assessment
               </h3>
               <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-6 px-4">
                 AWS, Azure & GCP red teaming — IAM misconfigurations, public buckets, exposed secrets.
               </p>
-              <ul className="text-left space-y-2">
+              <ul className="text-left space-y-3 px-4">
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Multi-Cloud Testing</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">IAM Misconfigurations</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Container Security</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Serverless Testing</span>
                 </li>
               </ul>
@@ -426,7 +509,7 @@ const OffensiveSecurityPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
               viewport={{ once: true }}
-              className="text-center"
+              className="text-center bg-white rounded-xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300"
             >
               {/* Professional Social Engineering Icon */}
               <div className="w-16 h-16 mx-auto mb-6 relative">
@@ -447,24 +530,40 @@ const OffensiveSecurityPage = () => {
                 Social Engineering Simulations
               </h3>
               <div className="w-24 h-0.5 bg-red-600 mx-auto mb-6"></div>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-6 px-4">
                 Phishing, vishing, USB drop, and physical breach attempts.
               </p>
-              <ul className="text-left space-y-2">
+              <ul className="text-left space-y-3 px-4">
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Phishing Campaigns</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Vishing Attacks</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">USB Drop Tests</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-5 h-5 rounded-full border-2 border-red-500 bg-red-50 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                    <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                   <span className="text-gray-700 text-sm">Pretexting Scenarios</span>
                 </li>
               </ul>
