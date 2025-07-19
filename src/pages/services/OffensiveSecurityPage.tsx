@@ -973,7 +973,202 @@ const OffensiveSecurityPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Our Arsenal of Offensive Technologies Section */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left Side - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              {/* Section Title */}
+              <div>
+                <div className="text-red-600 font-semibold text-sm uppercase tracking-wider mb-4">
+                  ATLAS DEFENDERS + OFFENSIVE SECURITY
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                  Our Arsenal of Offensive Technologies
+                </h2>
+              </div>
+
+              {/* Strategic Paragraph */}
+              <div className="space-y-6">
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  At Atlas Defenders, we simulate real-world threats using the same powerful tools and frameworks trusted by elite red teams and adversaries worldwide.
+                </p>
+                
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  Our expertise spans across reconnaissance, exploitation, post-exploitation, and lateral movement, delivering advanced testing scenarios powered by:
+                </p>
+
+                {/* Checkmark List */}
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                      <svg className="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700 font-medium">Realistic adversarial simulations</span>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                      <svg className="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700 font-medium">Industry-trusted offensive security tools</span>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-0.5 mr-3 flex-shrink-0">
+                      <svg className="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700 font-medium">Actionable insights tailored to enterprise environments</span>
+                  </li>
+                </ul>
+
+                <p className="text-lg text-gray-700 leading-relaxed font-medium">
+                  From the first scan to full domain compromise — we use the right tools, the right way, with surgical precision.
+                </p>
+              </div>
+
+              {/* CTA Button */}
+              <div className="pt-4">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                >
+                  <span>Challenge Your Defenses</span>
+                  <ArrowRight size={20} className="ml-3 group-hover:translate-x-1 transition-transform duration-300" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right Side - Animated Tool Cubes */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="relative h-[600px] overflow-hidden"
+            >
+              {/* Animated Columns Container */}
+              <div className="flex justify-center space-x-4 h-full">
+                
+                {/* Column 1 - Moving Up */}
+                <div className="flex flex-col space-y-4 animate-[slideUp_20s_linear_infinite]">
+                  <ToolCube tool="Metasploit" />
+                  <ToolCube tool="Burp Suite" />
+                  <ToolCube tool="Wireshark" />
+                  <ToolCube tool="OpenVAS" />
+                  <ToolCube tool="Hydra" />
+                  <ToolCube tool="John the Ripper" />
+                  <ToolCube tool="Dirsearch" />
+                  <ToolCube tool="Acunetix" />
+                  {/* Duplicate for seamless loop */}
+                  <ToolCube tool="Metasploit" />
+                  <ToolCube tool="Burp Suite" />
+                  <ToolCube tool="Wireshark" />
+                  <ToolCube tool="OpenVAS" />
+                </div>
+
+                {/* Column 2 - Moving Down */}
+                <div className="flex flex-col space-y-4 animate-[slideDown_25s_linear_infinite]">
+                  <ToolCube tool="Cobalt Strike" />
+                  <ToolCube tool="Nmap" />
+                  <ToolCube tool="Nikto" />
+                  <ToolCube tool="SQLmap" />
+                  <ToolCube tool="Aircrack-ng" />
+                  <ToolCube tool="Maltego" />
+                  <ToolCube tool="Qualys" />
+                  <ToolCube tool="PowerShell" />
+                  {/* Duplicate for seamless loop */}
+                  <ToolCube tool="Cobalt Strike" />
+                  <ToolCube tool="Nmap" />
+                  <ToolCube tool="Nikto" />
+                  <ToolCube tool="SQLmap" />
+                </div>
+
+                {/* Column 3 - Moving Up (Different Speed) */}
+                <div className="flex flex-col space-y-4 animate-[slideUp_30s_linear_infinite]">
+                  <ToolCube tool="Metasploit" />
+                  <ToolCube tool="Wireshark" />
+                  <ToolCube tool="SQLmap" />
+                  <ToolCube tool="Maltego" />
+                  <ToolCube tool="Burp Suite" />
+                  <ToolCube tool="Nmap" />
+                  <ToolCube tool="Qualys" />
+                  <ToolCube tool="Hydra" />
+                  {/* Duplicate for seamless loop */}
+                  <ToolCube tool="Metasploit" />
+                  <ToolCube tool="Wireshark" />
+                  <ToolCube tool="SQLmap" />
+                  <ToolCube tool="Maltego" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Custom CSS for animations */}
+        <style jsx>{`
+          @keyframes slideUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+          }
+          
+          @keyframes slideDown {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+          }
+        `}</style>
+      </section>
     </>
+  );
+};
+
+// Tool Cube Component
+const ToolCube = ({ tool }: { tool: string }) => {
+  // Tool logo mapping - using placeholder icons for now
+  const getToolIcon = (toolName: string) => {
+    const iconMap: { [key: string]: string } = {
+      'Metasploit': '🛡️',
+      'Cobalt Strike': '⚔️',
+      'PowerShell': '💻',
+      'Burp Suite': '🔍',
+      'Nmap': '🌐',
+      'Wireshark': '📡',
+      'Nikto': '🔎',
+      'OpenVAS': '🛡️',
+      'SQLmap': '🗃️',
+      'Hydra': '🔐',
+      'Aircrack-ng': '📶',
+      'John the Ripper': '🔓',
+      'Maltego': '🕸️',
+      'Dirsearch': '📁',
+      'Qualys': '🔍',
+      'Acunetix': '🌐'
+    };
+    return iconMap[toolName] || '🔧';
+  };
+
+  return (
+    <div className="w-24 h-24 bg-white rounded-xl shadow-lg border border-gray-200 flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+      <div className="text-2xl mb-1 group-hover:scale-110 transition-transform duration-300">
+        {getToolIcon(tool)}
+      </div>
+      <div className="text-xs font-semibold text-gray-700 text-center px-1 leading-tight">
+        {tool}
+      </div>
+    </div>
   );
 };
 
