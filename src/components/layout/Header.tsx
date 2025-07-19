@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Shield, Menu, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showServicesDropdown, setShowServicesDropdown] = useState(false);
@@ -13,6 +14,9 @@ const Header = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const autoScrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  // Check if we're on the offensive security page
+  const isOffensiveSecurityPage = location.pathname === '/services/cybersecurity/offensive-security';
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -273,11 +277,17 @@ const Header = () => {
   return (
     <header className={headerClasses}>
       <div className="container mx-auto px-4 flex items-center h-16">
-        {/* Logo - Clickable to go home with UniFi-style color behavior */}
+        {/* Logo - Clickable to go home with offensive security red styling */}
         <Link to="/" className="flex items-center space-x-2 mr-12">
-          <Shield className={`h-8 w-8 transition-colors duration-300 ${showServicesDropdown || isScrolled ? 'text-blue-600' : 'text-white'
+          <Shield className={`h-8 w-8 transition-colors duration-300 ${
+            showServicesDropdown || isScrolled 
+              ? (isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600')
+              : 'text-white'
             }`} />
-          <span className={`text-xl font-bold font-poppins transition-colors duration-300 ${showServicesDropdown || isScrolled ? 'text-blue-600' : 'text-white'
+          <span className={`text-xl font-bold font-poppins transition-colors duration-300 ${
+            showServicesDropdown || isScrolled 
+              ? (isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600')
+              : 'text-white'
             }`}>
             Atlas Defenders
           </span>
@@ -294,7 +304,10 @@ const Header = () => {
             onMouseLeave={handleServicesMouseLeave}
           >
             <button
-              className={`font-medium transition-colors duration-300 flex items-center ${showServicesDropdown || isScrolled ? 'text-gray-900 hover:text-blue-600' : 'text-white hover:text-accent'
+              className={`font-medium transition-colors duration-300 flex items-center ${
+                showServicesDropdown || isScrolled 
+                  ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
+                  : 'text-white hover:text-accent'
                 }`}
             >
               Services
@@ -328,8 +341,8 @@ const Header = () => {
                               key={category.id}
                               onMouseEnter={() => setSelectedCategory(category.id)}
                               className={`w-full text-left px-3 py-2 text-sm font-medium transition-all duration-150 relative ${selectedCategory === category.id
-                                ? 'text-blue-600 border-r-2 border-blue-600'
-                                : 'text-gray-700 hover:text-blue-600 hover:border-r-2 hover:border-blue-600'
+                                ? (isOffensiveSecurityPage ? 'text-red-600 border-r-2 border-red-600' : 'text-blue-600 border-r-2 border-blue-600')
+                                : (isOffensiveSecurityPage ? 'text-gray-700 hover:text-red-600 hover:border-r-2 hover:border-red-600' : 'text-gray-700 hover:text-blue-600 hover:border-r-2 hover:border-blue-600')
                                 }`}
                             >
                               {category.label}
@@ -342,14 +355,18 @@ const Header = () => {
                           <div className="space-y-1">
                             <Link
                               to="/services"
-                              className="block text-xs text-gray-500 hover:text-blue-600 transition-colors py-1"
+                              className={`block text-xs transition-colors py-1 ${
+                                isOffensiveSecurityPage ? 'text-gray-500 hover:text-red-600' : 'text-gray-500 hover:text-blue-600'
+                              }`}
                               onClick={() => setShowServicesDropdown(false)}
                             >
                               All Services
                             </Link>
                             <Link
                               to="/partners"
-                              className="block text-xs text-gray-500 hover:text-blue-600 transition-colors py-1"
+                              className={`block text-xs transition-colors py-1 ${
+                                isOffensiveSecurityPage ? 'text-gray-500 hover:text-red-600' : 'text-gray-500 hover:text-blue-600'
+                              }`}
                               onClick={() => setShowServicesDropdown(false)}
                             >
                               Resources
@@ -403,7 +420,9 @@ const Header = () => {
                                 className="group flex flex-col items-center text-center p-4 rounded-lg hover:bg-gray-50 transition-all duration-300"
                               >
                                 <div className="mb-4">
-                                  {service.icon}
+                                  {React.cloneElement(service.icon, {
+                                    className: `w-12 h-12 ${isOffensiveSecurityPage ? 'text-red-500' : 'text-blue-500'}`
+                                  })}
                                 </div>
                                 <h3 className="text-base font-normal text-gray-900 mb-2">
                                   {service.title}
@@ -411,7 +430,9 @@ const Header = () => {
                                 <p className="text-sm text-gray-600 mb-3">
                                   {service.subtitle}
                                 </p>
-                                <span className="text-sm text-blue-600 font-medium group-hover:underline">
+                                <span className={`text-sm font-medium group-hover:underline ${
+                                  isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600'
+                                }`}>
                                   Learn More →
                                 </span>
                               </Link>
@@ -426,7 +447,9 @@ const Header = () => {
                               className="group flex flex-col items-center text-center p-4 rounded-lg hover:bg-gray-50 transition-all duration-300"
                             >
                               <div className="mb-4">
-                                {service.icon}
+                                {React.cloneElement(service.icon, {
+                                  className: `w-12 h-12 ${isOffensiveSecurityPage ? 'text-red-500' : 'text-blue-500'}`
+                                })}
                               </div>
                               <h3 className="text-base font-normal text-gray-900 mb-2">
                                 {service.title}
@@ -434,7 +457,9 @@ const Header = () => {
                               <p className="text-sm text-gray-600 mb-3">
                                 {service.subtitle}
                               </p>
-                              <span className="text-sm text-blue-600 font-medium group-hover:underline">
+                              <span className={`text-sm font-medium group-hover:underline ${
+                                isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600'
+                              }`}>
                                 Learn More →
                               </span>
                             </Link>
@@ -451,7 +476,10 @@ const Header = () => {
           {/* Other Navigation Items */}
           <Link
             to="/industries"
-            className={`font-medium transition-colors duration-300 ${showServicesDropdown || isScrolled ? 'text-gray-900 hover:text-blue-600' : 'text-white hover:text-accent'
+            className={`font-medium transition-colors duration-300 ${
+              showServicesDropdown || isScrolled 
+                ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
+                : 'text-white hover:text-accent'
               }`}
           >
             Industries
@@ -459,7 +487,10 @@ const Header = () => {
 
           <Link
             to="/partners"
-            className={`font-medium transition-colors duration-300 ${showServicesDropdown || isScrolled ? 'text-gray-900 hover:text-blue-600' : 'text-white hover:text-accent'
+            className={`font-medium transition-colors duration-300 ${
+              showServicesDropdown || isScrolled 
+                ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
+                : 'text-white hover:text-accent'
               }`}
           >
             Partners
@@ -467,7 +498,10 @@ const Header = () => {
 
           <Link
             to="/about"
-            className={`font-medium transition-colors duration-300 ${showServicesDropdown || isScrolled ? 'text-gray-900 hover:text-blue-600' : 'text-white hover:text-accent'
+            className={`font-medium transition-colors duration-300 ${
+              showServicesDropdown || isScrolled 
+                ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
+                : 'text-white hover:text-accent'
               }`}
           >
             About
@@ -475,18 +509,27 @@ const Header = () => {
 
           <Link
             to="/contact"
-            className={`font-medium transition-colors duration-300 ${showServicesDropdown || isScrolled ? 'text-gray-900 hover:text-blue-600' : 'text-white hover:text-accent'
+            className={`font-medium transition-colors duration-300 ${
+              showServicesDropdown || isScrolled 
+                ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
+                : 'text-white hover:text-accent'
               }`}
           >
             Contact
           </Link>
         </nav>
 
-        {/* Ultra-Professional Get Consultation Button */}
+        {/* Ultra-Professional Get Consultation Button with Offensive Security Styling */}
         <div className="hidden md:block ml-8">
           <Link
             to="/contact"
-            className="group relative inline-flex items-center justify-center px-8 py-3 text-sm font-semibold text-white transition-all duration-500 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 rounded-xl hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 hover:shadow-2xl hover:shadow-blue-500/25 transform hover:scale-105 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 overflow-hidden"
+            className={`group relative inline-flex items-center justify-center px-8 py-3 text-sm font-semibold transition-all duration-500 rounded-xl transform hover:scale-105 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 overflow-hidden ${
+              isOffensiveSecurityPage && !isScrolled
+                ? 'bg-white text-red-600 hover:bg-gray-50 hover:shadow-2xl hover:shadow-red-500/25 focus:ring-red-500'
+                : isOffensiveSecurityPage && isScrolled
+                ? 'bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white hover:from-red-700 hover:via-red-800 hover:to-red-900 hover:shadow-2xl hover:shadow-red-500/25 focus:ring-red-500'
+                : 'bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 hover:shadow-2xl hover:shadow-blue-500/25 focus:ring-blue-500'
+            }`}
           >
             <span className="relative z-10 flex items-center space-x-2">
               <span className="font-medium tracking-wide">Get Consultation</span>
@@ -496,8 +539,20 @@ const Header = () => {
             </span>
 
             {/* Animated background layers */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-xl blur opacity-20 group-hover:opacity-40 transition-all duration-500 group-hover:blur-md"></div>
+            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+              isOffensiveSecurityPage && !isScrolled
+                ? 'bg-gray-100'
+                : isOffensiveSecurityPage && isScrolled
+                ? 'bg-gradient-to-r from-red-700 via-red-800 to-red-900'
+                : 'bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700'
+            }`}></div>
+            <div className={`absolute -inset-1 rounded-xl blur opacity-20 group-hover:opacity-40 transition-all duration-500 group-hover:blur-md ${
+              isOffensiveSecurityPage && !isScrolled
+                ? 'bg-gradient-to-r from-red-600 via-red-700 to-red-800'
+                : isOffensiveSecurityPage && isScrolled
+                ? 'bg-gradient-to-r from-red-600 via-red-700 to-red-800'
+                : 'bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600'
+            }`}></div>
 
             {/* Shimmer effect */}
             <div className="absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
@@ -528,42 +583,56 @@ const Header = () => {
               <nav className="space-y-4">
                 <Link
                   to="/services"
-                  className="block text-text-dark hover:text-secondary font-medium"
+                  className={`block font-medium ${
+                    isOffensiveSecurityPage ? 'text-text-dark hover:text-red-600' : 'text-text-dark hover:text-secondary'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   Services
                 </Link>
                 <Link
                   to="/industries"
-                  className="block text-text-dark hover:text-secondary font-medium"
+                  className={`block font-medium ${
+                    isOffensiveSecurityPage ? 'text-text-dark hover:text-red-600' : 'text-text-dark hover:text-secondary'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   Industries
                 </Link>
                 <Link
                   to="/partners"
-                  className="block text-text-dark hover:text-secondary font-medium"
+                  className={`block font-medium ${
+                    isOffensiveSecurityPage ? 'text-text-dark hover:text-red-600' : 'text-text-dark hover:text-secondary'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   Partners
                 </Link>
                 <Link
                   to="/about"
-                  className="block text-text-dark hover:text-secondary font-medium"
+                  className={`block font-medium ${
+                    isOffensiveSecurityPage ? 'text-text-dark hover:text-red-600' : 'text-text-dark hover:text-secondary'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   About
                 </Link>
                 <Link
                   to="/contact"
-                  className="block text-text-dark hover:text-secondary font-medium"
+                  className={`block font-medium ${
+                    isOffensiveSecurityPage ? 'text-text-dark hover:text-red-600' : 'text-text-dark hover:text-secondary'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   Contact
                 </Link>
                 <Link
                   to="/contact"
-                  className="block bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 text-center mt-4"
+                  className={`block px-6 py-3 rounded-xl font-semibold transition-all duration-300 text-center mt-4 ${
+                    isOffensiveSecurityPage 
+                      ? 'bg-gradient-to-r from-red-600 to-red-800 text-white hover:from-red-700 hover:to-red-900'
+                      : 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white hover:from-blue-700 hover:to-indigo-800'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   Get Consultation
