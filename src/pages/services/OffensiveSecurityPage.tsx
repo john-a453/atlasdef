@@ -978,7 +978,7 @@ const OffensiveSecurityPage = () => {
       <section className="py-20 bg-white relative overflow-hidden">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            
+
             {/* Left Side - Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -1002,7 +1002,7 @@ const OffensiveSecurityPage = () => {
                 <p className="text-lg text-gray-700 leading-relaxed">
                   At Atlas Defenders, we simulate real-world threats using the same powerful tools and frameworks trusted by elite red teams and adversaries worldwide.
                 </p>
-                
+
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Our expertise spans across reconnaissance, exploitation, post-exploitation, and lateral movement, delivering advanced testing scenarios powered by:
                 </p>
@@ -1062,7 +1062,7 @@ const OffensiveSecurityPage = () => {
             >
               {/* Animated Columns Container */}
               <div className="flex justify-center space-x-4 h-full">
-                
+
                 {/* Column 1 - Moving Up */}
                 <div className="flex flex-col space-y-4 animate-[slideUp_20s_linear_infinite]">
                   <ToolCube tool="Metasploit" />
@@ -1071,7 +1071,6 @@ const OffensiveSecurityPage = () => {
                   <ToolCube tool="OpenVAS" />
                   <ToolCube tool="Hydra" />
                   <ToolCube tool="John the Ripper" />
-                  <ToolCube tool="Dirsearch" />
                   <ToolCube tool="Acunetix" />
                   {/* Duplicate for seamless loop */}
                   <ToolCube tool="Metasploit" />
@@ -1082,16 +1081,16 @@ const OffensiveSecurityPage = () => {
 
                 {/* Column 2 - Moving Down */}
                 <div className="flex flex-col space-y-4 animate-[slideDown_25s_linear_infinite]">
-                  <ToolCube tool="Cobalt Strike" />
+                  <ToolCube tool="Nessus" />
                   <ToolCube tool="Nmap" />
                   <ToolCube tool="Nikto" />
                   <ToolCube tool="SQLmap" />
                   <ToolCube tool="Aircrack-ng" />
                   <ToolCube tool="Maltego" />
                   <ToolCube tool="Qualys" />
-                  <ToolCube tool="PowerShell" />
+                  <ToolCube tool="Empire" />
                   {/* Duplicate for seamless loop */}
-                  <ToolCube tool="Cobalt Strike" />
+                  <ToolCube tool="Nessus" />
                   <ToolCube tool="Nmap" />
                   <ToolCube tool="Nikto" />
                   <ToolCube tool="SQLmap" />
@@ -1119,7 +1118,7 @@ const OffensiveSecurityPage = () => {
         </div>
 
         {/* Custom CSS for animations */}
-        <style jsx>{`
+        <style jsx> {`
           @keyframes slideUp {
             0% { transform: translateY(0); }
             100% { transform: translateY(-50%); }
@@ -1137,37 +1136,59 @@ const OffensiveSecurityPage = () => {
 
 // Tool Cube Component
 const ToolCube = ({ tool }: { tool: string }) => {
-  // Tool logo mapping - using placeholder icons for now
-  const getToolIcon = (toolName: string) => {
-    const iconMap: { [key: string]: string } = {
-      'Metasploit': '🛡️',
-      'Cobalt Strike': '⚔️',
-      'PowerShell': '💻',
-      'Burp Suite': '🔍',
-      'Nmap': '🌐',
-      'Wireshark': '📡',
-      'Nikto': '🔎',
-      'OpenVAS': '🛡️',
-      'SQLmap': '🗃️',
-      'Hydra': '🔐',
-      'Aircrack-ng': '📶',
-      'John the Ripper': '🔓',
-      'Maltego': '🕸️',
-      'Dirsearch': '📁',
-      'Qualys': '🔍',
-      'Acunetix': '🌐'
+  // Tool logo mapping - using actual logos from /public/Logos/
+  const getToolLogo = (toolName: string) => {
+    const logoMap: { [key: string]: string } = {
+      'Metasploit': '/Logos/metasploit_logo.svg',
+      'Nessus': '/Logos/nessus_logo.png',
+      'Empire': '/Logos/powershell_logo.svg',
+      'Burp Suite': '/Logos/bruipsuite_logo.svg',
+      'Nmap': '/Logos/nmap_logo.svg',
+      'Wireshark': '/Logos/wireshark_logo.svg',
+      'Nikto': '/Logos/nikto_logo.svg',
+      'OpenVAS': '/Logos/openvas_logo.svg',
+      'SQLmap': '/Logos/sqlmap_logo.svg',
+      'Hydra': '/Logos/hydra_logo.svg',
+      'Aircrack-ng': '/Logos/aircrackng_logo.svg',
+      'John the Ripper': '/Logos/john_the_ripper_logo.svg',
+      'Maltego': '/Logos/maltego.svg',
+      'Qualys': '/Logos/qualys_logo.png',
+      'Acunetix': '/Logos/acuentix_logo.png'
     };
-    return iconMap[toolName] || '🔧';
+    return logoMap[toolName] || '/Logos/hacker_logo.svg';
+  };
+
+  // Special display rules: Qualys and Acunetix show logo only (no name)
+  const shouldShowName = (toolName: string) => {
+    return !['Qualys', 'Acunetix'].includes(toolName);
+  };
+
+  // Special logo sizing for very big logos
+  const getLogoSize = (toolName: string) => {
+    if (['Qualys', 'OpenVAS', 'Acunetix'].includes(toolName)) {
+      return 'w-20 h-20'; // Very very big logos
+    }
+    return 'w-12 h-12'; // Normal size
   };
 
   return (
-    <div className="w-24 h-24 bg-white rounded-xl shadow-lg border border-gray-200 flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-      <div className="text-2xl mb-1 group-hover:scale-110 transition-transform duration-300">
-        {getToolIcon(tool)}
+    <div className="w-32 h-32 bg-white rounded-xl shadow-lg border border-gray-200 flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+      <div className={`${getLogoSize(tool)} ${shouldShowName(tool) ? 'mb-2' : ''} group-hover:scale-110 transition-transform duration-300 flex items-center justify-center`}>
+        <img
+          src={getToolLogo(tool)}
+          alt={`${tool} logo`}
+          className="max-w-full max-h-full object-contain"
+          onError={(e) => {
+            // Fallback to hacker logo if image fails to load
+            (e.target as HTMLImageElement).src = '/Logos/hacker_logo.svg';
+          }}
+        />
       </div>
-      <div className="text-xs font-semibold text-gray-700 text-center px-1 leading-tight">
-        {tool}
-      </div>
+      {shouldShowName(tool) && (
+        <div className="text-sm font-semibold text-gray-700 text-center px-2 leading-tight">
+          {tool}
+        </div>
+      )}
     </div>
   );
 };

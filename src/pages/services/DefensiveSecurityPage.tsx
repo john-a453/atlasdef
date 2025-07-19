@@ -553,7 +553,7 @@ const DefensiveSecurityPage = () => {
     'Open Threat Exchange (OTX)': 'from-blue-600 to-blue-800',
     'IBM SOAR': 'from-blue-700 to-blue-900',
     'IBM QRadar': 'from-blue-700 to-blue-900',
-    'Shuffle': 'from-purple-600 to-purple-800',
+    'Shuffle': 'from-gray-800 to-black',
     'TheHive': 'from-orange-600 to-orange-800',
     'Elastic Stack': 'from-yellow-500 to-orange-600'
   };
@@ -606,7 +606,9 @@ const DefensiveSecurityPage = () => {
     'IBM QRadar': 'https://www.ibm.com/products/qradar-siem',
     'Shuffle': 'https://shuffler.io',
     'TheHive': 'https://thehive-project.org',
-    'Elastic Stack': 'https://www.elastic.co'
+    'Elastic Stack': 'https://www.elastic.co',
+    'Nginx': 'https://nginx.org',
+    'Traefik': 'https://traefik.io'
   };
 
   // Technology categories with their tools
@@ -630,8 +632,8 @@ const DefensiveSecurityPage = () => {
         { name: 'Palo Alto Cortex XSOAR', logo: '/Logos/paloalto_logo.svg' },
         { name: 'Splunk SOAR', logo: '/Logos/splunk_logo.svg' },
         { name: 'IBM SOAR', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/2560px-IBM_logo.svg.png' },
-        { name: 'Shuffle', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png' },
-        { name: 'TheHive', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png' }
+        { name: 'Shuffle', logo: '/Logos/shuffle_logo.svg' },
+        { name: 'TheHive', logo: '/Logos/thehive_logo.svg' }
       ]
     },
     siem: {
@@ -712,9 +714,10 @@ const DefensiveSecurityPage = () => {
       description: 'Proxy Server Solutions',
       tools: [
         { name: 'HAProxy', logo: '/Logos/Haproxy_logo.png' },
-        { name: 'Squid Proxy', logo: '/Logos/Squid_proxy_logo.png' },
+        { name: 'Squid Proxy', logo: '/Logos/squidproxy_logo.svg' },
         { name: 'F5', logo: '/Logos/F5_Logo_0.svg' },
-        { name: 'Palo Alto', logo: '/Logos/paloalto_logo.svg' }
+        { name: 'Nginx', logo: '/Logos/Nginx_logo.svg' },
+        { name: 'Traefik', logo: '/Logos/traefik_logo.svg' }
       ]
     },
     threat: {
@@ -722,9 +725,7 @@ const DefensiveSecurityPage = () => {
       description: 'Threat Intelligence Platforms and Feeds',
       tools: [
         { name: 'MISP', logo: '/Logos/misp_logo.png' },
-        { name: 'Open Threat Exchange (OTX)', logo: '/Logos/otx_logo.svg' },
-        { name: 'Wazuh', logo: '/Logos/Wazuh_Logo.svg' },
-        { name: 'CrowdStrike', logo: '/Logos/CrowdStrike_logo.svg' }
+        { name: 'Open Threat Exchange (OTX)', logo: '/Logos/otx_logo.svg' }
       ]
     }
   };
@@ -1397,49 +1398,86 @@ const DefensiveSecurityPage = () => {
               transition={{ duration: 0.3 }}
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"
             >
-              {technologyCategories[activeCategory as keyof typeof technologyCategories].tools.map((tool, index) => (
-                <motion.div
-                  key={tool.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="flip-card"
-                  onClick={() => {
-                    const url = companyUrls[tool.name as keyof typeof companyUrls];
-                    if (url) window.open(url, '_blank');
-                  }}
-                >
-                  <div className="flip-card-inner">
-                    <div className="flip-card-front">
-                      <div className="logo-container p-4">
-                        <img
-                          src={tool.logo}
-                          alt={tool.name}
-                          className="w-full h-full object-contain"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            const parent = target.parentElement;
-                            if (parent) {
-                              parent.innerHTML = `<div class="text-gray-600 font-semibold text-sm text-center">${tool.name}</div>`;
-                            }
-                          }}
-                        />
+              {technologyCategories[activeCategory as keyof typeof technologyCategories].tools.map((tool, index) => {
+                // Special styling logic for specific tools
+                const isTheHive = tool.name === 'TheHive';
+                const isOpenVAS = tool.name === 'OpenVAS';
+                const isShuffle = tool.name === 'Shuffle';
+                const isHAProxy = tool.name === 'HAProxy';
+                const isSquidProxy = tool.name === 'Squid Proxy';
+                const isTraefik = tool.name === 'Traefik';
+
+                // Special logo sizing
+                const getLogoClasses = () => {
+                  if (isTheHive) return "w-full h-full object-contain scale-150"; // Very big logo for TheHive
+                  if (isHAProxy || isSquidProxy || isTraefik) return "w-full h-full object-contain scale-200"; // Very very very big logos for proxy servers
+                  return "w-full h-full object-contain";
+                };
+
+                // Special front card styling for Shuffle (dark background)
+                const getFrontCardClasses = () => {
+                  if (isShuffle) return "flip-card-front bg-gray-900 border-gray-700";
+                  return "flip-card-front";
+                };
+
+                // Special logo container classes for Shuffle
+                const getLogoContainerClasses = () => {
+                  if (isShuffle) return "logo-container p-4 flex flex-col items-center justify-center h-full keep-original-colors";
+                  return "logo-container p-4 flex flex-col items-center justify-center h-full";
+                };
+
+                return (
+                  <motion.div
+                    key={tool.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="flip-card"
+                    onClick={() => {
+                      const url = companyUrls[tool.name as keyof typeof companyUrls];
+                      if (url) window.open(url, '_blank');
+                    }}
+                  >
+                    <div className="flip-card-inner">
+                      <div className={getFrontCardClasses()}>
+                        <div className={getLogoContainerClasses()}>
+                          <div className={`${isTheHive ? 'flex-1' : 'w-full h-full'} flex items-center justify-center`}>
+                            <img
+                              src={tool.logo}
+                              alt={tool.name}
+                              className={getLogoClasses()}
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                                const parent = target.parentElement;
+                                if (parent) {
+                                  parent.innerHTML = `<div class="text-gray-600 font-semibold text-sm text-center">${tool.name}</div>`;
+                                }
+                              }}
+                            />
+                          </div>
+                          {/* Show name below logo for specific tools */}
+                          {(isOpenVAS || isTheHive) && (
+                            <div className={`font-semibold text-sm text-center mt-2 ${isShuffle ? 'text-white' : 'text-gray-700'}`}>
+                              {tool.name}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div
+                        className={`flip-card-back bg-gradient-to-br ${brandColors[tool.name as keyof typeof brandColors] || 'from-gray-600 to-gray-800'}`}
+                      >
+                        <div className="text-white font-bold text-lg text-center mb-2">
+                          {tool.name}
+                        </div>
+                        <button className="discover-btn">
+                          Discover
+                        </button>
                       </div>
                     </div>
-                    <div
-                      className={`flip-card-back bg-gradient-to-br ${brandColors[tool.name as keyof typeof brandColors] || 'from-gray-600 to-gray-800'}`}
-                    >
-                      <div className="text-white font-bold text-lg text-center mb-2">
-                        {tool.name}
-                      </div>
-                      <button className="discover-btn">
-                        Discover
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </AnimatePresence>
         </div>
