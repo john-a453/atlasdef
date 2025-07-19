@@ -10,11 +10,10 @@ const OffensiveSecurityPage = () => {
 
   // Professional Terminal Typing Animation Component with Rotating Text
   const TerminalTypingAnimation = () => {
-    const [displayText, setDisplayText] = useState('');
-    const [isTyping, setIsTyping] = useState(false);
-    const [currentResponseIndex, setCurrentResponseIndex] = useState(0);
+    const [commandText, setCommandText] = useState('');
+    const [responseText, setResponseText] = useState('');
     const [showCursor, setShowCursor] = useState(true);
-    const [phase, setPhase] = useState('waiting'); // 'waiting', 'typing-command', 'typing-response', 'deleting'
+    const [animationPhase, setAnimationPhase] = useState('waiting'); // 'waiting', 'typing-command', 'cycling-responses'
 
     const responses = [
       'ATLAS DEFENDERS',
@@ -32,108 +31,99 @@ const OffensiveSecurityPage = () => {
     }, []);
 
     useEffect(() => {
-      let timeoutId: ReturnType<typeof setTimeout>;
-      let intervalId: ReturnType<typeof setInterval>;
+      let timeouts: ReturnType<typeof setTimeout>[] = [];
+      let intervals: ReturnType<typeof setInterval>[] = [];
+
+      const clearAllTimers = () => {
+        timeouts.forEach(clearTimeout);
+        intervals.forEach(clearInterval);
+        timeouts = [];
+        intervals = [];
+      };
 
       const startAnimation = () => {
-        // Wait 2 seconds then start typing command
-        timeoutId = setTimeout(() => {
-          setPhase('typing-command');
-          setIsTyping(true);
-
+        // Step 1: Wait 2 seconds, then type command
+        timeouts.push(setTimeout(() => {
+          setAnimationPhase('typing-command');
           const command = '$ whoami';
           let charIndex = 0;
 
-          intervalId = setInterval(() => {
+          const commandInterval = setInterval(() => {
             if (charIndex <= command.length) {
-              setDisplayText(command.slice(0, charIndex));
+              setCommandText(command.slice(0, charIndex));
               charIndex++;
             } else {
-              clearInterval(intervalId);
-              setIsTyping(false);
+              clearInterval(commandInterval);
+              setAnimationPhase('cycling-responses');
 
-              // Wait 1 second then start typing response
-              timeoutId = setTimeout(() => {
-                setPhase('typing-response');
-                setIsTyping(true);
-                setDisplayText('');
+              // Step 2: Start response cycling
+              let responseIndex = 0;
 
-                const response = responses[currentResponseIndex];
-                let responseCharIndex = 0;
+              const cycleResponses = () => {
+                const currentResponse = responses[responseIndex];
+                let charIndex = 0;
 
-                intervalId = setInterval(() => {
-                  if (responseCharIndex <= response.length) {
-                    setDisplayText(response.slice(0, responseCharIndex));
-                    responseCharIndex++;
+                // Type response
+                const typeInterval = setInterval(() => {
+                  if (charIndex <= currentResponse.length) {
+                    setResponseText(currentResponse.slice(0, charIndex));
+                    charIndex++;
                   } else {
-                    clearInterval(intervalId);
-                    setIsTyping(false);
+                    clearInterval(typeInterval);
 
-                    // Wait 3 seconds then start deleting
-                    timeoutId = setTimeout(() => {
-                      setPhase('deleting');
-                      setIsTyping(true);
+                    // Wait 3 seconds then delete
+                    timeouts.push(setTimeout(() => {
+                      let deleteIndex = currentResponse.length;
 
-                      let deleteIndex = response.length;
-                      intervalId = setInterval(() => {
+                      const deleteInterval = setInterval(() => {
                         if (deleteIndex >= 0) {
-                          setDisplayText(response.slice(0, deleteIndex));
+                          setResponseText(currentResponse.slice(0, deleteIndex));
                           deleteIndex--;
                         } else {
-                          clearInterval(intervalId);
-                          setIsTyping(false);
-                          setCurrentResponseIndex(prev => (prev + 1) % responses.length);
+                          clearInterval(deleteInterval);
 
-                          // Wait 500ms then start next response
-                          timeoutId = setTimeout(() => {
-                            setPhase('typing-response');
-                            setIsTyping(true);
-                            setDisplayText('');
+                          // Move to next response
+                          responseIndex = (responseIndex + 1) % responses.length;
 
-                            const nextResponse = responses[(currentResponseIndex + 1) % responses.length];
-                            let nextCharIndex = 0;
-
-                            intervalId = setInterval(() => {
-                              if (nextCharIndex <= nextResponse.length) {
-                                setDisplayText(nextResponse.slice(0, nextCharIndex));
-                                nextCharIndex++;
-                              } else {
-                                clearInterval(intervalId);
-                                setIsTyping(false);
-                                startAnimation(); // Restart the cycle
-                              }
-                            }, 100);
-                          }, 500);
+                          // Wait 500ms then cycle to next
+                          timeouts.push(setTimeout(() => {
+                            cycleResponses();
+                          }, 500));
                         }
-                      }, 60);
-                    }, 3000);
+                      }, 50);
+                      intervals.push(deleteInterval);
+                    }, 3000));
                   }
                 }, 100);
-              }, 1000);
+                intervals.push(typeInterval);
+              };
+
+              // Start response cycling after 1 second
+              timeouts.push(setTimeout(() => {
+                cycleResponses();
+              }, 1000));
             }
           }, 120);
-        }, 2000);
+          intervals.push(commandInterval);
+        }, 2000));
       };
 
       startAnimation();
 
-      return () => {
-        if (timeoutId) clearTimeout(timeoutId);
-        if (intervalId) clearInterval(intervalId);
-      };
-    }, [currentResponseIndex]);
+      return clearAllTimers;
+    }, []);
 
     return (
       <div className="space-y-2 h-12"> {/* Fixed height container */}
-        {/* Command line - always visible once typed */}
+        {/* Command line - typed once and stays visible */}
         <div className="text-green-400">
-          {phase === 'typing-command' ? displayText : (phase !== 'waiting' ? '$ whoami' : '')}
+          {commandText}
         </div>
 
-        {/* Response line - only show when not typing command */}
-        {(phase === 'typing-response' || phase === 'deleting') && (
+        {/* Response line - cycles through responses */}
+        {animationPhase === 'cycling-responses' && (
           <div className="text-green-400 flex items-center min-h-[20px]">
-            {displayText}
+            {responseText}
             {showCursor && (
               <span className="inline-block w-0.5 h-4 bg-green-400 ml-1">|</span>
             )}
