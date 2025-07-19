@@ -8,6 +8,141 @@ const OffensiveSecurityPage = () => {
     document.title = 'Offensive Security | Atlas Defenders';
   }, []);
 
+  // Professional Terminal Typing Animation Component with Rotating Text
+  const TerminalTypingAnimation = () => {
+    const [displayText, setDisplayText] = useState('');
+    const [isTyping, setIsTyping] = useState(false);
+    const [currentResponseIndex, setCurrentResponseIndex] = useState(0);
+    const [showCursor, setShowCursor] = useState(true);
+    const [phase, setPhase] = useState('waiting'); // 'waiting', 'typing-command', 'typing-response', 'deleting'
+
+    const responses = [
+      'ATLAS DEFENDERS',
+      'Empowering Security, Elevating Trust',
+      'Protecting Digital Assets Worldwide',
+      'Your Cybersecurity Partner'
+    ];
+
+    useEffect(() => {
+      // Cursor blinking
+      const cursorInterval = setInterval(() => {
+        setShowCursor(prev => !prev);
+      }, 600);
+      return () => clearInterval(cursorInterval);
+    }, []);
+
+    useEffect(() => {
+      let timeoutId: ReturnType<typeof setTimeout>;
+      let intervalId: ReturnType<typeof setInterval>;
+
+      const startAnimation = () => {
+        // Wait 2 seconds then start typing command
+        timeoutId = setTimeout(() => {
+          setPhase('typing-command');
+          setIsTyping(true);
+
+          const command = '$ whoami';
+          let charIndex = 0;
+
+          intervalId = setInterval(() => {
+            if (charIndex <= command.length) {
+              setDisplayText(command.slice(0, charIndex));
+              charIndex++;
+            } else {
+              clearInterval(intervalId);
+              setIsTyping(false);
+
+              // Wait 1 second then start typing response
+              timeoutId = setTimeout(() => {
+                setPhase('typing-response');
+                setIsTyping(true);
+                setDisplayText('');
+
+                const response = responses[currentResponseIndex];
+                let responseCharIndex = 0;
+
+                intervalId = setInterval(() => {
+                  if (responseCharIndex <= response.length) {
+                    setDisplayText(response.slice(0, responseCharIndex));
+                    responseCharIndex++;
+                  } else {
+                    clearInterval(intervalId);
+                    setIsTyping(false);
+
+                    // Wait 3 seconds then start deleting
+                    timeoutId = setTimeout(() => {
+                      setPhase('deleting');
+                      setIsTyping(true);
+
+                      let deleteIndex = response.length;
+                      intervalId = setInterval(() => {
+                        if (deleteIndex >= 0) {
+                          setDisplayText(response.slice(0, deleteIndex));
+                          deleteIndex--;
+                        } else {
+                          clearInterval(intervalId);
+                          setIsTyping(false);
+                          setCurrentResponseIndex(prev => (prev + 1) % responses.length);
+
+                          // Wait 500ms then start next response
+                          timeoutId = setTimeout(() => {
+                            setPhase('typing-response');
+                            setIsTyping(true);
+                            setDisplayText('');
+
+                            const nextResponse = responses[(currentResponseIndex + 1) % responses.length];
+                            let nextCharIndex = 0;
+
+                            intervalId = setInterval(() => {
+                              if (nextCharIndex <= nextResponse.length) {
+                                setDisplayText(nextResponse.slice(0, nextCharIndex));
+                                nextCharIndex++;
+                              } else {
+                                clearInterval(intervalId);
+                                setIsTyping(false);
+                                startAnimation(); // Restart the cycle
+                              }
+                            }, 100);
+                          }, 500);
+                        }
+                      }, 60);
+                    }, 3000);
+                  }
+                }, 100);
+              }, 1000);
+            }
+          }, 120);
+        }, 2000);
+      };
+
+      startAnimation();
+
+      return () => {
+        if (timeoutId) clearTimeout(timeoutId);
+        if (intervalId) clearInterval(intervalId);
+      };
+    }, [currentResponseIndex]);
+
+    return (
+      <div className="space-y-2 h-12"> {/* Fixed height container */}
+        {/* Command line - always visible once typed */}
+        <div className="text-green-400">
+          {phase === 'typing-command' ? displayText : (phase !== 'waiting' ? '$ whoami' : '')}
+        </div>
+
+        {/* Response line - only show when not typing command */}
+        {(phase === 'typing-response' || phase === 'deleting') && (
+          <div className="text-green-400 flex items-center min-h-[20px]">
+            {displayText}
+            {showCursor && (
+              <span className="inline-block w-0.5 h-4 bg-green-400 ml-1">|</span>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   // Counter component for animated statistics
   const Counter = ({ end, duration = 2.5, suffix = '', prefix = '' }: { end: number, duration?: number, suffix?: string, prefix?: string }) => {
     const [count, setCount] = useState(0);
@@ -111,14 +246,15 @@ const OffensiveSecurityPage = () => {
               </div>
             </motion.div>
 
-            {/* Right Content */}
+            {/* Right Content - Professional Terminal with Typing Animation */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-black/80 rounded-lg p-6 border border-red-500/30 backdrop-blur-sm">
+              <div className="bg-black/90 rounded-lg p-6 border border-red-500/30 backdrop-blur-sm relative overflow-hidden">
+                {/* Terminal Header */}
                 <div className="flex items-center mb-4">
                   <div className="flex space-x-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -127,7 +263,9 @@ const OffensiveSecurityPage = () => {
                   </div>
                   <span className="ml-4 text-gray-400 text-sm">atlas-defenders-redteam.sh</span>
                 </div>
-                <div className="text-green-400 font-mono text-sm space-y-2">
+
+                {/* Terminal Content with Professional Typing Animation */}
+                <div className="text-green-400 font-mono text-sm space-y-2 min-h-[280px]">
                   <div>$ nmap -sS -O target.company.com</div>
                   <div>Starting Nmap scan...</div>
                   <div>PORT     STATE SERVICE</div>
@@ -138,8 +276,9 @@ const OffensiveSecurityPage = () => {
                   <div className="text-red-400">Vulnerability detected: SQL Injection</div>
                   <div className="text-yellow-400">$ msfconsole</div>
                   <div className="text-yellow-400">Payload delivered successfully</div>
-                  <div className="text-green-400">$ whoami</div>
-                  <div className="text-green-400">root@target-server</div>
+
+                  {/* Professional Typing Animation Component */}
+                  <TerminalTypingAnimation />
                 </div>
               </div>
             </motion.div>
@@ -181,12 +320,12 @@ const OffensiveSecurityPage = () => {
             >
               <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl p-8 text-white">
                 <div className="mb-6">
-                  {/* White Hat Icon */}
-                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 1.74.5 3.37 1.41 4.84.91 1.47 2.2 2.59 3.68 3.16.74.29 1.52.29 2.26 0 1.48-.57 2.77-1.69 3.68-3.16C16.5 12.37 17 10.74 17 9c0-3.87-3.13-7-7-7zm0 2c2.76 0 5 2.24 5 5 0 1.25-.36 2.45-1.03 3.5-.67 1.05-1.6 1.84-2.68 2.25-.21.08-.43.08-.64 0-1.08-.41-2.01-1.2-2.68-2.25C9.36 11.45 9 10.25 9 9c0-2.76 2.24-5 5-5z" />
-                    <path d="M12 6c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm0 2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z" />
-                    <path d="M4 20c0-4.42 3.58-8 8-8s8 3.58 8 8v2H4v-2z" />
-                  </svg>
+                  {/* Professional Hacker Logo */}
+                  <img
+                    src="/Logos/hacker_logo.svg"
+                    alt="Ethical Hacker"
+                    className="w-12 h-12 filter brightness-0 invert"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold mb-4 text-white">Red Team Simulation</h3>
                 <p className="text-red-100 mb-6">
