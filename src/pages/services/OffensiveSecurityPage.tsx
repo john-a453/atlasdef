@@ -79,22 +79,35 @@ const OffensiveSecurityPage = () => {
                 Our certified red team experts use advanced techniques to test your defenses.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   to="/contact"
-                  className="group inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  className="group inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
                   <span>Request a Red Team Assessment</span>
-                  <ArrowRight size={20} className="ml-3" />
+                  <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
 
-                <Link
-                  to="/contact"
-                  className="group inline-flex items-center bg-transparent border-2 border-red-500 text-red-400 hover:bg-red-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
+                <button
+                  onClick={() => {
+                    const servicesSection = document.getElementById('offensive-services-section');
+                    if (servicesSection) {
+                      servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                  className="group relative inline-flex items-center justify-center bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-6 py-3 rounded-lg font-semibold text-base transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-white/25 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent overflow-hidden"
                 >
-                  <Target size={20} className="mr-3" />
-                  <span>View Service Details</span>
-                </Link>
+                  <span className="relative z-10 font-medium tracking-wide">View Service Details</span>
+
+                  {/* Professional hover effect overlay */}
+                  <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  {/* Subtle glow effect */}
+                  <div className="absolute -inset-1 bg-white rounded-lg blur opacity-20 group-hover:opacity-40 transition-all duration-500 group-hover:blur-md"></div>
+
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                </button>
               </div>
             </motion.div>
 
@@ -168,9 +181,14 @@ const OffensiveSecurityPage = () => {
             >
               <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl p-8 text-white">
                 <div className="mb-6">
-                  <Target size={48} className="text-red-200" />
+                  {/* White Hat Icon */}
+                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 1.74.5 3.37 1.41 4.84.91 1.47 2.2 2.59 3.68 3.16.74.29 1.52.29 2.26 0 1.48-.57 2.77-1.69 3.68-3.16C16.5 12.37 17 10.74 17 9c0-3.87-3.13-7-7-7zm0 2c2.76 0 5 2.24 5 5 0 1.25-.36 2.45-1.03 3.5-.67 1.05-1.6 1.84-2.68 2.25-.21.08-.43.08-.64 0-1.08-.41-2.01-1.2-2.68-2.25C9.36 11.45 9 10.25 9 9c0-2.76 2.24-5 5-5z" />
+                    <path d="M12 6c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm0 2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z" />
+                    <path d="M4 20c0-4.42 3.58-8 8-8s8 3.58 8 8v2H4v-2z" />
+                  </svg>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Red Team Simulation</h3>
+                <h3 className="text-2xl font-bold mb-4 text-white">Red Team Simulation</h3>
                 <p className="text-red-100 mb-6">
                   Our red team exercises simulate advanced persistent threats, testing your organization's
                   ability to detect, respond to, and recover from sophisticated attacks.
@@ -196,7 +214,7 @@ const OffensiveSecurityPage = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="offensive-services-section" className="py-20 bg-gray-50">
         <div className="container max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

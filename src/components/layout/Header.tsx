@@ -525,7 +525,7 @@ const Header = () => {
             to="/contact"
             className={`group relative inline-flex items-center justify-center px-8 py-3 text-sm font-semibold transition-all duration-500 rounded-xl transform hover:scale-105 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 overflow-hidden ${
               isOffensiveSecurityPage && !isScrolled
-                ? 'bg-white text-red-600 hover:bg-gray-50 hover:shadow-2xl hover:shadow-red-500/25 focus:ring-red-500'
+                ? 'bg-white border-2 border-white text-red-600 hover:bg-gray-50 hover:shadow-2xl hover:shadow-red-500/25 focus:ring-red-500 shadow-lg'
                 : isOffensiveSecurityPage && isScrolled
                 ? 'bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white hover:from-red-700 hover:via-red-800 hover:to-red-900 hover:shadow-2xl hover:shadow-red-500/25 focus:ring-red-500'
                 : 'bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 hover:shadow-2xl hover:shadow-blue-500/25 focus:ring-blue-500'

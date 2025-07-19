@@ -1,11 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Shield, Mail, Phone, MapPin, Linkedin, Facebook, Twitter } from 'lucide-react';
 
 const Footer = () => {
+  const location = useLocation();
   const currentYear = new Date().getFullYear();
+  
+  // Check if we're on the offensive security page
+  const isOffensiveSecurityPage = location.pathname === '/services/cybersecurity/offensive-security';
 
   return (
-    <footer className="bg-primary text-white pt-16 pb-8">
+    <footer className={`pt-16 pb-8 transition-colors duration-300 ${
+      isOffensiveSecurityPage ? 'bg-black text-white' : 'bg-primary text-white'
+    }`}>
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
