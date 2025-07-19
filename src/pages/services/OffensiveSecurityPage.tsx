@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Shield, Target, ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,44 @@ const OffensiveSecurityPage = () => {
   useEffect(() => {
     document.title = 'Offensive Security | Atlas Defenders';
   }, []);
+
+  // Counter component for animated statistics
+  const Counter = ({ end, duration = 2.5, suffix = '', prefix = '' }: { end: number, duration?: number, suffix?: string, prefix?: string }) => {
+    const [count, setCount] = useState(0);
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+
+    useEffect(() => {
+      if (isInView) {
+        let startTime: number;
+        const startCount = 0;
+
+        const updateCount = (timestamp: number) => {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+
+          const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+          const currentCount = Math.floor(easeOutQuart * (end - startCount) + startCount);
+
+          setCount(currentCount);
+
+          if (progress >= 1) {
+            setCount(end);
+          } else {
+            requestAnimationFrame(updateCount);
+          }
+        };
+
+        requestAnimationFrame(updateCount);
+      }
+    }, [isInView, end, duration]);
+
+    return (
+      <span ref={ref}>
+        {prefix}{count}{suffix}
+      </span>
+    );
+  };
 
   return (
     <>
@@ -572,6 +610,103 @@ const OffensiveSecurityPage = () => {
         </div>
       </section>
 
+      {/* Client Success & Project Statistics Section - Oblique Design */}
+      <section className="relative overflow-hidden">
+        {/* Oblique Background with Linear Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-800 to-black transform -skew-y-1 origin-top-left scale-110"></div>
+
+        {/* Content Container */}
+        <div className="relative z-10 py-16 px-4">
+          <div className="container max-w-6xl mx-auto">
+
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                Proven Excellence in Cybersecurity
+              </h2>
+              <p className="text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed">
+                Our offensive security expertise delivers measurable results across global enterprises
+              </p>
+            </motion.div>
+
+            {/* Statistics Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+
+              {/* Satisfied Clients */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-black text-white mb-2 leading-none">
+                  <Counter end={6561} suffix="+" duration={3} />
+                </div>
+                <div className="text-gray-200 font-semibold text-base tracking-wide">
+                  Satisfied Clients
+                </div>
+              </motion.div>
+
+              {/* Penetration Tests */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-black text-white mb-2 leading-none">
+                  <Counter end={600} suffix="+" duration={3} />
+                </div>
+                <div className="text-gray-200 font-semibold text-base tracking-wide">
+                  Penetration Tests
+                </div>
+              </motion.div>
+
+              {/* Security Experts */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-black text-white mb-2 leading-none">
+                  <Counter end={250} suffix="+" duration={3} />
+                </div>
+                <div className="text-gray-200 font-semibold text-base tracking-wide">
+                  Security Experts
+                </div>
+              </motion.div>
+
+              {/* Vulnerabilities Found */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-black text-white mb-2 leading-none">
+                  <Counter end={15420} suffix="+" duration={3} />
+                </div>
+                <div className="text-gray-200 font-semibold text-base tracking-wide">
+                  Vulnerabilities Found
+                </div>
+              </motion.div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Our Offensive Security Certifications Section */}
       <section className="py-20 bg-white">
         <div className="container max-w-6xl">
@@ -622,41 +757,73 @@ const OffensiveSecurityPage = () => {
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white relative overflow-hidden">
-        <div className="container relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              Ready to Uncover the Gaps in Your Security?
-            </h2>
-            <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Don't wait for a breach to happen. Get proactive protection with our comprehensive
-              offensive security services.
-            </p>
+      {/* Call to Action Section - CrowdStrike Style */}
+      <section className="relative bg-black text-white overflow-hidden">
+        {/* Diagonal Red Lines Background - Exact CrowdStrike Pattern */}
+        <div className="absolute inset-0">
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 200">
+            <defs>
+              <pattern id="diagonalLines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="20" stroke="#dc2626" strokeWidth="1" opacity="0.6" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#diagonalLines)" />
+          </svg>
+        </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+        {/* Content */}
+        <div className="relative z-10 py-16 px-4">
+          <div className="container max-w-6xl mx-auto text-center">
+
+            {/* Main Heading */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-white"
+            >
+              Ready to Uncover the Gaps in Your Security?
+            </motion.h2>
+
+            {/* Buttons Row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
+              {/* Primary Red Button */}
               <Link
                 to="/contact"
-                className="group inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                className="group inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md font-semibold text-base transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <span>Book a Free Consultation</span>
-                <ArrowRight size={20} className="ml-3" />
+                <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
 
+              {/* Secondary Black Button */}
               <Link
                 to="/contact"
-                className="group inline-flex items-center bg-transparent border-2 border-red-500 text-red-400 hover:bg-red-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
+                className="group inline-flex items-center bg-transparent border-2 border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-md font-semibold text-base transition-all duration-300"
               >
-                <Target size={20} className="mr-3" />
-                <span>Get a Quote</span>
+                <span>Contact us</span>
+                <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="text-gray-300 text-lg mt-6 max-w-3xl mx-auto leading-relaxed"
+            >
+              Don't wait for a breach to happen. Get proactive protection with our comprehensive offensive security services.
+            </motion.p>
+          </div>
         </div>
       </section>
     </>
