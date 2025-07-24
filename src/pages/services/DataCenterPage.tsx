@@ -43,47 +43,50 @@ const DataCenterPage = () => {
   useEffect(() => {
     document.title = 'Next-Generation Data Centers - Modernize Your Infrastructure | Atlas Defenders';
     
-    // Force navigation to show in "scrolled" state from the beginning
-    const forceNavScrolled = () => {
+    // Force logo and text colors but keep background transparent initially
+    const forceNavColors = () => {
       const header = document.querySelector('header');
       if (header) {
-        // Force the header to have the scrolled styling
-        header.style.backgroundColor = 'white';
-        header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
-        header.classList.add('bg-white', 'shadow-md');
-        
-        // Force logo to be blue
+        // Force logo to be blue always
         const logoElements = header.querySelectorAll('.h-8.w-8, .text-xl.font-bold');
         logoElements.forEach(element => {
           element.classList.remove('text-white');
           element.classList.add('text-blue-600');
         });
         
-        // Force all navigation links to be dark
+        // Force all navigation links to be dark always
         const navLinks = header.querySelectorAll('nav a:not([class*="bg-gradient"]), nav button:not([class*="bg-gradient"])');
         navLinks.forEach(link => {
           link.classList.remove('text-white');
           link.classList.add('text-gray-900');
         });
+        
+        // Only add white background when scrolled (let the header component handle this naturally)
+        // Don't force background color - let the normal scroll behavior work
       }
     };
 
-    // Apply immediately and on scroll to override any changes
-    forceNavScrolled();
-    window.addEventListener('scroll', forceNavScrolled);
+    // Apply colors immediately and keep them applied
+    forceNavColors();
     
-    // Also apply periodically to ensure it sticks
-    const interval = setInterval(forceNavScrolled, 500);
+    // Keep colors applied even when header component tries to change them
+    const interval = setInterval(forceNavColors, 200);
     
     // Cleanup function
     return () => {
       clearInterval(interval);
-      window.removeEventListener('scroll', forceNavScrolled);
+      // Reset colors when leaving the page
       const header = document.querySelector('header');
       if (header) {
-        header.style.backgroundColor = '';
-        header.style.boxShadow = '';
-        header.classList.remove('bg-white', 'shadow-md');
+        const logoElements = header.querySelectorAll('.h-8.w-8, .text-xl.font-bold');
+        logoElements.forEach(element => {
+          element.classList.remove('text-blue-600');
+        });
+        
+        const navLinks = header.querySelectorAll('nav a, nav button');
+        navLinks.forEach(link => {
+          link.classList.remove('text-gray-900');
+        });
       }
     };
   }, []);
