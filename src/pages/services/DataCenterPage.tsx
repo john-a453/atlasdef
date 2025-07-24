@@ -42,6 +42,50 @@ import { Link } from 'react-router-dom';
 const DataCenterPage = () => {
   useEffect(() => {
     document.title = 'Next-Generation Data Centers - Modernize Your Infrastructure | Atlas Defenders';
+    
+    // Force navigation to show in "scrolled" state from the beginning
+    const forceNavScrolled = () => {
+      const header = document.querySelector('header');
+      if (header) {
+        // Force the header to have the scrolled styling
+        header.style.backgroundColor = 'white';
+        header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+        header.classList.add('bg-white', 'shadow-md');
+        
+        // Force logo to be blue
+        const logoElements = header.querySelectorAll('.h-8.w-8, .text-xl.font-bold');
+        logoElements.forEach(element => {
+          element.classList.remove('text-white');
+          element.classList.add('text-blue-600');
+        });
+        
+        // Force all navigation links to be dark
+        const navLinks = header.querySelectorAll('nav a:not([class*="bg-gradient"]), nav button:not([class*="bg-gradient"])');
+        navLinks.forEach(link => {
+          link.classList.remove('text-white');
+          link.classList.add('text-gray-900');
+        });
+      }
+    };
+
+    // Apply immediately and on scroll to override any changes
+    forceNavScrolled();
+    window.addEventListener('scroll', forceNavScrolled);
+    
+    // Also apply periodically to ensure it sticks
+    const interval = setInterval(forceNavScrolled, 500);
+    
+    // Cleanup function
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('scroll', forceNavScrolled);
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.backgroundColor = '';
+        header.style.boxShadow = '';
+        header.classList.remove('bg-white', 'shadow-md');
+      }
+    };
   }, []);
 
   const [currentTechIndex, setCurrentTechIndex] = useState(0);
@@ -437,9 +481,7 @@ const DataCenterPage = () => {
                 </div>
               </div>
 
-              <div className="text-sm text-gray-500">
-                No setup fees • Free trial • No credit card required
-              </div>
+
             </motion.div>
           </div>
 
@@ -473,30 +515,7 @@ const DataCenterPage = () => {
                   backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
                 }}></div>
 
-                {/* Floating tech elements - subtle and professional */}
-                <motion.div
-                  animate={{ y: [-8, 8, -8] }}
-                  transition={{ duration: 6, repeat: Infinity }}
-                  className="absolute top-16 right-16 bg-white/10 backdrop-blur-sm rounded-lg p-3"
-                >
-                  <Server className="w-6 h-6 text-white/80" />
-                </motion.div>
 
-                <motion.div
-                  animate={{ y: [8, -8, 8] }}
-                  transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-                  className="absolute bottom-20 right-8 bg-white/10 backdrop-blur-sm rounded-lg p-3"
-                >
-                  <Database className="w-6 h-6 text-white/80" />
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [-5, 5, -5] }}
-                  transition={{ duration: 7, repeat: Infinity, delay: 2 }}
-                  className="absolute top-1/3 right-4 bg-white/10 backdrop-blur-sm rounded-lg p-3"
-                >
-                  <Network className="w-6 h-6 text-white/80" />
-                </motion.div>
               </div>
             </div>
           </div>
