@@ -796,219 +796,176 @@ const DataCenterPage = () => {
 
 
       {/* 3. TECHNOLOGY STACK */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Technology Stack
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Industry-leading technologies and platforms we specialize in.
-            </p>
-          </div>
-
-          {/* Professional Logo Grid - Exactly like reference images */}
-          <div className="space-y-16">
-            {/* Row 1 - Virtualization & Cloud */}
-            <div className="flex items-center justify-center gap-8 lg:gap-16">
+          {/* Layout exactly like reference image */}
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Content */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
+                className="space-y-6"
               >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">VMware</span>
+                <div className="text-sm font-semibold text-blue-600 uppercase tracking-wide">
+                  ENABLE BROADER VISIBILITY
                 </div>
+                
+                <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+                  Enterprise Infrastructure Platform
+                </h2>
+                
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Real-world expertise delivered using a world-class platform. Atlas Defenders 
+                  combines infrastructure data from multiple technology sources in your environment 
+                  and brings that together into one centralized platform, analyzing and 
+                  prioritizing potential optimization opportunities.
+                </p>
+                
+                <p className="text-gray-600 leading-relaxed">
+                  Keep the infrastructure software you already have and get more ROI from your 
+                  technology investments now and in the future.
+                </p>
+                
+                <p className="text-sm text-gray-500 italic">
+                  This is a representative sample of our 350+ technology integrations.
+                </p>
               </motion.div>
 
+              {/* Right Logo Grid */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
+                className="relative"
               >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">NUTANIX</span>
-                </div>
-              </motion.div>
+                <div className="grid grid-cols-3 gap-6">
+                  {/* Row 1 */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-red-600">Red Hat</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">PROXMOX</span>
-                </div>
-              </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-blue-600">Cisco</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">AWS</span>
-                </div>
-              </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-orange-600">Proxmox</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">AZURE</span>
-                </div>
-              </motion.div>
-            </div>
+                  {/* Row 2 */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-red-600">Fortinet</span>
+                  </motion.div>
 
-            {/* Row 2 - Networking & Security */}
-            <div className="flex items-center justify-center gap-8 lg:gap-16">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">CISCO</span>
-                </div>
-              </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.7 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-blue-600">Nutanix</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">FORTINET</span>
-                </div>
-              </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-orange-600">Palo Alto</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">PALO ALTO</span>
-                </div>
-              </motion.div>
+                  {/* Row 3 */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.9 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-green-600">Juniper</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">JUNIPER</span>
-                </div>
-              </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 1.0 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-blue-600">Aruba</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.9 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">UBIQUITI</span>
-                </div>
-              </motion.div>
-            </div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 1.1 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-orange-600">AWS</span>
+                  </motion.div>
 
-            {/* Row 3 - Automation & Monitoring */}
-            <div className="flex items-center justify-center gap-8 lg:gap-16">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.0 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">ANSIBLE</span>
-                </div>
-              </motion.div>
+                  {/* Row 4 */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 1.2 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-blue-600">AZURE</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.1 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">TERRAFORM</span>
-                </div>
-              </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 1.3 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-gray-700">VMware</span>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">ZABBIX</span>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.3 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">PRTG</span>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.4 }}
-                viewport={{ once: true }}
-                className="group relative flex items-center justify-center w-48 h-24 transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-2xl"></div>
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-gray-800 transition-colors duration-300">KUBERNETES</span>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 1.4 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                  >
+                    <span className="text-lg font-semibold text-green-600">Veeam</span>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
@@ -1071,9 +1028,9 @@ const DataCenterPage = () => {
 
           {/* Interactive Services Layout - Exact Style from Reference */}
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-5 gap-8">
+            <div className="grid lg:grid-cols-5 gap-8 items-stretch">
               {/* Left Sidebar Menu */}
-              <div className="lg:col-span-2 space-y-3">
+              <div className="lg:col-span-2 space-y-3 flex flex-col">
                 {whyChooseUsData.map((item, index) => (
                   <motion.button
                     key={item.id}
@@ -1140,72 +1097,98 @@ const DataCenterPage = () => {
               </div>
 
               {/* Right Content Area - Dynamic */}
-              <div className="lg:col-span-3">
+              <div className="lg:col-span-3 flex">
                 <motion.div
                   key={activeWhyChoose}
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-2xl overflow-hidden shadow-2xl min-h-[400px]"
+                  className="relative bg-gradient-to-b from-blue-900 via-blue-950 to-slate-900 rounded-2xl overflow-hidden shadow-2xl w-full flex flex-col justify-between"
+                  style={{ minHeight: 'calc(6 * 5rem + 5 * 0.75rem)' }} // 6 items * height + 5 gaps
                 >
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
-                    <img
-                      src={whyChooseUsData[activeWhyChoose].image}
-                      alt={whyChooseUsData[activeWhyChoose].title}
-                      className="w-full h-full object-cover opacity-30 transition-all duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-900/85 via-indigo-900/80 to-purple-900/85"></div>
-                  </div>
+
 
                   {/* Content */}
-                  <div className="relative z-10 p-8">
-                    <motion.h3
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
-                      className="text-3xl font-bold text-white mb-2"
-                    >
-                      {whyChooseUsData[activeWhyChoose].title}
-                    </motion.h3>
+                  <div className="relative z-10 p-8 flex flex-col justify-between h-full">
+                    {/* Top Section */}
+                    <div className="space-y-6">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="space-y-3"
+                      >
+                        <h3 className="text-4xl font-bold text-white leading-tight">
+                          {whyChooseUsData[activeWhyChoose].title}
+                        </h3>
+                        <p className="text-cyan-300 text-base font-semibold">
+                          {whyChooseUsData[activeWhyChoose].subtitle}
+                        </p>
+                      </motion.div>
+                      
+                      <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        className="text-blue-100 text-lg leading-relaxed"
+                      >
+                        {whyChooseUsData[activeWhyChoose].description}
+                      </motion.p>
+                    </div>
 
-                    <motion.p
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.3 }}
-                      className="text-blue-200 text-sm font-medium mb-4"
-                    >
-                      {whyChooseUsData[activeWhyChoose].subtitle}
-                    </motion.p>
-                    
-                    <motion.p
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.4 }}
-                      className="text-blue-100 text-lg leading-relaxed mb-6"
-                    >
-                      {whyChooseUsData[activeWhyChoose].description}
-                    </motion.p>
-
-                    <motion.ul
+                    {/* Features List */}
+                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.5 }}
-                      className="space-y-3"
+                      className="space-y-4"
                     >
-                      {whyChooseUsData[activeWhyChoose].features.map((feature, index) => (
-                        <motion.li
-                          key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: 0.6 + (index * 0.1) }}
-                          className="flex items-start text-white"
-                        >
-                          <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                          <span className="leading-relaxed">{feature}</span>
-                        </motion.li>
-                      ))}
-                    </motion.ul>
+                      <h4 className="text-xl font-semibold text-white mb-4">Key Benefits:</h4>
+                      <ul className="space-y-4">
+                        {whyChooseUsData[activeWhyChoose].features.map((feature, index) => (
+                          <motion.li
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: 0.6 + (index * 0.1) }}
+                            className="flex items-start text-gray-200"
+                          >
+                            <div className="w-3 h-3 bg-cyan-400 rounded-full mt-1.5 mr-4 flex-shrink-0"></div>
+                            <span className="leading-relaxed text-base">{feature}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+
+                    {/* Bottom CTA Section */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.8 }}
+                      className="pt-8 border-t border-white/20 flex justify-center"
+                    >
+                      <Link
+                        to="/contact"
+                        className="group relative inline-flex items-center justify-center bg-white hover:bg-gray-100 text-gray-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-500 shadow-2xl hover:shadow-white/25 hover:scale-105 hover:-translate-y-1 overflow-hidden"
+                      >
+                        {/* Animated background gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-50 via-white to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        {/* Shine effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                        
+                        {/* Button content */}
+                        <div className="relative z-10 flex items-center space-x-3">
+                          <span className="transition-all duration-300 group-hover:text-blue-600">
+                            Get Started Today
+                          </span>
+                          <ArrowRight className="w-5 h-5 transition-all duration-300 group-hover:translate-x-1 group-hover:text-blue-600" />
+                        </div>
+                        
+                        {/* Glow effect */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-white to-blue-400 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+                      </Link>
+                    </motion.div>
                   </div>
 
                   {/* Decorative Elements */}
