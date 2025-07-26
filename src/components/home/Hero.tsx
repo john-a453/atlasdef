@@ -3,25 +3,37 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-slate-900 via-blue-950 to-blue-800 overflow-hidden">
-      {/* Clean Background */}
+    <section className="relative min-h-screen bg-black overflow-hidden">
+      {/* Background Image on Right Side */}
       <div className="absolute inset-0">
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M0 0h100v100H0z' fill='none' stroke='%23ffffff' stroke-width='0.5'/%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundSize: '100px 100px'
-          }} />
+        <div className="absolute inset-0 flex">
+          {/* Left side - Pure black background */}
+          <div className="w-1/2 bg-black"></div>
+          
+          {/* Right side - Image with overlay */}
+          <div className="w-1/2 relative">
+            <img 
+              src="/Logos/cybersecurity_image.jpg" 
+              alt="Cybersecurity" 
+              className="w-full h-full object-cover"
+            />
+            {/* Gradient overlay to blend image with black background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-black/30 to-black/90"></div>
+          </div>
         </div>
+        
+        {/* Additional blur effect in the middle */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
       </div>
 
-      {/* Main Content - CrowdStrike Style */}
+      {/* Main Content */}
       <div className="relative z-10 min-h-screen flex items-center">
         <div className="container mx-auto px-8 lg:px-12">
           <div className="grid lg:grid-cols-12 gap-12">
             
-            {/* Left Content - Identical to CrowdStrike */}
-            <div className="lg:col-span-6 flex flex-col justify-center">
+            {/* Left Content */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -39,7 +51,7 @@ const Hero = () => {
                   </span>
                 </motion.div>
 
-                {/* Main Headline - CrowdStrike Style */}
+                {/* Main Headline */}
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -62,7 +74,7 @@ const Hero = () => {
                   Identify, contain, and prevent cyber threats with advanced intelligence and expert-led services.
                 </motion.p>
 
-                {/* CTA Button - CrowdStrike Red Style but Blue */}
+                {/* CTA Button */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -79,9 +91,9 @@ const Hero = () => {
               </motion.div>
             </div>
 
-            {/* Right side - Visual space for the character */}
-            <div className="lg:col-span-6">
-              {/* This space is filled by the absolute positioned elements above */}
+            {/* Right side - Space for image (handled by absolute positioning) */}
+            <div className="lg:col-span-5">
+              {/* This space allows the image to show through */}
             </div>
           </div>
         </div>
