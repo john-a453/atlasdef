@@ -38,7 +38,7 @@ const Hero = () => {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="space-y-8"
+                className="space-y-6"
               >
                 {/* Service Category Badge */}
                 <motion.div
@@ -47,7 +47,7 @@ const Hero = () => {
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   <span className="text-cyan-400 text-sm font-semibold uppercase tracking-widest">
-                    Cybersecurity Services
+                    Cyber Defense Services
                   </span>
                 </motion.div>
 
@@ -58,10 +58,10 @@ const Hero = () => {
                   transition={{ duration: 0.8, delay: 0.3 }}
                   className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-[0.9] text-white"
                 >
-                  Expose, address,
+                  Strengthen Your{" "}
+                  <span className="text-cyan-400">Infrastructure</span>
                   <br />
-                  and mitigate cyber{" "}
-                  <span className="text-cyan-400">risks</span>
+                  Before the Attack Comes.
                 </motion.h1>
 
                 {/* Description */}
@@ -71,7 +71,7 @@ const Hero = () => {
                   transition={{ duration: 0.6, delay: 0.5 }}
                   className="text-lg text-gray-300 leading-relaxed max-w-xl"
                 >
-                  Identify, contain, and prevent cyber threats with advanced intelligence and expert-led services.
+                  We design and deploy next-generation security solutions — from firewalls and Zero Trust to EDR, XDR, and SIEM — building resilient infrastructures that stop threats before they strike.
                 </motion.p>
 
                 {/* CTA Button */}
@@ -83,9 +83,9 @@ const Hero = () => {
                 >
                   <Link 
                     to="/contact"
-                    className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 font-bold text-sm uppercase tracking-wider transition-all duration-300 rounded-md shadow-lg hover:shadow-xl transform hover:scale-105"
+                    className="inline-block bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-4 font-bold text-sm uppercase tracking-wider transition-all duration-300 rounded-md shadow-lg hover:shadow-xl transform hover:scale-105"
                   >
-                    Contact us
+                    Ready to Fortify Your Cyber Defense Stack?
                   </Link>
                 </motion.div>
               </motion.div>
