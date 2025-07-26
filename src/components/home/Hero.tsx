@@ -4,14 +4,46 @@ import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   // Auto-switch slides every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 3);
+      setCurrentSlide((prev) => (prev + 1) % 4);
     }, 5000);
 
     return () => clearInterval(interval);
+  }, []);
+
+  // Preload all images for smooth transitions
+  useEffect(() => {
+    const imageUrls = [
+      "/Logos/cybersecurity_image.jpg",
+      "/Logos/edr_image.png", 
+      "/Logos/offensive_image.png",
+      "/Logos/Datacenter1.jpg"
+    ];
+
+    const preloadImages = async () => {
+      const imagePromises = imageUrls.map((url) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = url;
+        });
+      });
+
+      try {
+        await Promise.all(imagePromises);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.warn('Some images failed to preload:', error);
+        setImagesLoaded(true); // Continue anyway
+      }
+    };
+
+    preloadImages();
   }, []);
 
   const slides = [
@@ -37,8 +69,8 @@ const Hero = () => {
       titleEnd: "— 24/7.",
       description: "Our global Security Operations Center (SOC) monitors your systems around the clock — detecting attacks, stopping breaches, and keeping your business one step ahead.",
       cta: "Start 24/7 Protection Today",
-      image: "/Logos/xdr_image.png",
-      alt: "XDR Security",
+      image: "/Logos/edr_image.png",
+      alt: "EDR Security",
       theme: "cyan",
       badgeColor: "text-cyan-400",
       titleHighlightColor: "text-cyan-400",
@@ -52,13 +84,28 @@ const Hero = () => {
       titleEnd: "to the Test.",
       description: "Atlas Defenders simulates real-world attacks to uncover your vulnerabilities before malicious actors do. From red teaming to advanced penetration testing — we break in before they can.",
       cta: "Challenge Your Defenses",
-      image: "/Logos/hacker_logo.svg",
+      image: "/Logos/offensive_image.png",
       alt: "Offensive Security",
       theme: "red",
       badgeColor: "text-red-400",
       titleHighlightColor: "text-red-400",
       buttonColor: "bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600",
       overlayColor: "from-black via-red-900/30 to-transparent"
+    },
+    {
+      badge: "Next-Gen Data Centers",
+      title: "Build Your Next-Gen Data Center Today",
+      titleHighlight: "Designed.",
+      titleEnd: "Secured.",
+      description: "Atlas Defenders builds modern, secure, and scalable data center infrastructures — from virtualization and automation to intelligent power, advanced cooling, and zero-trust network architecture. Designed to evolve. Built to last.",
+      cta: "Talk to a Data Center Architect",
+      image: "/Logos/Datacenter1.jpg",
+      alt: "Next-Gen Data Center",
+      theme: "purple",
+      badgeColor: "text-purple-400",
+      titleHighlightColor: "text-purple-400",
+      buttonColor: "bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 hover:from-purple-500 hover:via-violet-500 hover:to-indigo-500",
+      overlayColor: "from-black via-purple-900/25 to-transparent"
     }
   ];
 
