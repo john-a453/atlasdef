@@ -124,7 +124,7 @@ const PremiumServicesSection = () => {
   const currentService = serviceCategories[currentCategory];
 
   return (
-    <section className="relative py-20 bg-white overflow-hidden">
+    <section className="relative py-20 bg-white overflow-hidden -mt-1">
       {/* Modern Background with 3D Elements */}
       <div className="absolute inset-0">
         {/* Clean foundation */}

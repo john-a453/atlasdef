@@ -95,6 +95,39 @@ const DataCenterPage = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [progress, setProgress] = useState(0);
   const [activeWhyChoose, setActiveWhyChoose] = useState(0);
+  const [currentIndustryIndex, setCurrentIndustryIndex] = useState(0);
+
+  // Animated Counter Hook
+  const useAnimatedCounter = (end: number, duration: number = 2000, decimals: number = 0) => {
+    const [count, setCount] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+      if (!isVisible) return;
+
+      let startTime: number;
+      const startValue = 0;
+
+      const animate = (currentTime: number) => {
+        if (!startTime) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const currentCount = startValue + (end - startValue) * easeOutQuart;
+        
+        setCount(Number(currentCount.toFixed(decimals)));
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }, [end, duration, decimals, isVisible]);
+
+    return { count, setIsVisible };
+  };
 
   // Interactive Tabs Data with detailed services
   const interactiveTabs = [
@@ -492,17 +525,132 @@ const DataCenterPage = () => {
     }
   ];
 
-  // Industries We Serve
-  const industries = [
-    { name: 'Finance & Banking', icon: Building },
-    { name: 'Healthcare', icon: Heart },
-    { name: 'Government & Defense', icon: Shield },
-    { name: 'Cloud Providers', icon: Cloud },
-    { name: 'E-commerce', icon: ShoppingCart },
-    { name: 'Critical Infrastructure', icon: Zap },
-    { name: 'Education & Research', icon: GraduationCap },
-    { name: 'Professional Services', icon: Briefcase }
+  // Industries We Serve - Complete Data with Relevant Images
+  const industriesData = [
+    {
+      name: 'Finance & Banking',
+      icon: Building,
+      description: 'Comprehensive data center solutions for financial institutions with SOX compliance, real-time transaction processing, fraud detection systems, and regulatory reporting infrastructure. Our secure environments ensure 99.99% uptime for critical banking operations.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=800&fit=crop', // Financial data/charts
+      badges: ['SOX Compliance', 'PCI DSS Level 1'],
+      gradient: 'from-blue-500/40 via-indigo-600/30 to-purple-700/40'
+    },
+    {
+      name: 'Healthcare',
+      icon: Heart,
+      description: 'HIPAA-compliant data centers designed for hospitals, clinics, and healthcare providers. Secure patient data storage, medical imaging systems, electronic health records (EHR), and telemedicine infrastructure with end-to-end encryption.',
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=800&fit=crop', // Medical equipment/hospital
+      badges: ['HIPAA Compliant', 'HITECH Act'],
+      gradient: 'from-emerald-500/40 via-teal-600/30 to-cyan-700/40'
+    },
+    {
+      name: 'E-Commerce & Cloud Providers',
+      icon: ShoppingCart,
+      description: 'Scalable cloud infrastructure for e-commerce platforms, payment processing systems, inventory management, and customer data protection. High-performance computing resources with auto-scaling capabilities for peak traffic periods.',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=800&fit=crop', // E-commerce/online shopping
+      badges: ['PCI DSS', 'ISO 27001'],
+      gradient: 'from-orange-500/40 via-red-600/30 to-pink-700/40'
+    },
+    {
+      name: 'Government & Public Sector',
+      icon: Shield,
+      description: 'FedRAMP-authorized data centers for federal, state, and local government agencies. FISMA-compliant infrastructure supporting classified data processing, citizen services, emergency response systems, and inter-agency communications.',
+      image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=800&fit=crop', // Government building/security
+      badges: ['FedRAMP Authorized', 'FISMA Compliant'],
+      gradient: 'from-slate-600/40 via-gray-700/30 to-zinc-800/40'
+    },
+    {
+      name: 'Critical Infrastructure',
+      icon: Zap,
+      description: 'Hardened data centers for power grids, water treatment facilities, transportation systems, and telecommunications networks. NERC CIP compliance, industrial control systems (ICS/SCADA), and 24/7 monitoring for national security.',
+      image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=800&fit=crop', // Power plant/industrial infrastructure
+      badges: ['NERC CIP', 'ICS Security'],
+      gradient: 'from-yellow-500/40 via-orange-600/30 to-red-700/40'
+    },
+    {
+      name: 'Education & Research',
+      icon: GraduationCap,
+      description: 'Academic data centers supporting universities, research institutions, and K-12 schools. FERPA-compliant student information systems, research computing clusters, distance learning platforms, and collaborative research networks.',
+      image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=800&fit=crop', // University/education
+      badges: ['FERPA Compliant', 'Research Grade'],
+      gradient: 'from-green-500/40 via-emerald-600/30 to-teal-700/40'
+    },
+    {
+      name: 'Professional Services',
+      icon: Briefcase,
+      description: 'Secure data centers for law firms, consulting companies, accounting firms, and professional service providers. Client confidentiality protection, document management systems, secure communications, and compliance reporting.',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop', // Professional office/business
+      badges: ['Attorney-Client Privilege', 'Professional Standards'],
+      gradient: 'from-purple-500/40 via-indigo-600/30 to-blue-700/40'
+    },
+    {
+      name: 'Manufacturing & Industrial',
+      icon: Settings,
+      description: 'Industrial-grade data centers for manufacturing operations, supply chain management, IoT sensor networks, predictive maintenance systems, and quality control processes. Integration with ERP, MES, and automation systems.',
+      image: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=600&h=800&fit=crop', // Manufacturing/industrial
+      badges: ['Industry 4.0', 'IoT Security'],
+      gradient: 'from-gray-500/40 via-slate-600/30 to-zinc-700/40'
+    }
   ];
+
+  // Auto-advance carousel with pause on hover/interaction
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+
+  useEffect(() => {
+    if (isCarouselPaused) return; // Don't auto-advance when paused
+
+    const interval = setInterval(() => {
+      setCurrentIndustryIndex((prev) => (prev + 1) % industriesData.length);
+    }, 4000); // Change every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [industriesData.length, isCarouselPaused]);
+
+  // Navigation functions
+  const nextIndustry = () => {
+    setCurrentIndustryIndex((prev) => (prev + 1) % industriesData.length);
+  };
+
+  const prevIndustry = () => {
+    setCurrentIndustryIndex((prev) => (prev - 1 + industriesData.length) % industriesData.length);
+  };
+
+  const goToIndustry = (index: number) => {
+    setCurrentIndustryIndex(index);
+  };
+
+  // Animated Stat Card Component
+  const AnimatedStatCard = ({ 
+    endValue, 
+    suffix = '', 
+    label, 
+    duration = 2000, 
+    decimals = 0 
+  }: {
+    endValue: number;
+    suffix?: string;
+    label: string;
+    duration?: number;
+    decimals?: number;
+  }) => {
+    const { count, setIsVisible } = useAnimatedCounter(endValue, duration, decimals);
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        onViewportEnter={() => setIsVisible(true)}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="text-center"
+      >
+        <div className="text-3xl lg:text-4xl font-bold text-white mb-2">
+          {decimals > 0 ? count.toFixed(decimals) : count}{suffix}
+        </div>
+        <div className="text-blue-200">{label}</div>
+      </motion.div>
+    );
+  };
 
   return (
     <>
@@ -795,10 +943,33 @@ const DataCenterPage = () => {
 
 
 
-      {/* 3. TECHNOLOGY STACK */}
-      <section className="py-24 bg-gray-50">
-        <div className="container mx-auto px-6">
-          {/* Layout exactly like reference image */}
+      {/* 3. OUR TECHNOLOGY PARTNERS - Professional Dark Design with Cursor Light */}
+      <section 
+        className="py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black relative overflow-hidden"
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+          e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+        }}
+      >
+        {/* Cursor Following Blue Light Effect */}
+        <div 
+          className="absolute pointer-events-none opacity-30 transition-opacity duration-300"
+          style={{
+            left: 'var(--mouse-x, 50%)',
+            top: 'var(--mouse-y, 50%)',
+            transform: 'translate(-50%, -50%)',
+            width: '600px',
+            height: '600px',
+            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0.2) 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(40px)',
+          }}
+        />
+
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left Content */}
@@ -807,34 +978,34 @@ const DataCenterPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="space-y-6"
+                className="space-y-8"
               >
-                <div className="text-sm font-semibold text-blue-600 uppercase tracking-wide">
-                  ENABLE BROADER VISIBILITY
+                <div>
+                  <h2 className="text-5xl font-bold text-white leading-tight mb-6">
+                    Our Technology
+                  </h2>
+                  <h2 className="text-5xl font-bold text-blue-400 leading-tight mb-8">
+                    Partners
+                  </h2>
                 </div>
                 
-                <h2 className="text-4xl font-bold text-gray-900 leading-tight">
-                  Enterprise Infrastructure Platform
-                </h2>
-                
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Real-world expertise delivered using a world-class platform. Atlas Defenders 
-                  combines infrastructure data from multiple technology sources in your environment 
-                  and brings that together into one centralized platform, analyzing and 
-                  prioritizing potential optimization opportunities.
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  Enhance your infrastructure security with seamless integration across 7 popular 
+                  technology platforms. Our solution fits effortlessly into your existing workflows 
+                  for comprehensive coverage and ease of use.
                 </p>
                 
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-400 leading-relaxed">
                   Keep the infrastructure software you already have and get more ROI from your 
                   technology investments now and in the future.
                 </p>
                 
-                <p className="text-sm text-gray-500 italic">
+                <p className="text-sm text-blue-300 font-medium">
                   This is a representative sample of our 350+ technology integrations.
                 </p>
               </motion.div>
 
-              {/* Right Logo Grid */}
+              {/* Right Technology Partners Grid */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -842,16 +1013,18 @@ const DataCenterPage = () => {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 gap-8">
                   {/* Row 1 */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                    className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 flex items-center justify-center h-32"
                   >
-                    <span className="text-lg font-semibold text-red-600">Red Hat</span>
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-lg">AWS</span>
+                    </div>
                   </motion.div>
 
                   <motion.div
@@ -859,40 +1032,49 @@ const DataCenterPage = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                     viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                    className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 flex items-center justify-center h-32"
                   >
-                    <span className="text-lg font-semibold text-blue-600">Cisco</span>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                    viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
-                  >
-                    <span className="text-lg font-semibold text-orange-600">Proxmox</span>
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-sm">Git</span>
+                    </div>
                   </motion.div>
 
                   {/* Row 2 */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 0.6 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
                     viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                    className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 flex items-center justify-center h-32"
                   >
-                    <span className="text-lg font-semibold text-red-600">Fortinet</span>
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-xs">JFrog</span>
+                    </div>
                   </motion.div>
 
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    viewport={{ once: true }}
+                    className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 flex items-center justify-center h-32"
+                  >
+                    <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-xs">Oracle</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Row 3 */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.7 }}
                     viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                    className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 flex items-center justify-center h-32"
                   >
-                    <span className="text-lg font-semibold text-blue-600">Nutanix</span>
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-xs">IBM</span>
+                    </div>
                   </motion.div>
 
                   <motion.div
@@ -900,110 +1082,224 @@ const DataCenterPage = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.8 }}
                     viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
+                    className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 flex items-center justify-center h-32"
                   >
-                    <span className="text-lg font-semibold text-orange-600">Palo Alto</span>
-                  </motion.div>
-
-                  {/* Row 3 */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 0.9 }}
-                    viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
-                  >
-                    <span className="text-lg font-semibold text-green-600">Juniper</span>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 1.0 }}
-                    viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
-                  >
-                    <span className="text-lg font-semibold text-blue-600">Aruba</span>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 1.1 }}
-                    viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
-                  >
-                    <span className="text-lg font-semibold text-orange-600">AWS</span>
-                  </motion.div>
-
-                  {/* Row 4 */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 1.2 }}
-                    viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
-                  >
-                    <span className="text-lg font-semibold text-blue-600">AZURE</span>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 1.3 }}
-                    viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
-                  >
-                    <span className="text-lg font-semibold text-gray-700">VMware</span>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 1.4 }}
-                    viewport={{ once: true }}
-                    className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center h-24"
-                  >
-                    <span className="text-lg font-semibold text-green-600">Veeam</span>
+                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-xs">GCP</span>
+                    </div>
                   </motion.div>
                 </div>
+
+                {/* Additional floating elements for extra professional effect */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-500/20 rounded-full blur-sm animate-pulse"></div>
+                <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-purple-500/20 rounded-full blur-md animate-pulse delay-1000"></div>
               </motion.div>
             </div>
           </div>
         </div>
+
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }} />
+        </div>
       </section>
 
-      {/* 4. CERTIFICATIONS */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Certifications That Back Our Expertise
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Industry-recognized certifications ensuring the highest standards of service delivery.
-            </p>
+      {/* 4. OUR INFRASTRUCTURE CERTIFICATIONS - Ultra Modern Design */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <h2 className="text-5xl font-bold text-gray-900 mb-4">
+                Our Infrastructure
+              </h2>
+              <h2 className="text-5xl font-bold text-blue-600 mb-8">
+                Certifications
+              </h2>
+              <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+                Our expert team holds industry-leading infrastructure certifications, ensuring advanced 
+                data center deployment and enterprise-grade security capabilities.
+              </p>
+            </motion.div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100"
-              >
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
-                  <Award className="w-6 h-6 text-white" />
+          {/* Modern Certification Badges Grid */}
+          <div className="flex flex-wrap justify-center items-center gap-12 max-w-6xl mx-auto">
+            {/* VCP-DCV Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div className="w-32 h-32 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 hover:scale-110 hover:-translate-y-2 border-4 border-white/50">
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                    <Award className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs">VCP</span>
+                  <div className="text-white/80 text-xs">DCV</div>
                 </div>
-                <p className="text-gray-800 font-medium">
-                  {cert}
-                </p>
-              </motion.div>
-            ))}
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            </motion.div>
+
+            {/* NCP-MCI Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div className="w-32 h-32 bg-gradient-to-br from-purple-600 via-indigo-500 to-purple-700 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 hover:scale-110 hover:-translate-y-2 border-4 border-white/50">
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                    <Award className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs">NCP</span>
+                  <div className="text-white/80 text-xs">MCI</div>
+                </div>
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-indigo-500 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            </motion.div>
+
+            {/* OSCP Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div className="w-32 h-32 bg-gradient-to-br from-orange-500 via-red-500 to-orange-600 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-orange-500/25 transition-all duration-500 hover:scale-110 hover:-translate-y-2 border-4 border-white/50">
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs">OSCP</span>
+                  <div className="text-white/80 text-xs">Offensive</div>
+                </div>
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            </motion.div>
+
+            {/* OSEP Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div className="w-32 h-32 bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-green-500/25 transition-all duration-500 hover:scale-110 hover:-translate-y-2 border-4 border-white/50">
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs">OSEP</span>
+                  <div className="text-white/80 text-xs">Evasion</div>
+                </div>
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            </motion.div>
+
+            {/* OSWP Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div className="w-32 h-32 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 hover:scale-110 hover:-translate-y-2 border-4 border-white/50">
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                    <Wifi className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs">OSWP</span>
+                  <div className="text-white/80 text-xs">Wireless</div>
+                </div>
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            </motion.div>
+
+            {/* CCNA Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div className="w-32 h-32 bg-gradient-to-br from-slate-500 via-gray-600 to-slate-600 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-slate-500/25 transition-all duration-500 hover:scale-110 hover:-translate-y-2 border-4 border-white/50">
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                    <Network className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs">CCNA</span>
+                  <div className="text-white/80 text-xs">Cisco</div>
+                </div>
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-slate-500 to-gray-600 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            </motion.div>
+
+            {/* AWS Certified Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div className="w-32 h-32 bg-gradient-to-br from-teal-500 via-cyan-500 to-teal-600 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-teal-500/25 transition-all duration-500 hover:scale-110 hover:-translate-y-2 border-4 border-white/50">
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                    <Cloud className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs">AWS</span>
+                  <div className="text-white/80 text-xs">Certified</div>
+                </div>
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            </motion.div>
           </div>
+
+          {/* Additional Professional Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mt-16"
+          >
+            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 max-w-4xl mx-auto border border-white/50 shadow-xl">
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                <span className="font-semibold text-blue-600">Continuous Excellence:</span> Our team maintains active certifications 
+                across virtualization, cloud platforms, networking, and cybersecurity domains.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+                <span className="bg-blue-100 px-3 py-1 rounded-full">VMware Certified</span>
+                <span className="bg-green-100 px-3 py-1 rounded-full">Nutanix Expert</span>
+                <span className="bg-orange-100 px-3 py-1 rounded-full">AWS Solutions Architect</span>
+                <span className="bg-purple-100 px-3 py-1 rounded-full">Offensive Security</span>
+                <span className="bg-cyan-100 px-3 py-1 rounded-full">Network Security</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -1041,8 +1337,8 @@ const DataCenterPage = () => {
                     onClick={() => setActiveWhyChoose(item.id)}
                     className={`relative w-full text-left p-5 rounded-xl shadow-lg transition-all duration-500 group overflow-hidden transform hover:scale-105 hover:-translate-y-1 ${
                       activeWhyChoose === item.id 
-                        ? 'bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 shadow-2xl shadow-blue-500/25' 
-                        : 'bg-white hover:bg-gradient-to-r hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 hover:shadow-2xl hover:shadow-blue-500/25'
+                        ? 'bg-gradient-to-b from-blue-900 via-blue-950 to-slate-900 shadow-2xl shadow-blue-500/25' 
+                        : 'bg-white hover:bg-gradient-to-b hover:from-blue-900 hover:via-blue-950 hover:to-slate-900 hover:shadow-2xl hover:shadow-blue-500/25'
                     }`}
                   >
                     {/* Background shine effect */}
@@ -1205,45 +1501,178 @@ const DataCenterPage = () => {
         </div>
       </section>
 
-      {/* 7. INDUSTRIES WE SERVE */}
-      <section className="py-24 bg-gray-50">
+      {/* 7. INDUSTRIES WE SERVE - Professional Carousel Design */}
+      <section className="py-24 bg-gradient-to-br from-white to-gray-50">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Industries We Serve
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Specialized solutions tailored to meet the unique requirements of various industries.
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div>
+                <h2 className="text-5xl font-bold text-gray-900 mb-4">
+                  Industries We
+                </h2>
+                <h2 className="text-5xl font-bold text-blue-600 mb-6">
+                  Serve
+                </h2>
+              </div>
+              
+              <p className="text-lg text-gray-700 leading-relaxed max-w-lg">
+                Atlas Defenders provides specialized data center solutions across critical industries, ensuring 
+                compliance and protection tailored to each sector's unique requirements.
+              </p>
+              
+              <Link
+                to="/industries"
+                className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              >
+                Explore Your Industry
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
-            {industries.map((industry, index) => {
-              const Icon = industry.icon;
+            {/* Right Carousel */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+              onMouseEnter={() => setIsCarouselPaused(true)}
+              onMouseLeave={() => setIsCarouselPaused(false)}
+            >
+              {/* Industry Cards Carousel - With Drag Support */}
+              <div className="relative overflow-hidden rounded-3xl">
+                <motion.div 
+                  className="flex cursor-pointer hover:cursor-grab active:cursor-grabbing"
+                  drag="x"
+                  dragConstraints={{
+                    left: -((industriesData.length - 1) * 340),
+                    right: 0
+                  }}
+                  dragElastic={0.2}
+                  dragMomentum={false}
+                  onDragStart={() => {
+                    // Disable auto-advance while dragging
+                  }}
+                  onDragEnd={(event, info) => {
+                    const threshold = 50;
+                    const velocity = info.velocity.x;
+                    const offset = info.offset.x;
 
-              return (
-                <motion.div
-                  key={industry.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.05 }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow duration-300"
+                    if (Math.abs(offset) > threshold || Math.abs(velocity) > 500) {
+                      if (offset > 0 || velocity > 500) {
+                        if (currentIndustryIndex > 0) {
+                          setCurrentIndustryIndex(currentIndustryIndex - 1);
+                        }
+                      } else if (offset < 0 || velocity < -500) {
+                        if (currentIndustryIndex < industriesData.length - 1) {
+                          setCurrentIndustryIndex(currentIndustryIndex + 1);
+                        }
+                      }
+                    }
+                  }}
+                  animate={{ 
+                    x: -currentIndustryIndex * 340
+                  }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 400, 
+                    damping: 40,
+                    mass: 1
+                  }}
+                  whileDrag={{ 
+                    scale: 0.98
+                  }}
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                    <Icon className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <h3 className="text-sm font-medium text-gray-900">
-                    {industry.name}
-                  </h3>
+                  {industriesData.map((industry, index) => {
+                    const Icon = industry.icon;
+                    return (
+                      <motion.div 
+                        key={industry.name}
+                        className="min-w-[320px] h-[450px] bg-white rounded-3xl overflow-hidden shadow-2xl relative group hover:scale-105 transition-all duration-500 border border-gray-100 mr-5"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        {/* Image - More Visible */}
+                        <img 
+                          src={industry.image}
+                          alt={industry.name}
+                          className="w-full h-full object-cover opacity-90 pointer-events-none"
+                        />
+                        
+                        {/* Blue Gradient Blur at Top - Lighter */}
+                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-blue-600/50 via-blue-700/30 to-transparent backdrop-blur-sm"></div>
+                        
+                        {/* Industry-specific gradient overlay - Much Lighter */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${industry.gradient}`}></div>
+                        
+                        {/* Bottom dark gradient for text readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-gray-900/30 to-transparent"></div>
+                        
+                        <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none">
+                          <div className="flex items-center mb-3">
+                            <Icon className="w-6 h-6 mr-3 text-white" />
+                            <h3 className="text-2xl font-bold text-white">{industry.name}</h3>
+                          </div>
+                          <p className="text-white/90 mb-4 text-sm leading-relaxed">
+                            {industry.description}
+                          </p>
+                          
+                          <div className="flex flex-wrap gap-2">
+                            {industry.badges.map((badge, badgeIndex) => (
+                              <span 
+                                key={badgeIndex}
+                                className="bg-white/25 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/20"
+                              >
+                                {badge}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                 </motion.div>
-              );
-            })}
+              </div>
+
+              {/* Navigation Dots */}
+              <div className="flex justify-center mt-8 space-x-3">
+                {industriesData.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToIndustry(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      currentIndustryIndex === index 
+                        ? 'bg-blue-600 shadow-sm scale-125' 
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Navigation Arrows - Better Positioning */}
+              <button
+                onClick={prevIndustry}
+                className="absolute top-1/2 -translate-y-1/2 left-4 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 border border-gray-200 z-10"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-700" />
+              </button>
+              <button
+                onClick={nextIndustry}
+                className="absolute top-1/2 -translate-y-1/2 right-4 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 border border-gray-200 z-10"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-700" />
+              </button>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 8. CLIENT SUCCESS SNAPSHOT */}
+      {/* 8. CLIENT SUCCESS SNAPSHOT - With Animated Counters */}
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-6">
           <motion.div
@@ -1280,65 +1709,118 @@ const DataCenterPage = () => {
         </div>
       </section>
 
-      {/* 9. CTA SECTION */}
-      <section className="py-24 bg-gradient-to-r from-gray-900 to-blue-900">
-        <div className="container mx-auto px-6 text-center">
+      {/* 9. CTA SECTION - With Cursor Following Light Effect */}
+      <section 
+        className="py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black relative overflow-hidden"
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+          e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+        }}
+      >
+        {/* Cursor Following Blue Light Effect */}
+        <div 
+          className="absolute pointer-events-none opacity-40 transition-opacity duration-300"
+          style={{
+            left: 'var(--mouse-x, 50%)',
+            top: 'var(--mouse-y, 50%)',
+            transform: 'translate(-50%, -50%)',
+            width: '800px',
+            height: '800px',
+            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(59, 130, 246, 0.3) 30%, rgba(59, 130, 246, 0.15) 50%, transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(60px)',
+          }}
+        />
+
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }} />
+        </div>
+
+        <div className="container mx-auto px-6 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
               Let's Build the Backbone of Your Digital Future
             </h2>
 
-            <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
               Ready to modernize your infrastructure? Our experts are here to design and implement
               the perfect data center solution for your business.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105"
+                className="group relative inline-flex items-center justify-center bg-white hover:bg-gray-100 text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-white/20 overflow-hidden"
               >
-                <Calendar className="w-5 h-5 mr-2" />
-                Book a Free Infrastructure Strategy Call
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-white to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                
+                {/* Button content */}
+                <div className="relative z-10 flex items-center space-x-3">
+                  <Calendar className="w-5 h-5 transition-all duration-300 group-hover:text-blue-600" />
+                  <span className="transition-all duration-300 group-hover:text-blue-600">
+                    Book a Free Infrastructure Strategy Call
+                  </span>
+                </div>
+                
+                {/* Glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-white to-indigo-400 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
               </Link>
 
               <Link
                 to="/services"
-                className="inline-flex items-center justify-center border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200"
+                className="group relative inline-flex items-center justify-center border-2 border-blue-400/50 text-blue-300 hover:border-blue-400 hover:text-white px-8 py-4 rounded-xl font-semibold transition-all duration-500 hover:scale-105 backdrop-blur-sm bg-white/5 hover:bg-blue-500/20"
               >
-                <Settings className="w-5 h-5 mr-2" />
+                <Settings className="w-5 h-5 mr-3 transition-all duration-300" />
                 Explore Our Managed Services
               </Link>
             </div>
 
             {/* Contact Information */}
-            <div className="mt-12 pt-8 border-t border-blue-800">
-              <p className="text-blue-200 mb-4">
+            <div className="pt-8 border-t border-white/20">
+              <p className="text-gray-400 mb-6 text-lg">
                 Need immediate assistance? Our solution architects are standing by.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <a
                   href="tel:+1-800-ATLAS-DEF"
-                  className="inline-flex items-center text-white hover:text-blue-300 transition-colors duration-200"
+                  className="group inline-flex items-center text-white hover:text-blue-300 transition-all duration-300 hover:scale-105"
                 >
-                  <Phone className="w-5 h-5 mr-2" />
-                  1-800-ATLAS-DEF
+                  <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-3 group-hover:bg-blue-500/30 transition-all duration-300">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <span className="text-lg font-medium">1-800-ATLAS-DEF</span>
                 </a>
-                <span className="hidden sm:block text-blue-400">|</span>
+                <div className="w-px h-8 bg-white/20 hidden sm:block"></div>
                 <a
                   href="mailto:datacenter@atlasdefenders.com"
-                  className="inline-flex items-center text-white hover:text-blue-300 transition-colors duration-200"
+                  className="group inline-flex items-center text-white hover:text-blue-300 transition-all duration-300 hover:scale-105"
                 >
-                  <FileText className="w-5 h-5 mr-2" />
-                  datacenter@atlasdefenders.com
+                  <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-3 group-hover:bg-blue-500/30 transition-all duration-300">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <span className="text-lg font-medium">datacenter@atlasdefenders.com</span>
                 </a>
               </div>
             </div>
+
+            {/* Additional floating elements for extra professional effect */}
+            <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-500/20 rounded-full blur-sm animate-pulse"></div>
+            <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-purple-500/20 rounded-full blur-md animate-pulse delay-1000"></div>
           </motion.div>
         </div>
       </section>
