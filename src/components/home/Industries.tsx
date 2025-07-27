@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { Building2, GraduationCap, HeartPulse, LandPlot, Building, ArrowRight, CheckCircle, Shield, Users, Zap } from 'lucide-react';
+import { Building2, GraduationCap, HeartPulse, LandPlot, Building, ArrowRight, CheckCircle, Shield, Users, Zap, ChevronLeft, ChevronRight, Landmark, Heart, ShoppingCart, Satellite } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const industries = [
   {
@@ -85,281 +86,319 @@ const FloatingElement = ({ delay, children, className = "" }: { delay: number, c
 );
 
 const Industries = () => {
-  return (
-    <section className="relative py-20 bg-white overflow-hidden">
-      {/* Modern Background with 3D Elements */}
-      <div className="absolute inset-0">
-        {/* Clean foundation */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/30 via-white to-blue-50/20"></div>
-        
-        {/* Floating geometric shapes */}
-        <FloatingElement delay={0} className="top-20 left-10 w-20 h-20 opacity-5">
-          <div className="w-full h-full bg-gradient-to-br from-primary to-secondary rounded-2xl transform rotate-45"></div>
-        </FloatingElement>
-        
-        <FloatingElement delay={2} className="top-40 right-20 w-16 h-16 opacity-5">
-          <div className="w-full h-full bg-gradient-to-br from-accent to-primary rounded-full"></div>
-        </FloatingElement>
-        
-        <FloatingElement delay={4} className="bottom-32 left-1/4 w-12 h-12 opacity-5">
-          <div className="w-full h-full bg-gradient-to-br from-secondary to-accent rounded-lg transform rotate-12"></div>
-        </FloatingElement>
-        
-        <FloatingElement delay={1} className="bottom-20 right-1/3 w-24 h-24 opacity-5">
-          <div className="w-full h-full bg-gradient-to-br from-accent to-secondary rounded-3xl transform -rotate-12"></div>
-        </FloatingElement>
+  const [currentIndustrySlide, setCurrentIndustrySlide] = useState(0);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
 
-        {/* Network connection lines */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={`connection-${i}`}
-              className="absolute"
-              style={{
-                left: `${20 + i * 15}%`,
-                top: `${30 + Math.random() * 40}%`,
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 0.1, 0] }}
-              transition={{
-                duration: 5,
-                delay: i * 1.2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <svg width="120" height="60" className="overflow-visible">
-                <motion.path
-                  d={`M 0 30 Q 60 ${10 + Math.random() * 40} 120 30`}
-                  stroke="url(#industryGradient)"
-                  strokeWidth="1"
-                  fill="none"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: [0, 1, 0] }}
-                  transition={{
-                    duration: 5,
-                    delay: i * 1.2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <defs>
-                  <linearGradient id="industryGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#2EC4B6" stopOpacity="0" />
-                    <stop offset="50%" stopColor="#3E92CC" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#0F2C59" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </motion.div>
-          ))}
-        </div>
+  // Enhanced Carousel navigation functions with auto-animation
+  const nextSlide = () => {
+    setCurrentIndustrySlide((prev) => (prev + 1) % Math.max(1, industries.length - 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndustrySlide((prev) => (prev - 1 + Math.max(1, industries.length - 1)) % Math.max(1, industries.length - 1));
+  };
+
+  // Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart(e.clientX);
+    setIsCarouselPaused(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const currentOffset = e.clientX - dragStart;
+    setDragOffset(currentOffset);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    setIsCarouselPaused(false);
+    
+    const threshold = 50;
+    if (dragOffset > threshold && currentIndustrySlide > 0) {
+      prevSlide();
+    } else if (dragOffset < -threshold && currentIndustrySlide < industries.length - 2) {
+      nextSlide();
+    }
+    
+    setDragOffset(0);
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      handleMouseUp();
+    }
+  };
+
+  // Auto-animation effect for carousel
+  useEffect(() => {
+    if (!isCarouselPaused) {
+      const interval = setInterval(() => {
+        nextSlide();
+      }, 4000); // Auto-advance every 4 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [isCarouselPaused, currentIndustrySlide]);
+
+  return (
+    <section 
+      className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+      }}
+    >
+      {/* Cursor Following Cyan-Blue Light Effect (Same as Data Center Page) */}
+      <div 
+        className="absolute pointer-events-none opacity-30 transition-opacity duration-300"
+        style={{
+          left: 'var(--mouse-x, 50%)',
+          top: 'var(--mouse-y, 50%)',
+          transform: 'translate(-50%, -50%)',
+          width: '600px',
+          height: '600px',
+          background: 'radial-gradient(circle, rgba(34, 211, 238, 0.4) 0%, rgba(34, 211, 238, 0.2) 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%)',
+          borderRadius: '50%',
+          filter: 'blur(40px)',
+        }}
+      />
+
+      {/* Enhanced Background Effects with Home Page Colors (Cyan/Blue) */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-cyan-500/10 to-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-cyan-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/3 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/2 to-transparent"></div>
       </div>
 
       <div className="container relative z-10">
-        {/* Modern Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full px-8 py-4 mb-8 border border-primary/20"
-          >
-            <Shield size={20} className="text-primary mr-3" />
-            <span className="text-primary font-semibold tracking-wider uppercase text-sm">Industry Expertise</span>
-          </motion.div>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight"
-          >
-            Specialized Solutions for
-            <span className="block bg-gradient-to-r from-accent via-secondary to-accent bg-clip-text text-transparent mt-2">
-              Every Industry
-            </span>
-          </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed"
-          >
-            We understand that each industry faces unique security challenges. Our specialized solutions 
-            are tailored to meet the specific compliance, operational, and security requirements of your sector.
-          </motion.p>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
 
-        {/* Modern Industries Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {industries.map((industry, index) => {
-            const Icon = industry.icon;
-            
-            return (
-              <motion.div
-                key={industry.id}
-                initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.15,
-                  ease: "easeOut"
-                }}
-                viewport={{ once: true }}
-                className="group relative"
+          {/* Left Side Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+            >
+              Industries We
+              <span className="block bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mt-2">
+                Protect
+              </span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="text-xl text-gray-300 leading-relaxed max-w-lg"
+            >
+              Atlas Defenders provides specialized SOC-as-a-Service solutions across critical industries, ensuring compliance and protection tailored to each sector's unique requirements.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <Link
+                to="/industries"
+                className="inline-flex items-center bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl transition-all duration-300 transform hover:scale-105 hover:shadow-cyan-500/25"
               >
-                {/* Main Card */}
-                <div className="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 border border-gray-100 hover:border-gray-200">
-                  {/* Background Image with Overlay */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={industry.image}
-                      alt={industry.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${industry.color} opacity-80 group-hover:opacity-70 transition-opacity duration-500`}></div>
+                <span>Explore Your Industry</span>
+                <ArrowRight size={20} className="ml-3 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Side Professional Carousel */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            {/* Professional Carousel Container */}
+            <div className="relative">
+              <div className="overflow-hidden rounded-2xl">
+                <div
+                  className={`flex transition-transform duration-1000 ease-in-out ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} select-none`}
+                  style={{ 
+                    transform: `translateX(calc(-${currentIndustrySlide * 35}% + ${isDragging ? dragOffset : 0}px))` 
+                  }}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {industries.map((industry, index) => {
+                    const Icon = industry.icon;
                     
-                    {/* Floating Icon */}
-                    <motion.div
-                      className="absolute top-6 left-6 w-16 h-16 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/30"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Icon size={28} className="text-white" />
-                    </motion.div>
-                    
-                    {/* Client Count Badge */}
-                    <div className="absolute top-6 right-6 bg-white/20 backdrop-blur-xl rounded-full px-4 py-2 border border-white/30">
-                      <span className="text-white font-semibold text-sm">{industry.clients} Clients</span>
-                    </div>
-                    
-                    {/* Title Overlay */}
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-2xl font-bold text-white mb-1">{industry.title}</h3>
-                      <p className="text-white/90 text-sm font-medium">{industry.subtitle}</p>
-                    </div>
-                  </div>
-                  
-                  {/* Content Section */}
-                  <div className="p-8">
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      {industry.description}
-                    </p>
-                    
-                    {/* Features List */}
-                    <div className="space-y-3 mb-8">
-                      {industry.features.map((feature, i) => (
+                    return (
+                      <div key={industry.id} className="w-1/2 flex-shrink-0 px-3">
                         <motion.div
-                          key={i}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.5, delay: 0.1 * i }}
+                          initial={{ opacity: 0, y: 30 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: index * 0.1 }}
                           viewport={{ once: true }}
-                          className="flex items-center"
+                          className="group bg-white/95 backdrop-blur-xl rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-3 border border-gray-200/20 h-full"
+                          onMouseEnter={() => setIsCarouselPaused(true)}
+                          onMouseLeave={() => setIsCarouselPaused(false)}
                         >
-                          <CheckCircle size={16} className="text-green-500 mr-3 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm font-medium">{feature}</span>
+                          {/* Ultra Professional Image Container with Cyan/Blue Effects */}
+                          <div className="relative h-56 overflow-hidden">
+                            <img
+                              src={industry.image}
+                              alt={industry.title}
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Professional Gradient Overlay with Home Page Colors */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/70 via-blue-600/60 to-cyan-700/70 opacity-60 group-hover:opacity-80 transition-opacity duration-700"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-blue-800/80 via-cyan-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-700/50 via-transparent to-blue-600/50 opacity-70 group-hover:opacity-90 transition-opacity duration-700"></div>
+
+
+                          </div>
+
+                          {/* Ultra Professional Content - Perfect Consistency */}
+                          <div className="p-6 space-y-4 flex flex-col justify-between min-h-[220px]">
+                            <div className="space-y-3">
+                              <h3 className="text-xl font-bold text-gray-900 group-hover:text-cyan-700 transition-colors duration-300 line-clamp-2 leading-tight">
+                                {industry.title}
+                              </h3>
+                              <p className="text-gray-600 text-sm leading-relaxed line-clamp-4">
+                                {industry.description}
+                              </p>
+                            </div>
+
+                            {/* Enhanced Professional Tags with Home Page Colors */}
+                            <div className="flex flex-wrap gap-2 pt-3">
+                              {industry.id === 'enterprise' && (
+                                <>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">Zero Trust</span>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">Enterprise SOC</span>
+                                </>
+                              )}
+                              {industry.id === 'sme' && (
+                                <>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">Managed Security</span>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">Cost-Effective</span>
+                                </>
+                              )}
+                              {industry.id === 'education' && (
+                                <>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">Student Data</span>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">BYOD Security</span>
+                                </>
+                              )}
+                              {industry.id === 'healthcare' && (
+                                <>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">HIPAA</span>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">Patient Data</span>
+                                </>
+                              )}
+                              {industry.id === 'government' && (
+                                <>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">Critical Infrastructure</span>
+                                  <span className="px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 rounded-full text-xs font-semibold border border-cyan-200">Nation-State Defense</span>
+                                </>
+                              )}
+                            </div>
+                          </div>
                         </motion.div>
-                      ))}
-                    </div>
-                    
-                    {/* Action Button */}
-                    <motion.button
-                      className={`w-full ${industry.bgColor} hover:bg-opacity-80 text-gray-800 font-semibold py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center group-hover:shadow-lg`}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <span>Learn More</span>
-                      <motion.div
-                        className="ml-2"
-                        animate={{ x: [0, 3, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <ArrowRight size={16} />
-                      </motion.div>
-                    </motion.button>
-                  </div>
-                  
-                  {/* Hover Glow Effect */}
-                  <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${industry.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl pointer-events-none`}
-                  />
+                      </div>
+                    );
+                  })}
                 </div>
-                
-                {/* Floating Accent */}
-                <motion.div
-                  className={`absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br ${industry.color} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.7, 1, 0.7],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: index * 0.3,
-                  }}
-                />
-              </motion.div>
-            );
-          })}
+              </div>
+
+              {/* Professional Progress Indicator */}
+              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {Array.from({ length: Math.max(1, industries.length - 1) }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndustrySlide(index)}
+                    className={`h-1 rounded-full transition-all duration-500 ${currentIndustrySlide === index
+                      ? 'bg-cyan-400 w-8'
+                      : 'bg-gray-600 hover:bg-gray-500 w-2'
+                      }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Modern CTA Section */}
+        {/* Ultra Professional High-Tech Navigation - Below Divs */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="flex items-center justify-center mt-20"
         >
-          <div className="bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-3xl p-12 border border-primary/10">
-            <div className="flex justify-center mb-6">
-              <div className="flex -space-x-2">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center border-2 border-white shadow-lg">
-                  <Users size={20} className="text-white" />
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center border-2 border-white shadow-lg">
-                  <Shield size={20} className="text-white" />
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center border-2 border-white shadow-lg">
-                  <Zap size={20} className="text-white" />
-                </div>
-              </div>
+          {/* High-Tech Navigation Container */}
+          <div className="flex items-center space-x-8 bg-gradient-to-r from-gray-800/80 via-gray-900/90 to-gray-800/80 backdrop-blur-xl rounded-2xl px-8 py-4 border border-gray-700/50 shadow-2xl">
+
+            {/* Previous Arrow */}
+            <button
+              onClick={prevSlide}
+              className="group relative flex items-center justify-center w-12 h-12 bg-gradient-to-br from-gray-700/50 to-gray-800/50 hover:from-cyan-600/20 hover:to-blue-600/20 rounded-xl border border-gray-600/30 hover:border-cyan-400/50 transition-all duration-500 transform hover:scale-110 hover:-translate-x-1"
+            >
+              <ChevronLeft size={20} className="text-gray-400 group-hover:text-cyan-400 transition-all duration-300" />
+
+              {/* High-tech glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-blue-400/0 group-hover:from-cyan-400/10 group-hover:to-blue-400/10 rounded-xl transition-all duration-500"></div>
+            </button>
+
+            {/* Professional Progress Dots */}
+            <div className="flex items-center space-x-3">
+              {Array.from({ length: Math.max(1, industries.length - 1) }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndustrySlide(index)}
+                  className={`relative transition-all duration-500 ${currentIndustrySlide === index
+                    ? 'w-8 h-2 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full'
+                    : 'w-2 h-2 bg-gray-600 hover:bg-gray-500 rounded-full hover:scale-125'
+                    }`}
+                >
+                  {currentIndustrySlide === index && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full animate-pulse"></div>
+                  )}
+                </button>
+              ))}
             </div>
-            
-            <h3 className="text-3xl font-bold text-primary mb-4">
-              Don't See Your Industry?
-            </h3>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-lg">
-              We work with organizations across all sectors. Our security experts can develop 
-              customized solutions for your specific industry requirements and compliance needs.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                to="/industries" 
-                className="btn bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white px-8 py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-              >
-                Explore All Industries
-              </Link>
-              <Link 
-                to="/contact" 
-                className="btn bg-white hover:bg-gray-50 text-primary px-8 py-4 rounded-full border border-primary/20 hover:border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Custom Consultation
-              </Link>
-            </div>
+
+            {/* Next Arrow */}
+            <button
+              onClick={nextSlide}
+              className="group relative flex items-center justify-center w-12 h-12 bg-gradient-to-br from-gray-700/50 to-gray-800/50 hover:from-cyan-600/20 hover:to-blue-600/20 rounded-xl border border-gray-600/30 hover:border-cyan-400/50 transition-all duration-500 transform hover:scale-110 hover:translate-x-1"
+            >
+              <ChevronRight size={20} className="text-gray-400 group-hover:text-cyan-400 transition-all duration-300" />
+
+              {/* High-tech glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-blue-400/0 group-hover:from-cyan-400/10 group-hover:to-blue-400/10 rounded-xl transition-all duration-500"></div>
+            </button>
           </div>
         </motion.div>
       </div>
