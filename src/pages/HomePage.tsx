@@ -3,6 +3,7 @@ import Hero from '../components/home/Hero';
 import PremiumServicesSection from '../components/home/PremiumServicesSection';
 import ProfessionalStats from '../components/home/ProfessionalStats';
 import Industries from '../components/home/Industries';
+
 import Partners from '../components/home/Partners';
 import Testimonials from '../components/home/Testimonials';
 import CTA from '../components/home/CTA';
@@ -17,6 +18,7 @@ const HomePage = () => {
       <Hero />
       <PremiumServicesSection />
       <Industries />
+      <TrustedBy />
       <Partners />
       <ProfessionalStats />
       <Testimonials />

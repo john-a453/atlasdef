@@ -67,7 +67,7 @@ const PremiumServicesSection = () => {
             <span className="text-gray-900">
               We Deliver the
             </span>
-            <span className="block bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent mt-2">
+            <span className="block bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mt-2">
               Best Solutions
             </span>
           </motion.h2>

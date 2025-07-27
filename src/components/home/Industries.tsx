@@ -159,14 +159,14 @@ const Industries = () => {
     >
       {/* Cursor Following Cyan-Blue Light Effect (Same as Data Center Page) */}
       <div 
-        className="absolute pointer-events-none opacity-30 transition-opacity duration-300"
+        className="absolute pointer-events-none opacity-40 transition-opacity duration-300"
         style={{
           left: 'var(--mouse-x, 50%)',
           top: 'var(--mouse-y, 50%)',
           transform: 'translate(-50%, -50%)',
           width: '600px',
           height: '600px',
-          background: 'radial-gradient(circle, rgba(34, 211, 238, 0.4) 0%, rgba(34, 211, 238, 0.2) 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(34, 211, 238, 0.5) 0%, rgba(34, 211, 238, 0.3) 30%, rgba(59, 130, 246, 0.2) 50%, transparent 70%)',
           borderRadius: '50%',
           filter: 'blur(40px)',
         }}

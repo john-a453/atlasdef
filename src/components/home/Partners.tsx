@@ -92,11 +92,14 @@ const Partners = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Our Trusted Technology Partners
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+            Industry-Leading Technologies
+            <span className="block bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mt-2">
+              We Use
+            </span>
           </h2>
-          <p className="text-xl text-text-muted max-w-3xl mx-auto">
-            We collaborate with industry-leading technology providers to deliver comprehensive solutions across all aspects of IT infrastructure and security.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mt-6">
+            We build and secure systems using proven, industry-leading platforms and technologies trusted by the world's top enterprises.
           </p>
         </motion.div>
 
