@@ -5,17 +5,27 @@ import { useState, useEffect } from 'react';
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Manual navigation functions
+  const goToNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % 7);
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + 7) % 7);
+  };
 
   // Auto-switch slides every 5 seconds - only start after images are loaded
   useEffect(() => {
-    if (!imagesLoaded) return;
+    if (!imagesLoaded || isPaused) return;
     
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 7);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [imagesLoaded]);
+  }, [imagesLoaded, isPaused]);
 
   // Preload all images for smooth transitions with optimizations
   useEffect(() => {
@@ -348,6 +358,109 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Professional Navigation Arrows */}
+      {imagesLoaded && (
+        <>
+          {/* Previous Arrow */}
+          <motion.button
+            onClick={goToPrevSlide}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            className="absolute left-8 top-1/2 -translate-y-1/2 z-20 group"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
+            <div className="relative">
+              {/* Outer Glow */}
+              <div className="absolute inset-0 bg-white/20 rounded-full blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Main Button */}
+              <div className="relative w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300 shadow-2xl">
+                <svg 
+                  className="w-6 h-6 text-white group-hover:text-white transition-colors duration-300" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                </svg>
+              </div>
+              
+              {/* Ripple Effect */}
+              <div className="absolute inset-0 rounded-full border-2 border-white/30 scale-0 group-hover:scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+            </div>
+          </motion.button>
+
+          {/* Next Arrow */}
+          <motion.button
+            onClick={goToNextSlide}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            className="absolute right-8 top-1/2 -translate-y-1/2 z-20 group"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
+            <div className="relative">
+              {/* Outer Glow */}
+              <div className="absolute inset-0 bg-white/20 rounded-full blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Main Button */}
+              <div className="relative w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300 shadow-2xl">
+                <svg 
+                  className="w-6 h-6 text-white group-hover:text-white transition-colors duration-300" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+              
+              {/* Ripple Effect */}
+              <div className="absolute inset-0 rounded-full border-2 border-white/30 scale-0 group-hover:scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+            </div>
+          </motion.button>
+
+          {/* Slide Indicators */}
+          <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
+            {slides.map((_, index) => (
+              <motion.button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                className="group relative"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 1.2 + index * 0.1 }}
+              >
+                <div className="relative">
+                  {/* Active Indicator */}
+                  <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    currentSlide === index 
+                      ? 'bg-white shadow-lg shadow-white/50' 
+                      : 'bg-white/30 group-hover:bg-white/60'
+                  }`}></div>
+                  
+                  {/* Glow Effect for Active */}
+                  {currentSlide === index && (
+                    <div className="absolute inset-0 bg-white rounded-full blur-sm scale-150 opacity-50"></div>
+                  )}
+                </div>
+              </motion.button>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* CrowdStrike-Style Bottom Banner */}
       <div className="absolute bottom-0 left-0 right-0 bg-white py-4 px-6 shadow-lg border-t-4 border-blue-600">
