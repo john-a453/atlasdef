@@ -6,39 +6,67 @@ const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  // Auto-switch slides every 5 seconds
+  // Auto-switch slides every 5 seconds - only start after images are loaded
   useEffect(() => {
+    if (!imagesLoaded) return;
+    
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 4);
+      setCurrentSlide((prev) => (prev + 1) % 7);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [imagesLoaded]);
 
-  // Preload all images for smooth transitions
+  // Preload all images for smooth transitions with optimizations
   useEffect(() => {
     const imageUrls = [
       "/Logos/cybersecurity_image.jpg",
       "/Logos/edr_image.png", 
       "/Logos/offensive_image.png",
-      "/Logos/Datacenter1.jpg"
+      "/Logos/Datacenter1.jpg",
+      "/Logos/itsupport_background_image.jpg",
+      "/Logos/erp_background_image.png",
+      "/Logos/development_background_image.jpg"
     ];
 
     const preloadImages = async () => {
-      const imagePromises = imageUrls.map((url) => {
+      const imagePromises = imageUrls.map((url, index) => {
         return new Promise((resolve, reject) => {
           const img = new Image();
-          img.onload = resolve;
-          img.onerror = reject;
+          
+          // Add loading optimizations
+          img.loading = 'eager'; // Load immediately
+          img.decoding = 'async'; // Decode asynchronously
+          
+          // Set a timeout to prevent hanging
+          const timeout = setTimeout(() => {
+            console.warn(`Image loading timeout: ${url}`);
+            resolve(null); // Resolve anyway to continue
+          }, 10000); // 10 second timeout
+          
+          img.onload = () => {
+            clearTimeout(timeout);
+            console.log(`✅ Loaded: ${url}`);
+            resolve(img);
+          };
+          
+          img.onerror = (error) => {
+            clearTimeout(timeout);
+            console.warn(`❌ Failed to load: ${url}`, error);
+            resolve(null); // Resolve with null instead of rejecting
+          };
+          
           img.src = url;
         });
       });
 
       try {
-        await Promise.all(imagePromises);
+        const results = await Promise.all(imagePromises);
+        const loadedCount = results.filter(img => img !== null).length;
+        console.log(`🎯 Preloaded ${loadedCount}/${imageUrls.length} images`);
         setImagesLoaded(true);
       } catch (error) {
-        console.warn('Some images failed to preload:', error);
+        console.warn('Image preloading error:', error);
         setImagesLoaded(true); // Continue anyway
       }
     };
@@ -106,6 +134,51 @@ const Hero = () => {
       titleHighlightColor: "text-purple-400",
       buttonColor: "bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 hover:from-purple-500 hover:via-violet-500 hover:to-indigo-500",
       overlayColor: "from-black via-purple-900/25 to-transparent"
+    },
+    {
+      badge: "IT Support Services",
+      title: "Reliable IT Support.",
+      titleHighlight: "Onsite or Remote.",
+      titleEnd: "Anytime You Need.",
+      description: "From setting up your new hires to troubleshooting daily issues — our dedicated IT experts keep your business running smoothly with fast, friendly, and professional support.",
+      cta: "Request IT Support Now",
+      image: "/Logos/itsupport_background_image.jpg",
+      alt: "IT Support Services",
+      theme: "emerald",
+      badgeColor: "text-emerald-400",
+      titleHighlightColor: "text-emerald-400",
+      buttonColor: "bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:via-teal-500 hover:to-cyan-500",
+      overlayColor: "from-black via-emerald-900/25 to-transparent"
+    },
+    {
+      badge: "Business Applications",
+      title: "Power Your Enterprise with",
+      titleHighlight: "Intelligent Business",
+      titleEnd: "Platforms.",
+      description: "From ERP and CRM to ITSM, HRMS, and Collaboration Platforms — Atlas Defenders implements intelligent, scalable business applications tailored to optimize your operations, streamline workflows, and accelerate digital transformation.",
+      cta: "Explore Business Solutions",
+      image: "/Logos/erp_background_image.png",
+      alt: "Business Applications",
+      theme: "orange",
+      badgeColor: "text-orange-400",
+      titleHighlightColor: "text-orange-400",
+      buttonColor: "bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 hover:from-orange-500 hover:via-amber-500 hover:to-yellow-500",
+      overlayColor: "from-black via-orange-900/25 to-transparent"
+    },
+    {
+      badge: "Development Services",
+      title: "From Code to Product —",
+      titleHighlight: "We Build",
+      titleEnd: "It All.",
+      description: "We develop fast, secure, and scalable applications — from cutting-edge websites to high-performance mobile apps. Whether you need a business platform, customer portal, or enterprise-grade software, our team transforms your vision into digital reality.",
+      cta: "Start Your Project Now",
+      image: "/Logos/development_background_image.jpg",
+      alt: "Development Services",
+      theme: "indigo",
+      badgeColor: "text-indigo-400",
+      titleHighlightColor: "text-indigo-400",
+      buttonColor: "bg-gradient-to-r from-indigo-600 via-blue-600 to-sky-600 hover:from-indigo-500 hover:via-blue-500 hover:to-sky-500",
+      overlayColor: "from-black via-indigo-900/25 to-transparent"
     }
   ];
 
