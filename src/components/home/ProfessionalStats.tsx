@@ -151,9 +151,9 @@ const ProfessionalStats = () => {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-            Exceptional Digital Security
+            Trusted by Organizations
             <span className="block bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mt-2">
-              Managed Services
+              WorldWide
             </span>
           </h2>
         </motion.div>

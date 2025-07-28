@@ -18,7 +18,6 @@ const HomePage = () => {
       <Hero />
       <PremiumServicesSection />
       <Industries />
-      <TrustedBy />
       <Partners />
       <ProfessionalStats />
       <Testimonials />
