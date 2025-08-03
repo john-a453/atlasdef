@@ -1,6 +1,5 @@
-import { motion, useDragControls, PanInfo } from 'framer-motion';
-import { Quote, User } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { motion, useMotionValue, useAnimationFrame } from 'framer-motion';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 const testimonials = [
   {
@@ -70,8 +69,92 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
-  const [dragOffset, setDragOffset] = useState({ row1: 0, row2: 0 });
-  const constraintsRef = useRef(null);
+  const [isRow1Paused, setIsRow1Paused] = useState(false);
+  const [isRow2Paused, setIsRow2Paused] = useState(false);
+  const row1TimeoutRef = useRef<number | null>(null);
+  const row2TimeoutRef = useRef<number | null>(null);
+
+  // Motion values to track current positions
+  const row1X = useMotionValue(0);
+  const row2X = useMotionValue(-50 * 16 * testimonials.slice(4).length);
+
+  // Animation speeds (pixels per frame)
+  const row1Speed = 32 / 60; // 32px/second ÷ 60fps
+  const row2Speed = 32 / 60; // Same speed for both rows
+
+  // Total distances for infinite loop
+  const row1TotalDistance = 50 * 16 * testimonials.length;
+  const row2TotalDistance = 50 * 16 * testimonials.slice(4).length;
+
+  // Continuous animation using useAnimationFrame
+  useAnimationFrame(useCallback(() => {
+    if (!isRow1Paused) {
+      const currentX1 = row1X.get();
+      const newX1 = currentX1 - row1Speed;
+      
+      // Reset position for infinite loop
+      if (newX1 <= -row1TotalDistance) {
+        row1X.set(0);
+      } else {
+        row1X.set(newX1);
+      }
+    }
+
+    if (!isRow2Paused) {
+      const currentX2 = row2X.get();
+      const newX2 = currentX2 + row2Speed;
+      
+      // Reset position for infinite loop
+      if (newX2 >= 0) {
+        row2X.set(-row2TotalDistance);
+      } else {
+        row2X.set(newX2);
+      }
+    }
+  }, [isRow1Paused, isRow2Paused, row1X, row2X, row1Speed, row2Speed, row1TotalDistance, row2TotalDistance]));
+
+  const handleRow1MouseEnter = () => {
+    setIsRow1Paused(true);
+    if (row1TimeoutRef.current) {
+      clearTimeout(row1TimeoutRef.current);
+    }
+  };
+
+  const handleRow1MouseLeave = () => {
+    if (row1TimeoutRef.current) {
+      clearTimeout(row1TimeoutRef.current);
+    }
+    row1TimeoutRef.current = setTimeout(() => {
+      setIsRow1Paused(false);
+    }, 3000);
+  };
+
+  const handleRow2MouseEnter = () => {
+    setIsRow2Paused(true);
+    if (row2TimeoutRef.current) {
+      clearTimeout(row2TimeoutRef.current);
+    }
+  };
+
+  const handleRow2MouseLeave = () => {
+    if (row2TimeoutRef.current) {
+      clearTimeout(row2TimeoutRef.current);
+    }
+    row2TimeoutRef.current = setTimeout(() => {
+      setIsRow2Paused(false);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (row1TimeoutRef.current) {
+        clearTimeout(row1TimeoutRef.current);
+      }
+      if (row2TimeoutRef.current) {
+        clearTimeout(row2TimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section className="py-20 bg-gray-50 overflow-hidden">
@@ -95,33 +178,20 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        {/* Draggable Testimonials Container */}
-        <div className="relative" ref={constraintsRef}>
-          {/* First Row - Draggable and Auto-scrolling */}
+        {/* Testimonials Container */}
+        <div className="relative">
+          {/* First Row - Right to Left */}
           <motion.div
-            className="flex space-x-6 mb-6 cursor-grab active:cursor-grabbing"
-            drag="x"
-            dragConstraints={constraintsRef}
-            dragElastic={0.1}
-            onDrag={(event, info) => {
-              setDragOffset(prev => ({ ...prev, row1: info.offset.x }));
-            }}
-            animate={{
-              x: dragOffset.row1 === 0 ? [0, -50 * 16 * testimonials.length] : dragOffset.row1
-            }}
-            transition={{
-              duration: dragOffset.row1 === 0 ? 80 : 0,
-              ease: "linear",
-              repeat: dragOffset.row1 === 0 ? Infinity : 0
-            }}
-            whileDrag={{ scale: 0.98 }}
+            className="flex space-x-6 mb-6"
+            style={{ x: row1X }}
           >
             {[...testimonials, ...testimonials, ...testimonials].map((testimonial, index) => (
               <motion.div
                 key={`row1-${index}`}
-                className="flex-shrink-0 w-96 bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 select-none"
+                className="flex-shrink-0 w-96 bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 select-none cursor-default"
                 whileHover={{ scale: 1.02, y: -5 }}
-                whileTap={{ scale: 0.98 }}
+                onMouseEnter={handleRow1MouseEnter}
+                onMouseLeave={handleRow1MouseLeave}
               >
                 <div className="mb-6">
                   <p className="text-gray-700 text-base leading-relaxed font-light">
@@ -159,31 +229,18 @@ const Testimonials = () => {
             ))}
           </motion.div>
 
-          {/* Second Row - Draggable and Auto-scrolling (Reverse Direction) */}
+          {/* Second Row - Left to Right */}
           <motion.div
-            className="flex space-x-6 cursor-grab active:cursor-grabbing"
-            drag="x"
-            dragConstraints={constraintsRef}
-            dragElastic={0.1}
-            onDrag={(event, info) => {
-              setDragOffset(prev => ({ ...prev, row2: info.offset.x }));
-            }}
-            animate={{
-              x: dragOffset.row2 === 0 ? [-50 * 16 * testimonials.slice(4).length, 0] : dragOffset.row2
-            }}
-            transition={{
-              duration: dragOffset.row2 === 0 ? 80 : 0,
-              ease: "linear",
-              repeat: dragOffset.row2 === 0 ? Infinity : 0
-            }}
-            whileDrag={{ scale: 0.98 }}
+            className="flex space-x-6"
+            style={{ x: row2X }}
           >
             {[...testimonials.slice(4), ...testimonials.slice(4), ...testimonials.slice(4)].map((testimonial, index) => (
               <motion.div
                 key={`row2-${index}`}
-                className="flex-shrink-0 w-96 bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 select-none"
+                className="flex-shrink-0 w-96 bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 select-none cursor-default"
                 whileHover={{ scale: 1.02, y: -5 }}
-                whileTap={{ scale: 0.98 }}
+                onMouseEnter={handleRow2MouseEnter}
+                onMouseLeave={handleRow2MouseLeave}
               >
                 <div className="mb-6">
                   <p className="text-gray-700 text-base leading-relaxed font-light">
@@ -221,19 +278,6 @@ const Testimonials = () => {
             ))}
           </motion.div>
         </div>
-
-        {/* Drag Instructions */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-8"
-        >
-          <p className="text-gray-500 text-sm">
-            💡 Drag left or right to explore more testimonials
-          </p>
-        </motion.div>
       </div>
     </section>
   );
