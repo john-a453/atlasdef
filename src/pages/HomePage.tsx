@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Hero from '../components/home/Hero';
 import PremiumServicesSection from '../components/home/PremiumServicesSection';
+import EmpoweringInnovation from '../components/home/EmpoweringInnovation';
 import ProfessionalStats from '../components/home/ProfessionalStats';
 import Industries from '../components/home/Industries';
 
@@ -17,6 +18,7 @@ const HomePage = () => {
     <>
       <Hero />
       <PremiumServicesSection />
+      <EmpoweringInnovation />
       <Industries />
       <Partners />
       <ProfessionalStats />
