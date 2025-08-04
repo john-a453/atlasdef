@@ -64,12 +64,12 @@ const GlobalCertifications = () => {
   const certifications = {
     cybersecurity: [
       'CISSP', 'CISA', 'CISM', 'CC', 'CompTIA Security+', 'CompTIA CySA+', 'CompTIA SecurityX',
-      'AWS SCS', 'PCSNE'
+      'AWS SCS', 'PCSNE', 'FCF', 'FCA', 'FCP', 'CRTP', 'CRTE', 'OSCP', 'OSDA', 'OSEP', 'eJPT', 'eCPPT'
     ],
     infrastructure: [
       'CCNA', 'CCNP', 'CCNP Security', 'JNCIA-JUNOS', 'JNCIA-DC', 'JNCIA-SEC', 
       'JNCIS-ENT', 'JNCIP-DC', 'JNCIP-ENT', 'NCA', 'NCP-MCI', 'NCM-MCI',
-      'FCA', 'FCF', 'FCP', 'PCNSP', 'RHCSA', 'RHCE', 'VCP-DCV', 'LPIC-1', 'LPIC-2', 'LPIC-3'
+      'PCNSP', 'RHCSA', 'RHCE', 'VCP-DCV', 'LPIC-1', 'LPIC-2', 'LPIC-3'
     ],
     cloud: [
       'AZ-104', 'AZ-800', 'AZ-801', 'AWS SAA', 'AWS SAP', 'AWS ANS', 
