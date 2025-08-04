@@ -7,6 +7,7 @@ import Industries from '../components/home/Industries';
 
 import Partners from '../components/home/Partners';
 import Testimonials from '../components/home/Testimonials';
+import GlobalCertifications from '../components/home/GlobalCertifications';
 import CTA from '../components/home/CTA';
 
 const HomePage = () => {
@@ -23,6 +24,7 @@ const HomePage = () => {
       <Partners />
       <ProfessionalStats />
       <Testimonials />
+      <GlobalCertifications />
       <CTA />
     </>
   );

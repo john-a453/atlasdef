@@ -1,207 +1,176 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 
 const EmpoweringInnovation = () => {
-    const blocks = [
-        {
-            id: 1,
-            title: 'Cybersecurity Operations',
-            description: 'Advanced protection delivered through offensive and defensive security, SOC-as-a-Service, SIEM, and Zero Trust architecture.',
-            image: '/Logos/cybersecurity_image.jpg',
-            imagePosition: 'left'
-        },
-        {
-            id: 2,
-            title: 'IT Infrastructure',
-            description: 'From data center builds and hybrid cloud to virtualization, networking, and resilient architectures — engineered for uptime.',
-            image: '/Logos/Datacenter1.jpg',
-            imagePosition: 'right'
-        },
-        {
-            id: 3,
-            title: 'Business Software',
-            description: 'Tailored ERP, CRM, ITSM, HRMS, and collaboration platforms that align with your business goals and scale as you grow.',
-            image: '/Logos/erp_background_image.png',
-            imagePosition: 'left'
-        },
-        {
-            id: 4,
-            title: 'Custom Development',
-            description: 'Modern web and mobile app development — secure, scalable, and optimized for user experience and performance.',
-            image: '/Logos/development_background_image.jpg',
-            imagePosition: 'right'
-        },
-        {
-            id: 5,
-            title: 'Training & Education',
-            description: 'Hands-on learning paths in cybersecurity, cloud, and systems — designed for upskilling teams with real-world expertise.',
-            image: '/Logos/itsupport_background_image.jpg',
-            imagePosition: 'left'
-        },
-        {
-            id: 6,
-            title: 'Technology Consulting',
-            description: 'From audits to strategy — actionable insights, architecture planning, and compliance guidance to drive innovation.',
-            image: '/Logos/monitoring_img.png',
-            imagePosition: 'right'
-        }
-    ];
+  const blocks = [
+    {
+      id: 1,
+      title: 'Cybersecurity Operations',
+      subtitle: 'Advanced protection delivered through offensive and defensive security, SOC-as-a-Service, SIEM, and Zero Trust architecture.',
+      image: '/Logos/cybersecurity_image.jpg',
+      imagePosition: 'left',
+      features: [
+        '24/7 Security Operations Center monitoring',
+        'Threat detection and incident response',
+        'Vulnerability assessments and penetration testing',
+        'Zero Trust architecture implementation',
+        'Compliance and risk management'
+      ]
+    },
+    {
+      id: 2,
+      title: 'IT Infrastructure',
+      subtitle: 'From data center builds and hybrid cloud to virtualization, networking, and resilient architectures — engineered for uptime.',
+      image: '/Logos/Datacenter1.jpg',
+      imagePosition: 'right',
+      features: [
+        'Data center design and implementation',
+        'Hybrid cloud and multi-cloud strategies',
+        'Network architecture and optimization',
+        'Virtualization and containerization',
+        'High availability and disaster recovery'
+      ]
+    },
+    {
+      id: 3,
+      title: 'Business Software',
+      subtitle: 'Tailored ERP, CRM, ITSM, HRMS, and collaboration platforms that align with your business goals and scale as you grow.',
+      image: '/Logos/erp_background_image.png',
+      imagePosition: 'left',
+      features: [
+        'Enterprise Resource Planning (ERP) systems',
+        'Customer Relationship Management (CRM)',
+        'IT Service Management (ITSM) platforms',
+        'Human Resource Management Systems (HRMS)',
+        'Collaboration and productivity tools'
+      ]
+    },
+    {
+      id: 4,
+      title: 'Custom Development',
+      subtitle: 'Modern web and mobile app development — secure, scalable, and optimized for user experience and performance.',
+      image: '/Logos/development_background_image.jpg',
+      imagePosition: 'right',
+      features: [
+        'Full-stack web application development',
+        'Mobile app development (iOS & Android)',
+        'API development and integration',
+        'Cloud-native application architecture',
+        'DevOps and CI/CD pipeline implementation'
+      ]
+    },
+    {
+      id: 5,
+      title: 'Training & Education',
+      subtitle: 'Hands-on learning paths in cybersecurity, cloud, and systems — designed for upskilling teams with real-world expertise.',
+      image: '/Logos/itsupport_background_image.jpg',
+      imagePosition: 'left',
+      features: [
+        'Cybersecurity certification training',
+        'Cloud platform expertise development',
+        'Technical skills bootcamps',
+        'Leadership and management training',
+        'Custom curriculum development'
+      ]
+    },
+    {
+      id: 6,
+      title: 'Technology Consulting',
+      subtitle: 'From audits to strategy — actionable insights, architecture planning, and compliance guidance to drive innovation.',
+      image: '/Logos/monitoring_img.png',
+      imagePosition: 'right',
+      features: [
+        'Technology strategy and roadmap planning',
+        'Security audits and compliance assessments',
+        'Digital transformation consulting',
+        'Architecture design and optimization',
+        'Vendor selection and procurement guidance'
+      ]
+    }
+  ];
 
-    return (
-        <section className="py-24 bg-white">
-            <div className="container mx-auto px-6">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-20"
-                >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                        Empowering Innovation
-                        <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mt-2">
-                            & Protection
-                        </span>
-                    </h2>
-                    <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                        Comprehensive solutions spanning cybersecurity, infrastructure, development, and strategic consulting —
-                        designed for IT professionals and business leaders who demand excellence.
-                    </p>
-                </motion.div>
+  return (
+    <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+      {/* Sophisticated Background Elements */}
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-100/60 to-cyan-100/40 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-indigo-100/50 to-purple-100/30 rounded-full blur-3xl"></div>
+        </div>
+        {/* Professional Grid Pattern */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle, rgba(59,130,246,0.08) 1px, transparent 1px)`,
+          backgroundSize: '32px 32px'
+        }}></div>
+      </div>
 
-                {/* Alternating Blocks */}
-                <div className="space-y-24">
-                    {blocks.map((block, index) => (
-                        <motion.div
-                            key={block.id}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                            className={`flex flex-col lg:flex-row items-center gap-12 ${block.imagePosition === 'right' ? 'lg:flex-row-reverse' : ''
-                                }`}
-                        >
-                            {/* Image Section */}
-                            <div className="flex-1 relative">
-                                <motion.div
-                                    whileHover={{ scale: 1.02 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="relative overflow-hidden rounded-2xl shadow-2xl"
-                                >
-                                    <img
-                                        src={block.image}
-                                        alt={block.title}
-                                        className="w-full h-80 object-cover"
-                                    />
-                                    {/* Gradient Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      <div className="container relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <span className="text-black">Empowering Innovation </span>
+            <span className="bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 bg-clip-text text-transparent">
+              & Protection
+            </span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            Comprehensive solutions spanning cybersecurity, infrastructure, development, and strategic consulting — 
+            designed for IT professionals and business leaders who demand excellence.
+          </p>
+        </motion.div>
 
-                                    {/* Floating Badge */}
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 0.6, delay: 0.3 }}
-                                        viewport={{ once: true }}
-                                        className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg"
-                                    >
-                                        <span className="text-primary font-semibold text-sm">
-                                            0{block.id}
-                                        </span>
-                                    </motion.div>
-                                </motion.div>
-                            </div>
+        {/* Service Items */}
+        <div className="space-y-24">
+          {blocks.map((block, index) => (
+            <div key={block.id} className={`grid lg:grid-cols-2 gap-16 items-center ${
+              block.imagePosition === 'right' ? '' : ''
+            }`}>
+              {/* Image Section */}
+              <motion.div
+                initial={{ opacity: 0, x: block.imagePosition === 'left' ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className={block.imagePosition === 'right' ? 'lg:order-2' : ''}
+              >
+                <img
+                  src={block.image}
+                  alt={block.title}
+                  className="w-full h-96 object-cover rounded-3xl transition-all duration-500 transform hover:scale-[1.03] shadow-2xl"
+                />
+              </motion.div>
 
-                            {/* Content Section */}
-                            <div className="flex-1 space-y-6">
-                                <motion.div
-                                    initial={{ opacity: 0, x: block.imagePosition === 'left' ? 50 : -50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.2 }}
-                                    viewport={{ once: true }}
-                                >
-                                    <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                                        {block.title}
-                                    </h3>
-                                    <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                                        {block.description}
-                                    </p>
-
-                                    {/* CTA Button */}
-                                    <motion.button
-                                        whileHover={{ scale: 1.05, x: 5 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className="inline-flex items-center text-primary font-semibold text-lg group"
-                                    >
-                                        <span>Learn More</span>
-                                        <motion.div
-                                            className="ml-2"
-                                            animate={{ x: [0, 5, 0] }}
-                                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                        >
-                                            <ArrowRight size={20} />
-                                        </motion.div>
-                                    </motion.button>
-                                </motion.div>
-
-                                {/* Decorative Elements */}
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.6, delay: 0.4 }}
-                                    viewport={{ once: true }}
-                                    className="flex space-x-2"
-                                >
-                                    {[...Array(3)].map((_, i) => (
-                                        <div
-                                            key={i}
-                                            className={`w-2 h-2 rounded-full ${i === 0 ? 'bg-primary' : i === 1 ? 'bg-secondary' : 'bg-accent'
-                                                }`}
-                                        />
-                                    ))}
-                                </motion.div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-
-                {/* Bottom CTA Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-20 pt-16 border-t border-gray-200"
-                >
-                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                        Ready to Transform Your Technology Strategy?
-                    </h3>
-                    <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-                        Let's discuss how Atlas Defenders can elevate your security posture,
-                        optimize your infrastructure, and accelerate your digital transformation.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <motion.button
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-gradient-to-r from-primary via-secondary to-accent text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
-                        >
-                            Schedule Consultation
-                        </motion.button>
-
-                        <motion.button
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="border-2 border-primary text-primary px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary hover:text-white transition-all duration-300"
-                        >
-                            Explore Services
-                        </motion.button>
-                    </div>
-                </motion.div>
+              {/* Content Section */}
+              <motion.div
+                initial={{ opacity: 0, x: block.imagePosition === 'left' ? 50 : -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className={`space-y-6 ${block.imagePosition === 'right' ? 'lg:order-1' : ''}`}
+              >
+                <h3 className="text-3xl font-bold text-gray-900">{block.title}</h3>
+                <p className="text-lg text-gray-600 leading-relaxed">{block.subtitle}</p>
+                <ul className="space-y-3">
+                  {block.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start space-x-3">
+                      <CheckCircle size={20} className="text-cyan-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default EmpoweringInnovation;
