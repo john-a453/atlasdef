@@ -63,40 +63,44 @@ const GlobalCertifications = () => {
   // Clean certification data without duplicates
   const certifications = {
     cybersecurity: [
-      'CISSP', 'CISA', 'CISM', 'CC', 'CompTIA Security+', 'CompTIA CySA+', 'CompTIA SecurityX',
-      'AWS SCS', 'PCSNE', 'FCF', 'FCA', 'FCP', 'CRTP', 'CRTE', 'OSCP', 'OSDA', 'OSEP', 'eJPT', 'eCPPT'
+      'CISSP', 'CISA', 'CISM', 'CompTIA Security+', 'CompTIA CySA+',
+      'eJPT', 'eCPPT', 'CRTP', 'CRTE', 'OSCP', 'OSEP', 'PCSNE', 'FCP'
     ],
     infrastructure: [
       'CCNA', 'CCNP', 'CCNP Security', 'JNCIA-JUNOS', 'JNCIA-DC', 'JNCIA-SEC', 
-      'JNCIS-ENT', 'JNCIP-DC', 'JNCIP-ENT', 'NCA', 'NCP-MCI', 'NCM-MCI',
-      'PCNSP', 'RHCSA', 'RHCE', 'VCP-DCV', 'LPIC-1', 'LPIC-2', 'LPIC-3'
+      'JNCIS-ENT', 'JNCIP-DC', 'JNCIP-ENT', 'NCA', 'NCP-MCI',
+      'RHCSA', 'VCP-DCV', 'AZ-800', 'AZ-801', 'LPIC-1', 'LPIC-2', 'LPIC-3'
     ],
     cloud: [
-      'AZ-104', 'AZ-800', 'AZ-801', 'AWS SAA', 'AWS SAP', 'AWS ANS', 
-      'GCP ACE', 'GCP PCA', 'GCP PCNE', 'CKA'
+      'AZ-104', 'AWS SAA', 'AWS SAP', 
+      'GCP ACE', 'GCP PCA', 'CKA'
     ],
     support: [
       'CompTIA A+', 'CompTIA Network+'
     ]
   };
 
+  // Cross-category certifications that should be highlighted in multiple categories
+  const crossCategoryCerts = ['PCSNE', 'FCP'];
+
   // Highlighted certifications for each category
   const highlightedCerts = {
     infrastructure: [
       'CCNA', 'CCNP', 'CCNP Security', 'JNCIA-JUNOS', 'JNCIA-DC', 'JNCIA-SEC',
-      'JNCIS-ENT', 'JNCIP-DC', 'JNCIP-ENT', 'NCA', 'NCP-MCI', 'NCM-MCI',
-      'FCA', 'FCF', 'FCP', 'VCP-DCV', 'LPIC-1', 'LPIC-2', 'LPIC-3', 'PCSNE'
+      'JNCIS-ENT', 'JNCIP-DC', 'JNCIP-ENT', 'NCA', 'NCP-MCI',
+      'RHCSA', 'VCP-DCV', 'AZ-800', 'AZ-801', 'LPIC-1', 'LPIC-2', 'LPIC-3',
+      'PCSNE', 'FCP'
     ],
     cybersecurity: [
-      'CC', 'CISSP', 'CISA', 'CISM', 'CompTIA Security+', 'CompTIA CySA+', 'CompTIA SecurityX',
-      'AWS SCS', 'CCNP Security', 'PCSNE', 'FCP', 'FCA', 'FCF'
+      'CISSP', 'CISA', 'CISM', 'CompTIA Security+', 'CompTIA CySA+',
+      'eJPT', 'eCPPT', 'CRTP', 'CRTE', 'OSCP', 'OSEP', 'PCSNE', 'FCP'
     ],
     cloud: [
-      'AWS SAA', 'AWS SAP', 'AWS ANS', 'AWS SCS', 'AZ-104', 'AZ-800', 'AZ-801',
-      'GCP ACE', 'GCP PCA', 'GCP PCNE'
+      'AZ-104', 'AWS SAA', 'AWS SAP',
+      'GCP ACE', 'GCP PCA'
     ],
     support: [
-      'CompTIA A+', 'CompTIA Network+', 'CompTIA Security+', 'LPIC-1', 'FCA', 'FCF'
+      'CompTIA A+', 'CompTIA Network+'
     ]
   };
 
@@ -177,7 +181,14 @@ const GlobalCertifications = () => {
             const consistentCerts = allCerts;
             
             return consistentCerts.map(({ cert, category }, index) => {
-              const isActive = activeCategory === 'all' || activeCategory === category;
+              // Standard category matching
+              let isActive = activeCategory === 'all' || activeCategory === category;
+              
+              // Cross-category highlighting: PCSNE and FCP should be highlighted when either cybersecurity OR infrastructure is selected
+              if (crossCategoryCerts.includes(cert)) {
+                isActive = activeCategory === 'all' || activeCategory === 'cybersecurity' || activeCategory === 'infrastructure';
+              }
+              
               const isHighlighted = highlightedCerts[category as keyof typeof highlightedCerts]?.includes(cert) || false;
               return (
                 <motion.div
@@ -277,7 +288,16 @@ const CertificationCard = ({ cert, isActive, isHighlighted, category }: { cert: 
       'CISSP': '/Certifications/CISSP.png',
       'CISA': '/Certifications/Certified Information Systems Auditor.png',
       'CISM': '/Certifications/Certified Information Security Manager.png',
-      'CC': '/Certifications/CC.png'
+      'CC': '/Certifications/CC.png',
+      
+      // Penetration Testing Certifications (SVG format)
+      'CRTP': '/Certifications/CRTP.svg',
+      'CRTE': '/Certifications/CRTE.svg',
+      'OSCP': '/Certifications/OSCP.svg',
+      'OSDA': '/Certifications/OSDA.svg',
+      'OSEP': '/Certifications/OSEP.svg',
+      'eJPT': '/Certifications/EJPTV2.svg',
+      'eCPPT': '/Certifications/ECPPT.svg'
     };
     return logoMap[certName] || '/Certifications/CISSP.png';
   };
