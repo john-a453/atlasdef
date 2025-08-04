@@ -89,57 +89,85 @@ const GlobalCertifications = () => {
             viewport={{ once: true }}
             className="relative h-[600px] overflow-hidden"
           >
-            {/* Animated Columns Container */}
-            <div className="flex justify-center space-x-4 h-full">
+            {/* Animated Columns Container - 4 Columns */}
+            <div className="flex justify-center space-x-3 h-full">
 
-              {/* Column 1 - Moving Up */}
+              {/* Column 1 - Moving Up - Cisco */}
               <div className="flex flex-col space-y-4 animate-[slideUp_20s_linear_infinite]">
-                <CertificationCube cert="CISSP" />
-                <CertificationCube cert="OSCP" />
                 <CertificationCube cert="CCNA" />
-                <CertificationCube cert="CISA" />
-                <CertificationCube cert="Security+" />
-                <CertificationCube cert="RHCSA" />
-                <CertificationCube cert="CISM" />
+                <CertificationCube cert="CCNP" />
+                <CertificationCube cert="CCNP Security" />
                 {/* Duplicate for seamless loop */}
-                <CertificationCube cert="CISSP" />
-                <CertificationCube cert="OSCP" />
                 <CertificationCube cert="CCNA" />
-                <CertificationCube cert="CISA" />
+                <CertificationCube cert="CCNP" />
+                <CertificationCube cert="CCNP Security" />
+                <CertificationCube cert="CCNA" />
+                <CertificationCube cert="CCNP" />
               </div>
 
-              {/* Column 2 - Moving Down */}
+              {/* Column 2 - Moving Down - Juniper & Palo Alto */}
               <div className="flex flex-col space-y-4 animate-[slideDown_25s_linear_infinite]">
-                <CertificationCube cert="AWS Solutions Architect" />
-                <CertificationCube cert="CCNP Enterprise" />
-                <CertificationCube cert="CRTP" />
-                <CertificationCube cert="VCP-DCV" />
-                <CertificationCube cert="CySA+" />
-                <CertificationCube cert="JNCIA" />
-                <CertificationCube cert="OSDA" />
-                <CertificationCube cert="RHCE" />
+                <CertificationCube cert="JNCIA-JUNOS" />
+                <CertificationCube cert="JNCIA-DC" />
+                <CertificationCube cert="JNCIA-SEC" />
+                <CertificationCube cert="JNCIS-ENT" />
+                <CertificationCube cert="JNCIP-DC" />
+                <CertificationCube cert="JNCIP-ENT" />
+                <CertificationCube cert="PCSNE" />
+                <CertificationCube cert="PCNSP" />
                 {/* Duplicate for seamless loop */}
-                <CertificationCube cert="AWS Solutions Architect" />
-                <CertificationCube cert="CCNP Enterprise" />
-                <CertificationCube cert="CRTP" />
-                <CertificationCube cert="VCP-DCV" />
+                <CertificationCube cert="JNCIA-JUNOS" />
+                <CertificationCube cert="JNCIA-DC" />
+                <CertificationCube cert="PCSNE" />
               </div>
 
-              {/* Column 3 - Moving Up (Different Speed) */}
+              {/* Column 3 - Moving Up - Fortinet, VMware, Red Hat, Nutanix */}
               <div className="flex flex-col space-y-4 animate-[slideUp_30s_linear_infinite]">
-                <CertificationCube cert="OSAP" />
-                <CertificationCube cert="AZ-104" />
-                <CertificationCube cert="PCSNE" />
-                <CertificationCube cert="CRTE" />
-                <CertificationCube cert="JNCIS" />
-                <CertificationCube cert="NSE 7" />
-                <CertificationCube cert="CDSA" />
-                <CertificationCube cert="eJPT" />
+                <CertificationCube cert="FCA" />
+                <CertificationCube cert="FCF" />
+                <CertificationCube cert="FCP" />
+                <CertificationCube cert="VCP-DCV" />
+                <CertificationCube cert="RHCSA" />
+                <CertificationCube cert="RHCE" />
+                <CertificationCube cert="NCA" />
+                <CertificationCube cert="NCP-MCI" />
+                <CertificationCube cert="NCM-MCI" />
+                <CertificationCube cert="CKA" />
                 {/* Duplicate for seamless loop */}
-                <CertificationCube cert="OSAP" />
+                <CertificationCube cert="FCA" />
+                <CertificationCube cert="VCP-DCV" />
+                <CertificationCube cert="RHCSA" />
+              </div>
+
+              {/* Column 4 - Moving Down - Cloud & Security Certifications */}
+              <div className="flex flex-col space-y-4 animate-[slideDown_35s_linear_infinite]">
                 <CertificationCube cert="AZ-104" />
-                <CertificationCube cert="PCSNE" />
-                <CertificationCube cert="CRTE" />
+                <CertificationCube cert="AZ-800" />
+                <CertificationCube cert="AZ-801" />
+                <CertificationCube cert="AWS SAA" />
+                <CertificationCube cert="AWS SAP" />
+                <CertificationCube cert="AWS ANS" />
+                <CertificationCube cert="AWS SCS" />
+                <CertificationCube cert="GCP ACE" />
+                <CertificationCube cert="GCP PCA" />
+                <CertificationCube cert="GCP PCNE" />
+                <CertificationCube cert="CompTIA A+" />
+                <CertificationCube cert="CompTIA Network+" />
+                <CertificationCube cert="CompTIA Security+" />
+                <CertificationCube cert="CompTIA CySA+" />
+                <CertificationCube cert="CompTIA SecurityX" />
+                <CertificationCube cert="LPIC-1" />
+                <CertificationCube cert="LPIC-2" />
+                <CertificationCube cert="LPIC-3" />
+                <CertificationCube cert="CISSP" />
+                <CertificationCube cert="CISA" />
+                <CertificationCube cert="CISM" />
+                <CertificationCube cert="CC" />
+                {/* Duplicate for seamless loop */}
+                <CertificationCube cert="AZ-104" />
+                <CertificationCube cert="AWS SAA" />
+                <CertificationCube cert="CompTIA Security+" />
+                <CertificationCube cert="CISSP" />
               </div>
             </div>
           </motion.div>
@@ -164,84 +192,106 @@ const GlobalCertifications = () => {
 
 // Certification Cube Component
 const CertificationCube = ({ cert }: { cert: string }) => {
-  // Certification logo mapping - using actual logos from /public/Logos/
+  // Certification logo mapping - using actual logos from /public/Certifications/
   const getCertLogo = (certName: string) => {
     const logoMap: { [key: string]: string } = {
-      // Infrastructure & Cloud
-      'CCNA': '/Logos/Cisco_logo.svg',
-      'CCNP Enterprise': '/Logos/Cisco_logo.svg',
-      'JNCIA': '/Logos/Juniper_Networks_logo.svg',
-      'JNCIS': '/Logos/Juniper_Networks_logo.svg',
-      'JNCIP': '/Logos/Juniper_Networks_logo.svg',
-      'PCSNE': '/Logos/paloalto_logo.svg',
-      'NSE 7': '/Logos/Fortinet_logo.svg',
-      'VCP-DCV': '/Logos/Proxmox_logo.svg', // Using Proxmox as VMware alternative
-      'RHCSA': '/Logos/Red_Hat_Logo.svg',
-      'RHCE': '/Logos/Red_Hat_Logo.svg',
-      'Nutanix Certified': '/Logos/Nutanix_Logo.svg',
-      'AZ-900': '/Logos/azure_active_directory_logo.svg',
-      'AZ-104': '/Logos/azure_active_directory_logo.svg',
-      'AWS Solutions Architect': '/Logos/Datacenter1.jpg', // Using datacenter image as AWS alternative
-      'Google Cloud Associate': '/Logos/Datacenter2.jpg',
-      'OCI Cloud Infrastructure': '/Logos/monitoring_img.png',
+      // Cisco Certifications
+      'CCNA': '/Certifications/CCNA.png',
+      'CCNP': '/Certifications/CCNP.png',
+      'CCNP Security': '/Certifications/CCNP_SECURITY.png',
       
-      // IT Support & Service Management
-      'CompTIA A+': '/Logos/itsupport_background_image.jpg',
-      'ITIL v4 Foundation': '/Logos/itsupport_background_image.jpg',
+      // Juniper Certifications
+      'JNCIA-JUNOS': '/Certifications/Jncia-junos.png',
+      'JNCIA-DC': '/Certifications/JNCIA-DC.png',
+      'JNCIA-SEC': '/Certifications/JNCIA-Sec.png',
+      'JNCIS-ENT': '/Certifications/JNCIS-ENT.png',
+      'JNCIP-DC': '/Certifications/JNCIP-DC.png',
+      'JNCIP-ENT': '/Certifications/JNCIP-ENT.png',
+      
+      // Palo Alto Certifications
+      'PCSNE': '/Certifications/PCSNE.png',
+      'PCNSP': '/Certifications/Palo alto Certified Network Security Professional.png',
+      
+      // Fortinet Certifications
+      'FCA': '/Certifications/FCA.png',
+      'FCF': '/Certifications/FCF.png',
+      'FCP': '/Certifications/FCP.png',
+      
+      // VMware Certifications
+      'VCP-DCV': '/Certifications/VCP-DCV.png',
+      
+      // Red Hat Certifications
+      'RHCSA': '/Certifications/Red Hat Certified System Administrator.png',
+      'RHCE': '/Certifications/Red Hat Certified Engineer.png',
+      
+      // Nutanix Certifications
+      'NCA': '/Certifications/Nutanix Certified Associate.png',
+      'NCP-MCI': '/Certifications/NUTANIX Professional Multicloud Infrastructure.png',
+      'NCM-MCI': '/Certifications/NUTANIX Multicloud Infrastructure Master.png',
+      
+      // Microsoft Azure Certifications
+      'AZ-104': '/Certifications/Az 104.png',
+      'AZ-800': '/Certifications/AZ 800.png',
+      'AZ-801': '/Certifications/AZ 801.png',
+      
+      // AWS Certifications
+      'AWS SAA': '/Certifications/AWS Certified Solution Architect Associate.png',
+      'AWS SAP': '/Certifications/AWS Certified Solution Architect Professional.png',
+      'AWS ANS': '/Certifications/AWS Certified Advanced Networking.png',
+      'AWS SCS': '/Certifications/AWS Certified Security Specialist.png',
+      
+      // Google Cloud Certifications
+      'GCP ACE': '/Certifications/Associate Cloud Engineer Certification.png',
+      'GCP PCA': '/Certifications/Professional Cloud Architect Certification.png',
+      'GCP PCNE': '/Certifications/Professional Cloud Network Engineer Certification.png',
+      
+      // Kubernetes Certifications
+      'CKA': '/Certifications/Certified Kubernetes Administrator.png',
+      
+      // CompTIA Certifications
+      'CompTIA A+': '/Certifications/Comptia A+.png',
+      'CompTIA Network+': '/Certifications/Comptia Network+.png',
+      'CompTIA Security+': '/Certifications/Comptia Security+.png',
+      'CompTIA CySA+': '/Certifications/Comptia Cysa+.png',
+      'CompTIA SecurityX': '/Certifications/Comptia SecurityX.png',
+      
+      // Linux Professional Institute
+      'LPIC-1': '/Certifications/LIPIC1.png',
+      'LPIC-2': '/Certifications/LIPIC2.png',
+      'LPIC-3': '/Certifications/LIPIC3.png',
       
       // Cybersecurity & GRC
-      'CISA': '/Logos/CISA_Logo.svg',
-      'CISM': '/Logos/CISM_logo.svg',
-      'CISSP': '/Logos/CISSP_logo.png',
-      'ISO/IEC 27001': '/Logos/cybersecurity_image.jpg',
-      'Security+': '/Logos/security+_logo.png',
-      'CySA+': '/Logos/cysa+_logo.png',
-      
-      // Offensive Security
-      'OSCP': '/Logos/oscp_logo.svg',
-      'OSAP': '/Logos/osep_logo.svg', // Using OSEP as alternative
-      'OSWP': '/Logos/oswp_logo.svg',
-      'OSDA': '/Logos/osda_logo.svg',
-      'CRTP': '/Logos/crtp_logo.svg',
-      'CRTE': '/Logos/crte_logo.svg',
-      'CDSA': '/Logos/CDSA_logo.svg',
-      'eJPT': '/Logos/ejptv2_logo.svg',
-      'eCPPT': '/Logos/ecppt_logo.svg'
+      'CISSP': '/Certifications/CISSP.png',
+      'CISA': '/Certifications/Certified Information Systems Auditor.png',
+      'CISM': '/Certifications/Certified Information Security Manager.png',
+      'CC': '/Certifications/CC.png'
     };
-    return logoMap[certName] || '/Logos/cybersecurity_image.jpg';
+    return logoMap[certName] || '/Certifications/CISSP.png';
   };
 
-  // Special display rules: Some certs show logo only (no name)
-  const shouldShowName = (certName: string) => {
-    return !['AWS Solutions Architect', 'Google Cloud Associate', 'CompTIA A+', 'ITIL v4 Foundation', 'ISO/IEC 27001'].includes(certName);
+  // All certifications show logo only (no text) for cleaner look
+  const shouldShowName = () => {
+    return false; // Show logo only for all certifications
   };
 
-  // Special logo sizing for very big logos
-  const getLogoSize = (certName: string) => {
-    if (['CISSP', 'Security+', 'CySA+', 'CISA', 'CISM'].includes(certName)) {
-      return 'w-20 h-20'; // Very big logos for major certs
-    }
-    return 'w-12 h-12'; // Normal size
+  // Bigger sizing for all certification logos
+  const getLogoSize = () => {
+    return 'w-32 h-32'; // Much larger logos without background
   };
 
   return (
-    <div className="w-32 h-32 bg-white rounded-xl shadow-lg border border-gray-200 flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-      <div className={`${getLogoSize(cert)} ${shouldShowName(cert) ? 'mb-2' : ''} group-hover:scale-110 transition-transform duration-300 flex items-center justify-center`}>
+    <div className="flex items-center justify-center hover:scale-110 transition-all duration-300 group">
+      <div className={`${getLogoSize()} group-hover:scale-110 transition-transform duration-300 flex items-center justify-center`}>
         <img
           src={getCertLogo(cert)}
           alt={`${cert} certification`}
-          className="max-w-full max-h-full object-contain"
+          className="max-w-full max-h-full object-contain drop-shadow-lg"
           onError={(e) => {
-            // Fallback to cybersecurity image if logo fails to load
-            (e.target as HTMLImageElement).src = '/Logos/cybersecurity_image.jpg';
+            // Fallback to CISSP logo if image fails to load
+            (e.target as HTMLImageElement).src = '/Certifications/CISSP.png';
           }}
         />
       </div>
-      {shouldShowName(cert) && (
-        <div className="text-xs font-semibold text-gray-700 text-center px-2 leading-tight">
-          {cert}
-        </div>
-      )}
     </div>
   );
 };
