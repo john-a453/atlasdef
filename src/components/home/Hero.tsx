@@ -375,11 +375,8 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 1 }}
           >
             <div className="relative">
-              {/* Outer Glow */}
-              <div className="absolute inset-0 bg-white/20 rounded-full blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
               {/* Main Button */}
-              <div className="relative w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300 shadow-2xl">
+              <div className="relative w-14 h-14 bg-white/10 border border-white/20 rounded-full flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300">
                 <svg 
                   className="w-6 h-6 text-white group-hover:text-white transition-colors duration-300" 
                   fill="none" 
@@ -408,11 +405,8 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 1 }}
           >
             <div className="relative">
-              {/* Outer Glow */}
-              <div className="absolute inset-0 bg-white/20 rounded-full blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
               {/* Main Button */}
-              <div className="relative w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300 shadow-2xl">
+              <div className="relative w-14 h-14 bg-white/10 border border-white/20 rounded-full flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300">
                 <svg 
                   className="w-6 h-6 text-white group-hover:text-white transition-colors duration-300" 
                   fill="none" 
@@ -453,7 +447,7 @@ const Hero = () => {
                   
                   {/* Glow Effect for Active */}
                   {currentSlide === index && (
-                    <div className="absolute inset-0 bg-white rounded-full blur-sm scale-150 opacity-50"></div>
+                    <div className="absolute inset-0 bg-white rounded-full scale-150 opacity-50"></div>
                   )}
                 </div>
               </motion.button>
@@ -463,7 +457,7 @@ const Hero = () => {
       )}
 
       {/* CrowdStrike-Style Bottom Banner */}
-      <div className="absolute bottom-0 left-0 right-0 bg-white py-4 px-6 shadow-lg border-t-4 border-blue-600">
+      <div className="absolute bottom-0 left-0 right-0 bg-white py-4 px-6 border-t-4 border-blue-600">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">

@@ -272,11 +272,11 @@ const CertificationCard = ({ cert, isActive, isHighlighted, category }: { cert: 
       // Kubernetes Certifications
       'CKA': '/Certifications/Certified Kubernetes Administrator.png',
       
-      // CompTIA Certifications
-      'CompTIA A+': '/Certifications/Comptia A+.png',
-      'CompTIA Network+': '/Certifications/Comptia Network+.png',
-      'CompTIA Security+': '/Certifications/Comptia Security+.png',
-      'CompTIA CySA+': '/Certifications/Comptia Cysa+.png',
+      // CompTIA Certifications - URL encoded for deployment compatibility
+      'CompTIA A+': '/Certifications/Comptia%20A%2B.png',
+      'CompTIA Network+': '/Certifications/Comptia%20Network%2B.png',
+      'CompTIA Security+': '/Certifications/Comptia%20Security%2B.png',
+      'CompTIA CySA+': '/Certifications/Comptia%20Cysa%2B.png',
       'CompTIA SecurityX': '/Certifications/Comptia SecurityX.png',
       
       // Linux Professional Institute
@@ -328,8 +328,20 @@ const CertificationCard = ({ cert, isActive, isHighlighted, category }: { cert: 
               }
             `}
             onError={(e) => {
-              // Fallback to CISSP logo if image fails to load
-              (e.target as HTMLImageElement).src = '/Certifications/CISSP.png';
+              // Individual fallback handling for each certification
+              const target = e.target as HTMLImageElement;
+              if (cert === 'CompTIA A+') {
+                target.src = '/Certifications/Comptia A+.png';
+              } else if (cert === 'CompTIA Network+') {
+                target.src = '/Certifications/Comptia Network+.png';
+              } else if (cert === 'CompTIA Security+') {
+                target.src = '/Certifications/Comptia Security+.png';
+              } else if (cert === 'CompTIA CySA+') {
+                target.src = '/Certifications/Comptia Cysa+.png';
+              } else {
+                // Fallback to CISSP logo for other certifications
+                target.src = '/Certifications/CISSP.png';
+              }
             }}
           />
         </div>
