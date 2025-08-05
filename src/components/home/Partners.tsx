@@ -17,31 +17,38 @@ const Partners = () => {
   ];
 
   const row2Logos = [
-    { name: 'Azure Active Directory', logo: '/Logos/azure_active_directory_logo.svg' },
+    { name: 'Keycloak', logo: '/Logos/keycloak.svg' },
+    { name: 'Authentik', logo: '/Logos/Authentik.svg' },
+    { name: 'Authelia', logo: '/Logos/authelia_logo.svg' },
     { name: 'Nutanix', logo: '/Logos/Nutanix_Logo.svg' },
+    { name: 'VMware', logo: '/Logos/vmware.svg' },
     { name: 'Proxmox', logo: '/Logos/Proxmox_logo.svg' },
-    { name: 'XCP-ng', logo: '/Logos/xcpng_logo.png' },
+    { name: 'XCP-ng', logo: '/Logos/XCP-ng.svg' },
     { name: 'Citrix', logo: '/Logos/Citrix_logo.svg' },
     { name: 'Red Hat', logo: '/Logos/Red_Hat_Logo.svg' },
-    { name: 'Ubuntu', logo: '/Logos/ubuntu_logo.png' },
-    { name: 'AlmaLinux', logo: '/Logos/almalinux_logo.svg' },
-    { name: 'Rocky Linux', logo: '/Logos/rockylinux_logo.png' },
-    { name: 'HAProxy', logo: '/Logos/Haproxy_logo.png' },
-    { name: 'Squid Proxy', logo: '/Logos/Squid_proxy_logo.png' }
+    { name: 'Ubuntu', logo: '/Logos/Ubuntu.svg' },
+    { name: 'Rocky Linux', logo: '/Logos/rocky_linux.svg' },
+    { name: 'NGINX', logo: '/Logos/nginx.svg' },
+    { name: 'HAProxy', logo: '/Logos/haproxy.svg' },
+    { name: 'Grafana', logo: '/Logos/grafana.svg' }
   ];
 
   const row3Logos = [
-    { name: 'Wazuh', logo: '/Logos/Wazuh_Logo.svg' },
     { name: 'CrowdStrike', logo: '/Logos/CrowdStrike_logo.svg' },
     { name: 'SentinelOne', logo: '/Logos/SentinelOne_logo.svg' },
+    { name: 'Symantec', logo: '/Logos/Symantec.svg' },
+    { name: 'Cybereason', logo: '/Logos/Cyberreason.svg' },
+    { name: 'Wazuh', logo: '/Logos/Wazuh_Logo.svg' },
     { name: 'Okta', logo: '/Logos/okta_logo.svg' },
     { name: 'Splunk', logo: '/Logos/splunk_logo.svg' },
+    { name: 'Elastic Stack', logo: '/Logos/elastic.svg' },
+    { name: 'Security Onion', logo: '/Logos/securityonion.svg' },
     { name: 'Nessus', logo: '/Logos/nessus_logo.png' },
     { name: 'Qualys', logo: '/Logos/qualys_logo.png' },
-    { name: 'OpenVAS', logo: '/Logos/openvas_logo.png' },
-    { name: 'Rapid7', logo: '/Logos/rapid7_logo.png' },
-    { name: 'Acunetix', logo: '/Logos/acuentix_logo.png' },
-    { name: 'Cybereason', logo: '/Logos/Cybereason_logo.svg' }
+    { name: 'OpenVAS', logo: '/Logos/openvas.svg' },
+    { name: 'Rapid7', logo: '/Logos/rapid7.svg' },
+    { name: 'Acunetix', logo: '/Logos/acunetix.svg' },
+    { name: 'Nextcloud', logo: '/Logos/nextcloud.svg' }
   ];
 
   const LogoRow = ({ logos, direction, speed = 30 }: { logos: any[], direction: 'left' | 'right', speed?: number }) => {
@@ -68,12 +75,12 @@ const Partners = () => {
           {duplicatedLogos.map((partner, index) => (
             <div
               key={`${partner.name}-${index}`}
-              className="flex-shrink-0 w-32 h-16 flex items-center justify-center group"
+              className={`flex-shrink-0 w-32 ${partner.name === 'Rocky Linux' ? 'h-24' : ['Cybereason', 'Symantec'].includes(partner.name) ? 'h-24' : 'h-16'} flex items-center justify-center group`}
             >
               <img 
                 src={partner.logo} 
                 alt={`${partner.name} logo`} 
-                className="max-h-12 max-w-full object-contain transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
+                className={`${partner.name === 'Rocky Linux' ? 'max-h-40' : partner.name === 'VMware' ? 'max-h-36' : partner.name === 'Keycloak' ? 'max-h-32' : partner.name === 'Authentik' ? 'max-h-32' : partner.name === 'Cybereason' ? 'max-h-32' : partner.name === 'Symantec' ? 'max-h-32' : partner.name === 'OpenVAS' ? 'max-h-32' : ['CrowdStrike', 'SentinelOne'].includes(partner.name) ? 'max-h-28' : partner.name === 'HAProxy' ? 'max-h-24' : partner.name === 'Rapid7' ? 'max-h-24' : partner.name === 'Nextcloud' ? 'max-h-20' : ['Ubuntu', 'Proxmox', 'XCP-ng', 'Acunetix', 'Authelia'].includes(partner.name) ? 'max-h-20' : 'max-h-12'} max-w-full object-contain transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-lg`}
               />
             </div>
           ))}
