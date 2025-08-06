@@ -184,12 +184,7 @@ const OffensiveSecurityPage = () => {
               transition={{ duration: 0.8 }}
               className="text-white"
             >
-              <div className="mb-6">
-                <span className="inline-flex items-center px-4 py-2 rounded-full bg-red-500/20 border border-red-500/30 text-red-400 text-sm font-semibold mb-4">
-                  <Shield size={16} className="mr-2" />
-                  Offensive Security Services
-                </span>
-              </div>
+
 
               <h1 className="text-5xl lg:text-7xl font-black mb-6 leading-tight">
                 <span className="text-white">Uncover the</span>
@@ -881,25 +876,25 @@ const OffensiveSecurityPage = () => {
             className="flex justify-center items-center flex-wrap gap-8 lg:gap-12"
           >
             {/* eJPTv2 */}
-            <img src="/Logos/ejptv2_logo.svg" alt="eJPTv2" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/EJPTV2.svg" alt="eJPTv2" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* eCPPT */}
-            <img src="/Logos/ecppt_logo.svg" alt="eCPPT" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/ECPPT.svg" alt="eCPPT" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* OSCP */}
-            <img src="/Logos/oscp_logo.svg" alt="OSCP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/OSCP.svg" alt="OSCP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* OSEP */}
-            <img src="/Logos/osep_logo.svg" alt="OSEP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/OSEP.svg" alt="OSEP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* OSWP */}
-            <img src="/Logos/oswp_logo.svg" alt="OSWP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/OSWP.svg" alt="OSWP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* CRTP */}
-            <img src="/Logos/crtp_logo.svg" alt="CRTP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/CRTP.svg" alt="CRTP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* CRTE */}
-            <img src="/Logos/crte_logo.svg" alt="CRTE" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/CRTE.svg" alt="CRTE" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
           </motion.div>
         </div>
       </section>

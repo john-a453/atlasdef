@@ -275,16 +275,7 @@ const SOCServicePage = () => {
               transition={{ duration: 0.8 }}
               className="space-y-8"
             >
-              {/* Premium Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="inline-flex items-center bg-gradient-to-r from-cyan-500/20 to-blue-500/20 backdrop-blur-sm border border-cyan-400/30 rounded-full px-6 py-2"
-              >
-                <Shield size={16} className="text-cyan-400 mr-2" />
-                <span className="text-cyan-300 text-sm font-medium">Enterprise-Grade Security Operations</span>
-              </motion.div>
+
 
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
@@ -1510,250 +1501,58 @@ const SOCServicePage = () => {
         </div>
       </section>
 
-      {/* Ultra Professional Certifications Section - Single Row Design */}
-      <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-blue-50/30 relative overflow-hidden">
-        {/* Sophisticated Background Effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-100/40 to-cyan-100/30 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-indigo-100/30 to-purple-100/20 rounded-full blur-3xl"></div>
-          {/* Professional Grid Pattern */}
-          <div className="absolute inset-0 opacity-30" style={{
-            backgroundImage: `radial-gradient(circle, rgba(59,130,246,0.05) 1px, transparent 1px)`,
-            backgroundSize: '32px 32px'
-          }}></div>
-        </div>
-
-        <div className="container relative z-10">
-          {/* Premium Header */}
+      {/* Our Professional Certifications Section */}
+      <section className="py-20 bg-white">
+        <div className="container max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
-            >
-              Our Professional
-              <span className="block bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 bg-clip-text text-transparent mt-2">
-                Certifications
-              </span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed"
-            >
-              Atlas Defenders team holds industry-leading certifications to ensure the highest level of cybersecurity expertise and professional excellence.
-            </motion.p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Our Professional Certifications
+            </h2>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              Atlas Defenders team holds industry-leading certifications to ensure the highest level of cybersecurity expertise and professional excellence
+            </p>
           </motion.div>
 
-          {/* Ultra Professional Single Row Certifications */}
+          {/* Professional Certification Badges - 2 Row Layout */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="relative"
+            className="space-y-8"
           >
-            {/* Premium Container */}
-            <div className="bg-white/80 backdrop-blur-2xl rounded-3xl p-12 shadow-2xl border border-gray-200/60 relative overflow-hidden">
-              {/* Elegant Background Pattern */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-50/50 via-transparent to-blue-50/50"></div>
+            {/* First Row - 5 Certifications */}
+            <div className="flex justify-center items-center gap-8 lg:gap-12">
+              {/* CompTIA Security+ */}
+              <img src="/Certifications/Comptia Security+.png" alt="CompTIA Security+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
-              {/* Single Row Layout with OSDA in Middle */}
-              <div className="relative z-10 flex items-center justify-center space-x-16">
+              {/* CySA+ */}
+              <img src="/Certifications/Comptia Cysa+.png" alt="CySA+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
-                {/* CompTIA Security+ */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  viewport={{ once: true }}
-                  className="group text-center cursor-pointer"
-                  onClick={() => window.open('https://www.comptia.org/certifications/security', '_blank')}
-                >
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200/50 group-hover:border-cyan-400 flex items-center justify-center group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500">
-                      <img
-                        src="/Logos/security+_logo.png"
-                        alt="CompTIA Security+"
-                        className="w-16 h-16 object-contain"
-                      />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 rounded-2xl transition-all duration-500"></div>
-                  </div>
-                  <h3 className="text-sm font-bold text-gray-800 group-hover:text-cyan-700 transition-colors duration-300">CompTIA Security+</h3>
-                </motion.div>
+              {/* CISSP */}
+              <img src="/Certifications/CISSP.png" alt="CISSP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
-                {/* CySA+ */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: true }}
-                  className="group text-center cursor-pointer"
-                  onClick={() => window.open('https://www.comptia.org/certifications/cybersecurity-analyst', '_blank')}
-                >
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200/50 group-hover:border-cyan-400 flex items-center justify-center group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500">
-                      <img
-                        src="/Logos/cysa+_logo.png"
-                        alt="CySA+"
-                        className="w-16 h-16 object-contain"
-                      />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 rounded-2xl transition-all duration-500"></div>
-                  </div>
-                  <h3 className="text-sm font-bold text-gray-800 group-hover:text-cyan-700 transition-colors duration-300">CySA+</h3>
-                </motion.div>
+              {/* CISM */}
+              <img src="/Certifications/Certified Information Security Manager.png" alt="CISM" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
-                {/* CISSP */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                  viewport={{ once: true }}
-                  className="group text-center cursor-pointer"
-                  onClick={() => window.open('https://www.isc2.org/Certifications/CISSP', '_blank')}
-                >
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200/50 group-hover:border-cyan-400 flex items-center justify-center group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500">
-                      <img
-                        src="/Logos/CISSP_logo.png"
-                        alt="CISSP"
-                        className="w-16 h-16 object-contain"
-                      />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 rounded-2xl transition-all duration-500"></div>
-                  </div>
-                  <h3 className="text-sm font-bold text-gray-800 group-hover:text-cyan-700 transition-colors duration-300">CISSP</h3>
-                </motion.div>
-
-                {/* OSDA - CENTER POSITION (Featured) */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  viewport={{ once: true }}
-                  className="group text-center relative cursor-pointer"
-                  onClick={() => window.open('https://osda.org', '_blank')}
-                >
-                  <div className="relative mb-6">
-                    <div className="w-32 h-32 bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-2xl border-2 border-gray-200/50 group-hover:border-cyan-400 flex items-center justify-center group-hover:shadow-3xl group-hover:scale-105 transition-all duration-500">
-                      <img
-                        src="/Logos/osda_logo.svg"
-                        alt="OSDA"
-                        className="w-20 h-20 object-contain"
-                      />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 rounded-3xl transition-all duration-500"></div>
-                  </div>
-                  <h3 className="text-base font-bold text-gray-800 group-hover:text-cyan-700 transition-colors duration-300">OSDA</h3>
-                </motion.div>
-
-                {/* CISM */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.9 }}
-                  viewport={{ once: true }}
-                  className="group text-center cursor-pointer"
-                  onClick={() => window.open('https://www.isaca.org/credentialing/cism', '_blank')}
-                >
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200/50 group-hover:border-cyan-400 flex items-center justify-center group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500">
-                      <img
-                        src="/Logos/CISM_logo.svg"
-                        alt="CISM"
-                        className="w-16 h-16 object-contain"
-                      />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 rounded-2xl transition-all duration-500"></div>
-                  </div>
-                  <h3 className="text-sm font-bold text-gray-800 group-hover:text-cyan-700 transition-colors duration-300">CISM</h3>
-                </motion.div>
-
-                {/* CISA */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 1.0 }}
-                  viewport={{ once: true }}
-                  className="group text-center cursor-pointer"
-                  onClick={() => window.open('https://www.isaca.org/credentialing/cisa', '_blank')}
-                >
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200/50 group-hover:border-cyan-400 flex items-center justify-center group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500">
-                      <img
-                        src="/Logos/CISA_Logo.svg"
-                        alt="CISA"
-                        className="w-16 h-16 object-contain"
-                      />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 rounded-2xl transition-all duration-500"></div>
-                  </div>
-                  <h3 className="text-sm font-bold text-gray-800 group-hover:text-cyan-700 transition-colors duration-300">CISA</h3>
-                </motion.div>
-
-                {/* CDSA */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 1.1 }}
-                  viewport={{ once: true }}
-                  className="group text-center cursor-pointer"
-                  onClick={() => window.open('https://www.ec-council.org/programs/certified-data-science-analyst-cdsa/', '_blank')}
-                >
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200/50 group-hover:border-cyan-400 flex items-center justify-center group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500">
-                      <img
-                        src="/Logos/CDSA_logo.svg"
-                        alt="CDSA"
-                        className="w-16 h-16 object-contain"
-                      />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 rounded-2xl transition-all duration-500"></div>
-                  </div>
-                  <h3 className="text-sm font-bold text-gray-800 group-hover:text-cyan-700 transition-colors duration-300">CDSA</h3>
-                </motion.div>
-              </div>
-
-
+              {/* CISA */}
+              <img src="/Certifications/Certified Information Systems Auditor.png" alt="CISA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
             </div>
 
-            {/* Professional Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              viewport={{ once: true }}
-              className="text-center mt-12"
-            >
-              <div className="flex items-center justify-center space-x-12">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-cyan-600">7+</div>
-                  <div className="text-sm text-gray-600 font-medium">Professional Certifications</div>
-                </div>
-                <div className="w-px h-12 bg-gray-300"></div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-cyan-600">100%</div>
-                  <div className="text-sm text-gray-600 font-medium">Certified Team</div>
-                </div>
-                <div className="w-px h-12 bg-gray-300"></div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-cyan-600">24/7</div>
-                  <div className="text-sm text-gray-600 font-medium">Expert Support</div>
-                </div>
-              </div>
-            </motion.div>
+            {/* Second Row - 2 Certifications */}
+            <div className="flex justify-center items-center gap-8 lg:gap-12">
+              {/* OSDA */}
+              <img src="/Certifications/OSDA.svg" alt="OSDA" className="h-36 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+
+              {/* CDSA */}
+              <img src="/Certifications/cdsa.svg" alt="CDSA" className="h-36 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            </div>
           </motion.div>
         </div>
       </section>
