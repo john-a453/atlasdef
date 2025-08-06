@@ -1066,7 +1066,6 @@ const OffensiveSecurityPage = () => {
                   <ToolCube tool="OpenVAS" />
                   <ToolCube tool="Hydra" />
                   <ToolCube tool="John the Ripper" />
-                  <ToolCube tool="Acunetix" />
                   {/* Duplicate for seamless loop */}
                   <ToolCube tool="Metasploit" />
                   <ToolCube tool="Burp Suite" />
@@ -1153,14 +1152,14 @@ const ToolCube = ({ tool }: { tool: string }) => {
     return logoMap[toolName] || '/Logos/hacker_logo.svg';
   };
 
-  // Special display rules: Qualys and Acunetix show logo only (no name)
+  // Special display rules: Qualys, Acunetix, and Nessus show logo only (no name)
   const shouldShowName = (toolName: string) => {
-    return !['Qualys', 'Acunetix'].includes(toolName);
+    return !['Qualys', 'Acunetix', 'Nessus'].includes(toolName);
   };
 
   // Special logo sizing for very big logos
   const getLogoSize = (toolName: string) => {
-    if (['Qualys', 'OpenVAS', 'Acunetix'].includes(toolName)) {
+    if (['Qualys', 'OpenVAS', 'Acunetix', 'Nessus'].includes(toolName)) {
       return 'w-20 h-20'; // Very very big logos
     }
     return 'w-12 h-12'; // Normal size

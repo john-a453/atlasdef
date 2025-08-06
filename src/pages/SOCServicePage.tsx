@@ -1530,10 +1530,36 @@ const SOCServicePage = () => {
             {/* First Row - 5 Certifications */}
             <div className="flex justify-center items-center gap-8 lg:gap-12">
               {/* CompTIA Security+ */}
-              <img src="/Certifications/Comptia Security+.png" alt="CompTIA Security+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+              <img 
+                src="/Certifications/Comptia Security+.png" 
+                alt="CompTIA Security+" 
+                className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg"
+                onError={(e) => {
+                  // Fallback for server deployment
+                  const target = e.target as HTMLImageElement;
+                  if (target.src.includes('Comptia Security+.png')) {
+                    target.src = '/Certifications/Comptia%20Security%2B.png';
+                  } else if (target.src.includes('Comptia%20Security%2B.png')) {
+                    target.src = '/Certifications/Comptia_Security_Plus.png';
+                  }
+                }}
+              />
 
               {/* CySA+ */}
-              <img src="/Certifications/Comptia Cysa+.png" alt="CySA+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+              <img 
+                src="/Certifications/Comptia Cysa+.png" 
+                alt="CySA+" 
+                className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg"
+                onError={(e) => {
+                  // Fallback for server deployment
+                  const target = e.target as HTMLImageElement;
+                  if (target.src.includes('Comptia Cysa+.png')) {
+                    target.src = '/Certifications/Comptia%20Cysa%2B.png';
+                  } else if (target.src.includes('Comptia%20Cysa%2B.png')) {
+                    target.src = '/Certifications/Comptia_CySA_Plus.png';
+                  }
+                }}
+              />
 
               {/* CISSP */}
               <img src="/Certifications/CISSP.png" alt="CISSP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />

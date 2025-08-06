@@ -1634,22 +1634,22 @@ const DefensiveSecurityPage = () => {
             className="flex justify-center items-center space-x-12"
           >
             {/* CISSP */}
-            <img src="/Logos/CISSP_logo.png" alt="CISSP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/CISSP.png" alt="CISSP" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* CISM */}
-            <img src="/Logos/CISM_logo.svg" alt="CISM" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/Certified Information Security Manager.png" alt="CISM" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* CISA */}
-            <img src="/Logos/CISA_Logo.svg" alt="CISA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/Certified Information Systems Auditor.png" alt="CISA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* OSDA */}
-            <img src="/Logos/osda_logo.svg" alt="OSDA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/OSDA.svg" alt="OSDA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* CySA+ */}
-            <img src="/Logos/cysa+_logo.png" alt="CySA+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/Comptia Cysa+.png" alt="CySA+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* CDSA */}
-            <img src="/Logos/CDSA_logo.svg" alt="CDSA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
+            <img src="/Certifications/cdsa.svg" alt="CDSA" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
 
             {/* Security+ */}
             <img src="/Logos/security+_logo.png" alt="Security+" className="h-28 w-auto object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg" />
