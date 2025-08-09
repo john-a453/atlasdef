@@ -38,7 +38,7 @@ const NetworkEngineeringPage = () => {
           'WPA3 enterprise security',
           'IoT device integration'
         ],
-        image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
       },
       {
         id: 'cloud-networking',
@@ -154,10 +154,10 @@ const NetworkEngineeringPage = () => {
       }
       .logo-hover {
         transition: all 0.3s ease;
-        filter: grayscale(100%) opacity(0.7);
+        filter: opacity(1);
       }
       .logo-hover:hover {
-        filter: grayscale(0%) opacity(1);
+        filter: opacity(1);
         transform: scale(1.05);
       }
       .hero-text {
@@ -282,12 +282,12 @@ const NetworkEngineeringPage = () => {
     { name: 'Palo Alto', logo: '/Logos/paloalto_logo.svg', tagline: 'Next-Gen Security' },
     { name: 'Huawei', logo: '/Logos/huawei_logo.svg', tagline: 'Global Infrastructure' },
     { name: 'Aruba', logo: '/Logos/Aruba_Networks_logo.svg', tagline: 'Wireless Excellence' },
-    { name: 'Ubiquiti', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Ubiquiti_Networks_2016.svg/2560px-Ubiquiti_Networks_2016.svg.png', tagline: 'Scalable Solutions' },
+    { name: 'UniFi', logo: '/Logos/unifi.svg', tagline: 'Enterprise Wireless' },
     { name: 'TP-Link', logo: '/Logos/TPLINK_Logo.svg', tagline: 'Enterprise Ready' },
     { name: 'Sophos', logo: '/Logos/Sophos_logo.svg', tagline: 'Secure Networks' },
     { name: 'F5', logo: '/Logos/F5_Logo_0.svg', tagline: 'Application Delivery' },
     { name: 'pfSense', logo: '/Logos/PfSense_logo.png', tagline: 'Open Source Power' },
-    { name: 'PRTG', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/PRTG_Network_Monitor_Logo.svg/2560px-PRTG_Network_Monitor_Logo.svg.png', tagline: 'Network Monitoring' }
+    { name: 'Zabbix', logo: 'https://assets.zabbix.com/img/logo/zabbix_logo_500x131.png', tagline: 'Network Monitoring' }
   ];
 
   // Networking Certifications
@@ -326,6 +326,112 @@ const NetworkEngineeringPage = () => {
       role: "Operations Chief"
     }
   ];
+
+  // Professional Networking Certification Card Component with Advanced Animations
+  const NetworkingCertificationCard = ({ cert, index }: { cert: { name: string, logo: string, type: string }, index: number }) => {
+    const [isHovered, setIsHovered] = useState(false);
+    
+    // Certification logo mapping for networking certifications
+    const getCertLogo = (certName: string) => {
+      const logoMap: { [key: string]: string } = {
+        // Cisco Certifications
+        'CCNA': '/Certifications/CCNA.png',
+        'CCNP Enterprise': '/Certifications/CCNP.png',
+        'CCNP Security': '/Certifications/CCNP_SECURITY.png',
+        
+        // Juniper Certifications
+        'JNCIA': '/Certifications/Jncia-junos.png',
+        'JNCIS': '/Certifications/JNCIS-ENT.png',
+        'JNCIP': '/Certifications/JNCIP-ENT.png',
+        
+        // Palo Alto Certifications
+        'PCSNE': '/Certifications/PCSNE.png',
+        
+        // Fortinet Certifications
+        'NSE 4': '/Certifications/FCP.png',
+        'NSE 7': '/Certifications/FCP.png'
+      };
+      return logoMap[certName] || cert.logo;
+    };
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 30, scale: 0.8 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ 
+          duration: 0.6,
+          delay: index * 0.08,
+          ease: [0.25, 0.46, 0.45, 0.94]
+        }}
+        whileHover={{ 
+          scale: 1.1, 
+          y: -4,
+          transition: { 
+            type: "spring", 
+            stiffness: 300, 
+            damping: 20,
+            duration: 0.3
+          }
+        }}
+        viewport={{ once: true }}
+        className="cursor-pointer group"
+      >
+        <div className="flex flex-col items-center text-center space-y-4">
+          {/* Logo Image - Clean and Simple */}
+          <motion.div 
+            className="w-24 h-24 flex items-center justify-center"
+            whileHover={{ 
+              scale: 1.05,
+              transition: { 
+                type: "spring", 
+                stiffness: 400, 
+                damping: 15 
+              }
+            }}
+          >
+            <motion.img
+              src={getCertLogo(cert.name)}
+              alt={`${cert.name} certification`}
+              className="max-w-full max-h-full object-contain transition-all duration-300"
+              whileHover={{
+                filter: 'brightness(1.05) saturate(1.1)',
+                transition: { duration: 0.3 }
+              }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = cert.logo;
+              }}
+            />
+          </motion.div>
+          
+          {/* Text Content */}
+          <motion.div 
+            className="space-y-1"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 0.4,
+              delay: index * 0.08 + 0.2
+            }}
+          >
+            {/* Certification Name */}
+            <motion.div 
+              className="text-sm font-semibold tracking-wide text-gray-800 group-hover:text-gray-900 transition-colors duration-300"
+            >
+              {cert.name}
+            </motion.div>
+            
+            {/* Certification Type */}
+            <motion.div 
+              className="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300"
+            >
+              {cert.type}
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.div>
+    );
+  };
 
   return (
     <>
@@ -544,9 +650,9 @@ const NetworkEngineeringPage = () => {
                       style={{
                         borderRadius: '6px',
                         minHeight: isExpanded ? '280px' : '180px',
-                        flex: isExpanded ? '2' : shouldShrink ? '0.6' : '1',
-                        minWidth: shouldShrink ? '140px' : '200px',
-                        maxWidth: isExpanded ? 'none' : shouldShrink ? '180px' : '300px',
+                        flex: isExpanded ? '1.8' : shouldShrink ? '0.8' : '1',
+                        minWidth: shouldShrink ? '180px' : '200px',
+                        maxWidth: isExpanded ? 'none' : shouldShrink ? '220px' : '300px',
                         transition: 'all 0.3s ease-in-out'
                       }}
                       onClick={() => handleCardClick(service.id)}
@@ -581,12 +687,26 @@ const NetworkEngineeringPage = () => {
                             </p>
                           </div>
                           
-                          {/* Bottom Indicator - EXACT UniFi Style with Black Arrow */}
-                          <div className="mt-3 flex justify-center">
-                            <div className="w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors duration-200">
-                              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                              </svg>
+                          {/* Professional Enterprise Arrow Button */}
+                          <div className="mt-4 flex justify-center">
+                            <div className="group relative">
+                              {/* Main Button */}
+                              <div className="w-8 h-8 bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-0.5 cursor-pointer border border-gray-700 hover:border-gray-600">
+                                <svg className="w-3.5 h-3.5 text-white transition-transform duration-300 group-hover:translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                              </div>
+                              
+                              {/* Glow Effect */}
+                              <div className="absolute inset-0 w-8 h-8 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-indigo-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                              
+                              {/* Pulse Ring */}
+                              <div className="absolute inset-0 w-8 h-8 border-2 border-gray-600 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500"></div>
+                              
+                              {/* Shimmer Effect */}
+                              <div className="absolute inset-0 w-8 h-8 rounded-full overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -712,14 +832,34 @@ const NetworkEngineeringPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="ubiquiti-card p-6 text-center group relative overflow-hidden"
+                className="ubiquiti-card p-6 text-center group relative overflow-hidden cursor-pointer"
+                onClick={() => {
+                  const companyUrls: { [key: string]: string } = {
+                    'Cisco': 'https://www.cisco.com',
+                    'Juniper': 'https://www.juniper.net',
+                    'Fortinet': 'https://www.fortinet.com',
+                    'Palo Alto': 'https://www.paloaltonetworks.com',
+                    'Huawei': 'https://www.huawei.com',
+                    'Aruba': 'https://www.arubanetworks.com',
+                    'UniFi': 'https://www.ui.com',
+                    'TP-Link': 'https://www.tp-link.com',
+                    'Sophos': 'https://www.sophos.com',
+                    'F5': 'https://www.f5.com',
+                    'pfSense': 'https://www.pfsense.org',
+                    'Zabbix': 'https://www.zabbix.com'
+                  };
+                  const url = companyUrls[tech.name];
+                  if (url) {
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                  }
+                }}
               >
                 <div className="h-16 flex items-center justify-center mb-4">
                   <img
                     src={tech.logo}
                     alt={`${tech.name} logo`}
-                    className="logo-hover max-h-10 max-w-full object-contain"
-                    title={tech.name}
+                    className={`logo-hover ${tech.name === 'UniFi' ? 'max-h-12' : 'max-h-10'} max-w-full object-contain`}
+                    title={`Visit ${tech.name} website`}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -731,64 +871,42 @@ const NetworkEngineeringPage = () => {
                   />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">{tech.name}</h3>
-                <p className="text-xs text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {tech.tagline}
-                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Section 4 — Our Networking Certifications */}
-      <section className="py-20 bg-slate-50">
-        <div className="container">
+      {/* Section 4 — Global Certifications in Networking Excellence */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-full mx-auto px-8">
+          {/* Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Global Certifications in Networking Excellence
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Our team holds the industry's most prestigious networking certifications from leading vendors.
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+              Our team maintains the highest standards of professional excellence through comprehensive networking certification programs from industry-leading vendors
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {/* Networking Certifications Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-6 px-4"
+          >
             {networkingCertifications.map((cert, index) => (
-              <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className="ubiquiti-card p-6 text-center group"
-              >
-                <div className="h-12 flex items-center justify-center mb-4">
-                  <img
-                    src={cert.logo}
-                    alt={`${cert.name} certification`}
-                    className="logo-hover max-h-8 max-w-full object-contain"
-                    title={cert.name}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const parent = target.parentElement;
-                      if (parent) {
-                        parent.innerHTML = `<div class="text-slate-600 font-semibold text-sm">${cert.name}</div>`;
-                      }
-                    }}
-                  />
-                </div>
-                <h3 className="text-sm font-bold text-slate-900 mb-1">{cert.name}</h3>
-                <p className="text-xs text-slate-500">{cert.type}</p>
-              </motion.div>
+              <NetworkingCertificationCard key={`${cert.name}-${index}`} cert={cert} index={index} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
