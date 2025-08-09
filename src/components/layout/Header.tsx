@@ -15,8 +15,9 @@ const Header = () => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const autoScrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
-  // Check if we're on the offensive security page
+  // Check if we're on special pages that need different styling
   const isOffensiveSecurityPage = location.pathname === '/services/cybersecurity/offensive-security';
+  const isNetworkEngineeringPage = location.pathname === '/services/infrastructure/network-engineering';
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -73,8 +74,8 @@ const Header = () => {
     }, 150);
   };
 
-  // UniFi-style header classes - background turns white when dropdown is active
-  const headerClasses = `fixed w-full z-50 transition-all duration-300 ${showServicesDropdown || isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
+  // Header styling - normal background, only logo and text colors change for Network Engineering
+  const headerClasses = `fixed w-full z-50 transition-all duration-300 ${showServicesDropdown || isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
     }`;
 
   // Exact services data from your images
@@ -277,15 +278,19 @@ const Header = () => {
   return (
     <header className={headerClasses}>
       <div className="container mx-auto px-4 flex items-center h-16">
-        {/* Logo - Clickable to go home with offensive security red styling */}
-        <Link to="/" className="flex items-center space-x-2 mr-12">
-          <Shield className={`h-8 w-8 transition-colors duration-300 ${showServicesDropdown || isScrolled
+        {/* Logo - Enhanced size and visibility */}
+        <Link to="/" className="flex items-center space-x-3 mr-12">
+          <Shield className={`h-10 w-10 transition-colors duration-300 ${showServicesDropdown
             ? (isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600')
-            : 'text-white'
+            : isNetworkEngineeringPage
+              ? 'text-blue-600'
+              : 'text-white'
             }`} />
-          <span className={`text-xl font-bold font-poppins transition-colors duration-300 ${showServicesDropdown || isScrolled
+          <span className={`text-2xl font-bold font-poppins transition-colors duration-300 ${showServicesDropdown
             ? (isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600')
-            : 'text-white'
+            : isNetworkEngineeringPage
+              ? 'text-blue-600'
+              : 'text-white'
             }`}>
             Atlas Defenders
           </span>
@@ -304,7 +309,9 @@ const Header = () => {
             <button
               className={`font-medium transition-colors duration-300 flex items-center ${showServicesDropdown || isScrolled
                 ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
-                : 'text-white hover:text-accent'
+                : isNetworkEngineeringPage
+                  ? 'text-gray-900 hover:text-gray-700'
+                  : 'text-white hover:text-accent'
                 }`}
             >
               Services
@@ -471,7 +478,9 @@ const Header = () => {
             to="/industries"
             className={`font-medium transition-colors duration-300 ${showServicesDropdown || isScrolled
               ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
-              : 'text-white hover:text-accent'
+              : isNetworkEngineeringPage
+                ? 'text-gray-900 hover:text-gray-700'
+                : 'text-white hover:text-accent'
               }`}
           >
             Industries
@@ -481,7 +490,9 @@ const Header = () => {
             to="/partners"
             className={`font-medium transition-colors duration-300 ${showServicesDropdown || isScrolled
               ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
-              : 'text-white hover:text-accent'
+              : isNetworkEngineeringPage
+                ? 'text-gray-900 hover:text-gray-700'
+                : 'text-white hover:text-accent'
               }`}
           >
             Partners
@@ -491,7 +502,9 @@ const Header = () => {
             to="/about"
             className={`font-medium transition-colors duration-300 ${showServicesDropdown || isScrolled
               ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
-              : 'text-white hover:text-accent'
+              : isNetworkEngineeringPage
+                ? 'text-gray-900 hover:text-gray-700'
+                : 'text-white hover:text-accent'
               }`}
           >
             About
@@ -501,7 +514,9 @@ const Header = () => {
             to="/contact"
             className={`font-medium transition-colors duration-300 ${showServicesDropdown || isScrolled
               ? (isOffensiveSecurityPage ? 'text-gray-900 hover:text-red-600' : 'text-gray-900 hover:text-blue-600')
-              : 'text-white hover:text-accent'
+              : isNetworkEngineeringPage
+                ? 'text-gray-900 hover:text-gray-700'
+                : 'text-white hover:text-accent'
               }`}
           >
             Contact
@@ -548,7 +563,11 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMenu}
-          className={`md:hidden p-2 rounded-md ${showServicesDropdown || isScrolled ? 'text-gray-900' : 'text-white'
+          className={`md:hidden p-2 rounded-md ${showServicesDropdown || isScrolled 
+            ? 'text-gray-900' 
+            : isNetworkEngineeringPage 
+              ? 'text-gray-900' 
+              : 'text-white'
             }`}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}

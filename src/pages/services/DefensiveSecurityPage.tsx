@@ -76,10 +76,10 @@ const DefensiveSecurityPage = () => {
         z-index: 2;
       }
       
-      /* Logo styling */
+      /* Logo styling - Made much bigger */
       .logo-container img {
         transition: all 0.3s ease;
-        max-height: 56px;
+        max-height: 96px;
         max-width: 100%;
         object-fit: contain;
         filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
@@ -619,10 +619,10 @@ const DefensiveSecurityPage = () => {
       tools: [
         { name: 'CrowdStrike', logo: '/Logos/CrowdStrike_logo.svg' },
         { name: 'Palo Alto Cortex XDR', logo: '/Logos/paloalto_logo.svg' },
-        { name: 'SentinelOne', logo: '/Logos/SentinelOne_logo.svg' },
+        { name: 'SentinelOne', logo: '/Logos/SentinelOne.svg' },
         { name: 'Wazuh', logo: '/Logos/Wazuh_Logo.svg' },
-        { name: 'Cybereason', logo: '/Logos/Cybereason_logo.svg' },
-        { name: 'Symantec', logo: '/Logos/Symantec_logo.svg' }
+        { name: 'Cybereason', logo: '/Logos/Cyberreason.svg' },
+        { name: 'Symantec', logo: '/Logos/Symantec.svg' }
       ]
     },
     soar: {
@@ -645,7 +645,7 @@ const DefensiveSecurityPage = () => {
         { name: 'LogRhythm', logo: '/Logos/logrythm_logo.png' },
         { name: 'IBM QRadar', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/2560px-IBM_logo.svg.png' },
         { name: 'Graylog', logo: '/Logos/graylog_logo.svg' },
-        { name: 'Security Onion', logo: '/Logos/securityonion_logo.svg' }
+        { name: 'Security Onion', logo: '/Logos/securityonion.svg' }
       ]
     },
     firewalls: {
@@ -675,9 +675,9 @@ const DefensiveSecurityPage = () => {
       tools: [
         { name: 'Tenable Nessus', logo: '/Logos/nessus_logo.png' },
         { name: 'Qualys', logo: '/Logos/qualys_logo.png' },
-        { name: 'OpenVAS', logo: '/Logos/openvas_logo.png' },
-        { name: 'Acunetix', logo: '/Logos/acuentix_logo.png' },
-        { name: 'Rapid7', logo: '/Logos/rapid7_logo.png' }
+        { name: 'OpenVAS', logo: '/Logos/openvas.svg' },
+        { name: 'Acunetix', logo: '/Logos/acunetix.svg' },
+        { name: 'Rapid7', logo: '/Logos/rapid7.svg' }
       ]
     },
     waf: {
@@ -685,7 +685,7 @@ const DefensiveSecurityPage = () => {
       description: 'Web Application Firewall Solutions',
       tools: [
         { name: 'F5', logo: '/Logos/F5_Logo_0.svg' },
-        { name: 'ModSecurity', logo: '/Logos/modsecurity_logo.png' },
+        { name: 'ModSecurity', logo: '/Logos/modesecurity_logo.svg' },
         { name: 'OWASP', logo: '/Logos/owasp_logo.svg' },
         { name: 'Palo Alto', logo: '/Logos/paloalto_logo.svg' }
       ]
@@ -694,8 +694,8 @@ const DefensiveSecurityPage = () => {
       title: 'Identity & Access Management (IAM)',
       description: 'Identity & Access Management Solutions',
       tools: [
-        { name: 'Keycloak', logo: '/Logos/Keycloak_logo.svg' },
-        { name: 'Authentik', logo: '/Logos/Authentik_logo.svg' },
+        { name: 'Keycloak', logo: '/Logos/keycloak.svg' },
+        { name: 'Authentik', logo: '/Logos/Authentik.svg' },
         { name: 'Authelia', logo: '/Logos/authelia_logo.svg' },
         { name: 'Okta', logo: '/Logos/okta_logo.svg' },
         { name: 'Azure Active Directory', logo: '/Logos/azure_active_directory_logo.svg' }
@@ -706,17 +706,17 @@ const DefensiveSecurityPage = () => {
       description: 'Privileged Access Management Solutions',
       tools: [
         { name: 'CyberArk', logo: '/Logos/Cyberark_logo.svg' },
-        { name: 'HashiCorp Vault', logo: '/Logos/hashicorp_vault_logo.svg' }
+        { name: 'HashiCorp Vault', logo: '/Logos/hashicorpvault_logo.svg' }
       ]
     },
     proxy: {
       title: 'Proxy Servers',
       description: 'Proxy Server Solutions',
       tools: [
-        { name: 'HAProxy', logo: '/Logos/Haproxy_logo.png' },
+        { name: 'HAProxy', logo: '/Logos/haproxy.svg' },
         { name: 'Squid Proxy', logo: '/Logos/squidproxy_logo.svg' },
         { name: 'F5', logo: '/Logos/F5_Logo_0.svg' },
-        { name: 'Nginx', logo: '/Logos/Nginx_logo.svg' },
+        { name: 'Nginx', logo: '/Logos/nginx.svg' },
         { name: 'Traefik', logo: '/Logos/traefik_logo.svg' }
       ]
     },
@@ -1406,23 +1406,32 @@ const DefensiveSecurityPage = () => {
                 const isHAProxy = tool.name === 'HAProxy';
                 const isSquidProxy = tool.name === 'Squid Proxy';
                 const isTraefik = tool.name === 'Traefik';
+                const isCybereason = tool.name === 'Cybereason';
+                const isAcunetix = tool.name === 'Acunetix';
+                const isModSecurity = tool.name === 'ModSecurity';
+                const isAuthentik = tool.name === 'Authentik';
 
                 // Special logo sizing
                 const getLogoClasses = () => {
                   if (isTheHive) return "w-full h-full object-contain scale-150"; // Very big logo for TheHive
                   if (isHAProxy || isSquidProxy || isTraefik) return "w-full h-full object-contain scale-300"; // VERY VERY VERY big logos for proxy servers
+                  if (isCybereason || isOpenVAS || isAcunetix || isModSecurity || isAuthentik) return "w-full h-full object-contain scale-200"; // Bigger logos for requested tools
                   return "w-full h-full object-contain";
                 };
 
-                // Special front card styling for Shuffle (dark background)
+                // Special front card styling for Shuffle and specific tools
                 const getFrontCardClasses = () => {
                   if (isShuffle) return "flip-card-front bg-gray-900 border-gray-700";
+                  if (isModSecurity) return "flip-card-front bg-blue-50 border-blue-200";
+                  if (isAuthentik) return "flip-card-front bg-blue-50 border-blue-200";
+                  if (isAcunetix) return "flip-card-front bg-orange-50 border-orange-200";
                   return "flip-card-front";
                 };
 
-                // Special logo container classes for Shuffle
+                // Special logo container classes for specific tools
                 const getLogoContainerClasses = () => {
                   if (isShuffle) return "logo-container p-4 flex flex-col items-center justify-center h-full keep-original-colors";
+                  if (isModSecurity || isAuthentik || isAcunetix) return "logo-container p-4 flex flex-col items-center justify-center h-full keep-original-colors";
                   return "logo-container p-4 flex flex-col items-center justify-center h-full";
                 };
 
@@ -1457,7 +1466,7 @@ const DefensiveSecurityPage = () => {
                             />
                           </div>
                           {/* Show name below logo for specific tools */}
-                          {(isOpenVAS || isTheHive || tool.name === 'HashiCorp Vault') && (
+                          {(isTheHive || tool.name === 'HashiCorp Vault') && (
                             <div className={`font-semibold text-sm text-center mt-2 ${isShuffle ? 'text-white' : 'text-gray-700'}`}>
                               {tool.name}
                             </div>
