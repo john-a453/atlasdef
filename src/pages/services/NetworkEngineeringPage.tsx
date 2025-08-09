@@ -38,7 +38,7 @@ const NetworkEngineeringPage = () => {
           'WPA3 enterprise security',
           'IoT device integration'
         ],
-        image: 'https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
       },
       {
         id: 'cloud-networking',
@@ -517,7 +517,7 @@ const NetworkEngineeringPage = () => {
           {/* EXACT UniFi Grid Layout */}
           <div className="space-y-3">
             {unifiServices.map((row, rowIndex) => (
-              <div key={rowIndex} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div key={rowIndex} className="flex gap-3">
                 {row.map((service) => {
                   const isExpanded = expandedCard === service.id;
                   const isRowExpanded = row.some(s => expandedCard === s.id);
@@ -538,12 +538,16 @@ const NetworkEngineeringPage = () => {
                         relative bg-white border border-gray-200 cursor-pointer
                         transition-all duration-300 ease-in-out overflow-hidden
                         hover:shadow-sm hover:border-gray-300
-                        ${isExpanded ? 'lg:col-span-4 md:col-span-2 shadow-sm border-gray-300' : ''}
-                        ${shouldShrink ? 'opacity-40 scale-95' : 'opacity-100'}
+                        ${isExpanded ? 'shadow-sm border-gray-300' : ''}
+                        ${shouldShrink ? 'opacity-40' : 'opacity-100'}
                       `}
                       style={{
                         borderRadius: '6px',
-                        minHeight: isExpanded ? 'auto' : '180px'
+                        minHeight: isExpanded ? '280px' : '180px',
+                        flex: isExpanded ? '2' : shouldShrink ? '0.6' : '1',
+                        minWidth: shouldShrink ? '140px' : '200px',
+                        maxWidth: isExpanded ? 'none' : shouldShrink ? '180px' : '300px',
+                        transition: 'all 0.3s ease-in-out'
                       }}
                       onClick={() => handleCardClick(service.id)}
                     >
@@ -597,23 +601,32 @@ const NetworkEngineeringPage = () => {
                             className="grid lg:grid-cols-3 gap-6 p-6"
                             style={{ minHeight: '240px' }}
                           >
-                            {/* Left Section - Image/Visual (1 column) */}
+                            {/* Left Section - Professional Image */}
                             <div className="lg:col-span-1">
                               <div className="h-full bg-gray-50 rounded border border-gray-200 overflow-hidden">
-                                <div className="h-full flex items-center justify-center p-6">
-                                  <div className="text-center">
-                                    {React.cloneElement(service.icon, { 
-                                      className: "w-16 h-16 text-gray-700 mx-auto mb-3",
-                                      strokeWidth: 1.2 
-                                    })}
-                                    <h4 className="text-sm font-semibold text-gray-900 mb-1">
-                                      {service.title}
-                                    </h4>
-                                    <p className="text-xs text-blue-600 font-medium">
-                                      {service.subtitle}
-                                    </p>
-                                  </div>
-                                </div>
+                                <img
+                                  src={service.image}
+                                  alt={service.title}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.style.display = 'none';
+                                    const parent = target.parentElement;
+                                    if (parent) {
+                                      parent.innerHTML = `
+                                        <div class="h-full flex items-center justify-center p-6">
+                                          <div class="text-center">
+                                            <div class="w-16 h-16 text-gray-700 mx-auto mb-3 flex items-center justify-center">
+                                              ${service.icon.props.children || ''}
+                                            </div>
+                                            <h4 class="text-sm font-semibold text-gray-900 mb-1">${service.title}</h4>
+                                            <p class="text-xs text-blue-600 font-medium">${service.subtitle}</p>
+                                          </div>
+                                        </div>
+                                      `;
+                                    }
+                                  }}
+                                />
                               </div>
                             </div>
 
@@ -646,16 +659,8 @@ const NetworkEngineeringPage = () => {
                                 </div>
                               </div>
 
-                              {/* Bottom Actions - Exact UniFi Style */}
-                              <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-                                <Link
-                                  to="/contact"
-                                  className="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded hover:bg-blue-700 transition-colors duration-200"
-                                >
-                                  Learn More
-                                  <ArrowRight size={12} className="ml-1.5" />
-                                </Link>
-                                
+                              {/* Bottom Actions - Close Button Only */}
+                              <div className="flex items-center justify-end mt-4 pt-3 border-t border-gray-100">
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
