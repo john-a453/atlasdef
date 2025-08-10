@@ -815,14 +815,7 @@ const NetworkEngineeringPage = () => {
     <>
       {/* Hero Section - NETGEAR Style */}
       <section className="relative bg-white min-h-screen flex items-center overflow-hidden">
-        {/* Blue Geometric Shapes - NETGEAR Style */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-1/2 h-full">
-            <div className="absolute top-20 right-20 w-96 h-96 bg-blue-100 transform rotate-45 rounded-3xl opacity-60"></div>
-            <div className="absolute top-40 right-40 w-64 h-64 bg-blue-200 transform rotate-12 rounded-2xl opacity-80"></div>
-            <div className="absolute bottom-20 right-10 w-48 h-48 bg-blue-300 transform -rotate-12 rounded-xl opacity-70"></div>
-          </div>
-        </div>
+
 
         <div className="container mx-auto px-6 py-20 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
