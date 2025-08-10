@@ -836,7 +836,7 @@ const NetworkEngineeringPage = () => {
               {/* Brand/Service Name - Exact NETGEAR Style */}
               <div className="space-y-1">
                 <h1 className="text-6xl lg:text-7xl font-light text-gray-900 tracking-tight">
-                  atlas <span className="font-bold">Network</span>
+                  atlas <span className="font-bold text-blue-600">Network</span>
                 </h1>
                 <div className="text-3xl font-light text-gray-700 -mt-2">Engineering</div>
               </div>
@@ -844,10 +844,10 @@ const NetworkEngineeringPage = () => {
               {/* Headlines - Exact NETGEAR Style */}
               <div className="space-y-2 mt-8">
                 <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                  Serious performance.
+                  Serious <span className="text-blue-600">performance</span>.
                 </h2>
                 <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                  Seriously reliable.
+                  Seriously <span className="text-blue-600">reliable</span>.
                 </h2>
               </div>
 
@@ -1028,11 +1028,11 @@ const NetworkEngineeringPage = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2, delay: 0.1 }}
-                            className="grid lg:grid-cols-3 gap-6 p-6"
+                            className="grid lg:grid-cols-5 gap-6 p-6"
                             style={{ minHeight: '240px' }}
                           >
-                            {/* Left Section - Professional Image */}
-                            <div className="lg:col-span-1">
+                            {/* Left Section - Professional Image (More Space) */}
+                            <div className="lg:col-span-2">
                               <div className="h-full bg-gray-50 rounded border border-gray-200 overflow-hidden">
                                 <img
                                   src={service.image}
@@ -1060,8 +1060,8 @@ const NetworkEngineeringPage = () => {
                               </div>
                             </div>
 
-                            {/* Right Section - Details (2 columns) */}
-                            <div className="lg:col-span-2 flex flex-col justify-between">
+                            {/* Right Section - Details (3 columns) */}
+                            <div className="lg:col-span-3 flex flex-col justify-between">
                               <div>
                                 {/* Header */}
                                 <div className="mb-4">
