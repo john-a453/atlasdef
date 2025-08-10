@@ -874,30 +874,58 @@ const NetworkEngineeringPage = () => {
               </div>
             </motion.div>
 
-            {/* Right Content - Professional Network Equipment */}
+            {/* Right Content - Multiple Network Images Layout */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="relative"
             >
-              <div className="relative">
-                {/* Network Equipment Image */}
-                <div className="relative z-10">
-                  <img
-                    src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                    alt="Professional Network Equipment"
-                    className="w-full h-auto object-contain"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
-                    }}
-                  />
-                </div>
+              <div className="relative flex flex-col gap-4">
+                {/* Main Large Image */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="relative"
+                >
+                  <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl p-1 shadow-2xl">
+                    <img
+                      src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                      alt="Enterprise Network Infrastructure"
+                      className="w-full h-64 object-cover rounded-xl"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80";
+                      }}
+                    />
+                  </div>
+                </motion.div>
 
-                {/* Background Blue Geometric Shape */}
-                <div className="absolute inset-0 -z-10">
-                  <div className="absolute bottom-0 right-0 w-full h-3/4 bg-gradient-to-tr from-blue-400 to-blue-600 transform rotate-3 rounded-3xl opacity-20"></div>
+                {/* Secondary Smaller Image */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="relative ml-auto w-3/4"
+                >
+                  <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-1 shadow-xl">
+                    <img
+                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                      alt="Network Monitoring Dashboard"
+                      className="w-full h-48 object-cover rounded-xl"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80";
+                      }}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Background Decorative Elements */}
+                <div className="absolute inset-0 -z-10 overflow-hidden">
+                  <div className="absolute top-10 right-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-10 left-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl"></div>
                 </div>
               </div>
             </motion.div>
