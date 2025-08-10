@@ -276,7 +276,7 @@ const Header = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
-                  className="fixed left-0 top-16 w-full bg-white shadow-xl z-40"
+                  className="fixed left-0 top-16 w-full bg-white shadow-xl z-40 overflow-hidden"
                   style={{
                     height: '320px'
                   }}
@@ -326,7 +326,7 @@ const Header = () => {
                     </div>
 
                     {/* Main Content Area with Services */}
-                    <div className="flex-1 p-8 bg-white relative">
+                    <div className="flex-1 p-8 bg-white relative overflow-hidden">
                       <div className="flex items-center justify-between mb-6">
                         <h2 className="text-xl font-normal text-gray-900">
                           {servicesData[selectedCategory as keyof typeof servicesData].title}
