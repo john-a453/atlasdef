@@ -303,29 +303,407 @@ const NetworkEngineeringPage = () => {
     { name: 'NSE 7', logo: '/Logos/Fortinet_logo.svg', type: 'Expert' }
   ];
 
-  // Client Testimonials
+  // Client Testimonials - Attractive Atlas Defenders Reviews
   const testimonials = [
     {
-      quote: "Atlas Defenders transformed our network infrastructure — zero downtime, maximum performance.",
-      company: "Global Enterprise Corp",
-      role: "CTO"
+      quote: "Atlas Defenders transformed our office network completely! Our internet is now lightning fast, video calls never drop, and our team can work seamlessly from anywhere. They made everything so simple and reliable. Highly recommend their networking services!",
+      name: "Michael Chen",
+      role: "CEO, TechStart Solutions",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      rating: 5
     },
     {
-      quote: "From design to execution, their large-scale networking expertise is unmatched.",
-      company: "TechFlow Solutions",
-      role: "Network Director"
+      quote: "Amazing experience with Atlas Defenders! They set up our entire office network in just two days. Everything works perfectly - WiFi reaches every corner, our systems are secure, and their support team is always there when we need them. Professional and reliable!",
+      name: "Sarah Rodriguez",
+      role: "Operations Manager, Creative Agency", 
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      rating: 5
     },
     {
-      quote: "Our uptime and performance have never been better — exactly what we needed.",
-      company: "DataCenter Pro",
-      role: "Infrastructure Manager"
+      quote: "Outstanding network security setup! Atlas Defenders protected our business from cyber threats while keeping everything user-friendly. Our data is safe, our network is fast, and we have peace of mind. They truly care about their clients' success.",
+      name: "David Thompson",
+      role: "Business Owner, Retail Chain",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      rating: 5
     },
     {
-      quote: "We trust Atlas Defenders with mission-critical connectivity — they deliver every time.",
-      company: "ISP Networks Ltd",
-      role: "Operations Chief"
+      quote: "Best networking company we've worked with! They upgraded our entire infrastructure and now everything runs smoothly. No more connection issues, faster file sharing, and excellent customer service. Atlas Defenders exceeded all our expectations!",
+      name: "Emily Johnson",
+      role: "IT Manager, Healthcare Group",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      rating: 5
+    },
+    {
+      quote: "Incredible wireless network setup! Atlas Defenders gave us seamless WiFi coverage throughout our 3-story building. The installation was quick, professional, and now our productivity has increased significantly. Fantastic team and service!",
+      name: "James Wilson",
+      role: "Founder, Marketing Firm",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      rating: 5
+    },
+    {
+      quote: "Atlas Defenders made our remote work dreams come true! They set up secure VPN access and cloud connectivity that works flawlessly. Our team can collaborate from anywhere with confidence. Professional, efficient, and highly skilled!",
+      name: "Lisa Martinez",
+      role: "HR Director, Consulting Firm",
+      avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+      rating: 5
     }
   ];
+
+  // Star Rating Component
+  const StarRating = ({ rating }: { rating: number }) => {
+    return (
+      <div className="flex justify-center mb-4">
+        {[...Array(5)].map((_, index) => (
+          <svg
+            key={index}
+            className={`w-5 h-5 ${index < rating ? 'text-yellow-400' : 'text-white/30'}`}
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        ))}
+      </div>
+    );
+  };
+
+  // Modern Smooth Carousel Testimonial Component
+  const GradientTestimonials = ({ testimonials }: { testimonials: Array<{ quote: string, name: string, role: string, avatar: string, rating: number }> }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+
+    // Auto-advance testimonials with smooth animation
+    useEffect(() => {
+      if (!isHovered) {
+        const interval = setInterval(() => {
+          setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        }, 4000); // Change every 4 seconds
+        return () => clearInterval(interval);
+      }
+    }, [testimonials.length, isHovered]);
+
+    // Calculate visible testimonials (show 3 at a time on desktop)
+    const getVisibleTestimonials = () => {
+      const visible = [];
+      for (let i = 0; i < 3; i++) {
+        const index = (currentIndex + i) % testimonials.length;
+        visible.push({ ...testimonials[index], originalIndex: index });
+      }
+      return visible;
+    };
+
+    return (
+      <div className="py-16 overflow-hidden">
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            What Our <span className="text-blue-600">Clients</span> Say
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Real experiences from businesses who trust Atlas Defenders with their network infrastructure.
+          </p>
+        </motion.div>
+
+        {/* Testimonial Carousel Container */}
+        <div 
+          className="max-w-7xl mx-auto px-6"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Desktop View - 3 Cards Sliding */}
+          <div className="hidden md:block">
+            <div className="relative h-96">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ x: 300, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -300, opacity: 0 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    duration: 0.8
+                  }}
+                  className="grid grid-cols-3 gap-6 absolute inset-0"
+                >
+                  {getVisibleTestimonials().map((testimonial, index) => (
+                    <motion.div
+                      key={`${testimonial.originalIndex}-${currentIndex}`}
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ 
+                        delay: index * 0.1,
+                        duration: 0.5,
+                        ease: "easeOut"
+                      }}
+                      className="relative"
+                    >
+                      {/* Gradient Card */}
+                      <div className="bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 rounded-3xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col">
+                        {/* 5-Star Rating */}
+                        <StarRating rating={testimonial.rating} />
+
+                        {/* Quote Text */}
+                        <div className="mb-6 flex-grow">
+                          <p className="text-white text-sm leading-relaxed">
+                            "{testimonial.quote}"
+                          </p>
+                        </div>
+
+                        {/* Author Section */}
+                        <div className="flex flex-col items-center text-center mt-auto">
+                          {/* Avatar */}
+                          <div className="w-14 h-14 rounded-full overflow-hidden mb-3 border-2 border-white/30">
+                            <img
+                              src={testimonial.avatar}
+                              alt={testimonial.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=6366f1&color=ffffff&size=56`;
+                              }}
+                            />
+                          </div>
+
+                          {/* Name and Role */}
+                          <div>
+                            <h4 className="text-white font-semibold text-base mb-1">
+                              {testimonial.name}
+                            </h4>
+                            <p className="text-white/80 text-xs">
+                              {testimonial.role}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Mobile View - Single Card */}
+          <div className="md:hidden">
+            <div className="relative h-96">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ x: 300, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -300, opacity: 0 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    duration: 0.8
+                  }}
+                  className="absolute inset-0"
+                >
+                  <div className="bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 rounded-3xl p-8 text-white shadow-xl h-full flex flex-col">
+                    <StarRating rating={testimonials[currentIndex].rating} />
+                    <div className="mb-8 flex-grow">
+                      <p className="text-white text-sm leading-relaxed">
+                        "{testimonials[currentIndex].quote}"
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-center text-center mt-auto">
+                      <div className="w-16 h-16 rounded-full overflow-hidden mb-4 border-3 border-white/30">
+                        <img
+                          src={testimonials[currentIndex].avatar}
+                          alt={testimonials[currentIndex].name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonials[currentIndex].name)}&background=6366f1&color=ffffff&size=64`;
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-semibold text-lg mb-1">
+                          {testimonials[currentIndex].name}
+                        </h4>
+                        <p className="text-white/80 text-sm">
+                          {testimonials[currentIndex].role}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Interactive Navigation Dots */}
+          <div className="flex justify-center space-x-3 mt-12">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${
+                  index === currentIndex
+                    ? 'bg-blue-600 shadow-lg'
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+              />
+            ))}
+          </div>
+
+
+        </div>
+      </div>
+    );
+  };
+
+  // Zabbix-Style Interactive Section Component
+  const ZabbixStyleSection = () => {
+    const [activeItem, setActiveItem] = useState('expert-certifications');
+
+    const menuItems = [
+      {
+        id: 'expert-certifications',
+        title: 'CCNP, JNCIP, NSE4-7 & PCSNE Certified',
+        description: 'Our team holds professional networking certifications including CCNP Enterprise, JNCIP, NSE4-7, and PCSNE. With decades of combined experience in enterprise networking, we deliver solutions that work flawlessly from day one.',
+        link: 'View All Services →',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'Network engineer working on advanced routing and switching equipment'
+      },
+      {
+        id: 'zero-downtime',
+        title: '99.999% Uptime Network Designs',
+        description: 'We architect networks with redundancy at every layer - from dual ISP connections to HSRP/VRRP failover. Our designs ensure your business never stops, with proven track records of zero unplanned downtime.',
+        link: 'View All Services →',
+        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'High-availability data center with redundant network infrastructure'
+      },
+      {
+        id: 'comprehensive-services',
+        title: 'Complete Network Lifecycle Management',
+        description: 'From initial design and deployment to ongoing monitoring and optimization, we handle every aspect of your network infrastructure. SD-WAN, wireless, security, cloud connectivity - all under one roof.',
+        link: 'View All Services →',
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'Comprehensive network operations center monitoring global infrastructure'
+      },
+      {
+        id: 'proven-results',
+        title: 'Proven Results & Rapid ROI',
+        description: 'Our clients see immediate improvements: 40% reduction in network costs, 300% performance gains, and seamless scalability. We deliver measurable business value, not just technical solutions.',
+        link: 'View All Services →',
+        image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'Business meeting showing network performance improvements and ROI metrics'
+      }
+    ];
+
+    const currentItem = menuItems.find(item => item.id === activeItem) || menuItems[0];
+
+    return (
+      <div className="grid lg:grid-cols-2 gap-0 h-[70vh]">
+        {/* Left Content Panel - Menu */}
+        <div className="bg-white p-6 flex flex-col justify-center border-r border-gray-200">
+          {/* Main Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mb-6"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Why Choose <span className="text-blue-600">Atlas Defenders</span> in Networking
+            </h2>
+            <p className="text-base text-gray-600 leading-relaxed">
+              Backed by years of experience, certified expertise, and proven results, we deliver networking solutions that drive your business forward with reliability and performance.
+            </p>
+          </motion.div>
+
+          {/* Interactive Menu Items */}
+          <div className="space-y-1">
+            {menuItems.map((item) => (
+              <motion.div
+                key={item.id}
+                className={`relative cursor-pointer transition-all duration-300 ${
+                  activeItem === item.id ? 'opacity-100' : 'opacity-70 hover:opacity-90'
+                }`}
+                onClick={() => setActiveItem(item.id)}
+                whileHover={{ x: 4 }}
+              >
+                {/* Blue accent line for active item */}
+                <div className={`absolute left-0 top-0 bottom-0 w-1 bg-blue-600 transition-all duration-300 ${
+                  activeItem === item.id ? 'opacity-100' : 'opacity-0'
+                }`} />
+                
+                <div className={`pl-6 py-4 ${activeItem === item.id ? 'pl-8' : ''} transition-all duration-300`}>
+                  <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
+                    activeItem === item.id ? 'text-gray-900' : 'text-gray-600'
+                  }`}>
+                    {item.title}
+                  </h3>
+                  
+                  <AnimatePresence>
+                    {activeItem === item.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                          {item.description}
+                        </p>
+                        <Link 
+                          to="/services" 
+                          className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors cursor-pointer inline-flex items-center"
+                        >
+                          {item.link}
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Image Panel */}
+        <div className="relative overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeItem}
+              initial={{ opacity: 0, scale: 1.02 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="relative w-full h-full"
+            >
+              <img
+                src={currentItem.image}
+                alt={currentItem.alt}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+                }}
+              />
+              
+              {/* Professional overlay for depth and sophistication */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-gray-900/30" />
+              
+              {/* Subtle brand accent overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 via-transparent to-transparent" />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    );
+  };
 
   // Professional Networking Certification Card Component with Advanced Animations
   const NetworkingCertificationCard = ({ cert, index }: { cert: { name: string, logo: string, type: string }, index: number }) => {
@@ -527,83 +905,15 @@ const NetworkEngineeringPage = () => {
         </div>
       </section>
 
-      {/* Section 1 — Why Global Leaders Choose Us */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Image Left */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl p-12 shadow-xl">
-                <div className="text-center">
-                  <Globe size={120} className="text-blue-600 mx-auto mb-6" />
-                  <h3 className="text-2xl font-bold text-slate-800 mb-4">Global Network Infrastructure</h3>
-                  <p className="text-slate-600">Connecting enterprises worldwide with carrier-grade reliability</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Text Right */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8">
-                Why Global Leaders Choose Us
-              </h2>
-
-              {/* For Executives */}
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
-                    <CheckCircle size={16} className="text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">99.999% uptime network designs</h3>
-                    <p className="text-slate-600">Mission-critical infrastructure that never fails when you need it most</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
-                    <CheckCircle size={16} className="text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">Zero-downtime migrations</h3>
-                    <p className="text-slate-600">Seamless transitions that keep your business running without interruption</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
-                    <CheckCircle size={16} className="text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">Scalable for future growth</h3>
-                    <p className="text-slate-600">Networks designed to grow with your business for years to come</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-blue-50 rounded-xl p-6 border-l-4 border-blue-500">
-                <p className="text-lg font-semibold text-slate-800">
-                  "Trusted by enterprises, telecoms, and governments worldwide."
-                </p>
-              </div>
-            </motion.div>
-          </div>
+      {/* Section 1 — Why Global Leaders Choose Us - Light Zabbix Style */}
+      <section className="py-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <ZabbixStyleSection />
         </div>
       </section>
 
       {/* EXACT UniFi-Style Expandable Services Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white mt-12">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -613,7 +923,7 @@ const NetworkEngineeringPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-              Enterprise Network Solutions
+              Enterprise <span className="text-blue-600">Network Solutions</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
               Click any service to explore detailed capabilities and features.
@@ -911,210 +1221,46 @@ const NetworkEngineeringPage = () => {
       </section>
 
       {/* Section 5 — What Our Clients Say */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-              Proven Results. Trusted Worldwide.
-            </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              See what our clients say about our networking expertise and results.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="ubiquiti-card p-8"
-              >
-                <div className="mb-6">
-                  <div className="flex text-blue-500 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <blockquote className="text-lg text-slate-700 leading-relaxed mb-4">
-                    "{testimonial.quote}"
-                  </blockquote>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                    <Users size={20} className="text-blue-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-slate-900">{testimonial.company}</div>
-                    <div className="text-sm text-slate-500">{testimonial.role}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+      <section className="py-16 bg-gray-50 relative">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* New Gradient Card Testimonials */}
+          <GradientTestimonials testimonials={testimonials} />
         </div>
       </section>
 
-      {/* Section 6 — Proof of Scale */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Proof of Scale
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our global network engineering achievements speak for themselves.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20">
-                <Globe size={36} className="text-blue-400" />
-              </div>
-              <div className="mb-4">
-                <Counter end={12} suffix="+" duration={2.5} />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Countries Served</h3>
-              <p className="text-gray-300">Global network infrastructure deployments</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20">
-                <Users size={36} className="text-green-400" />
-              </div>
-              <div className="mb-4">
-                <Counter end={500000} suffix="+" duration={2.5} />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Concurrent Users Supported</h3>
-              <p className="text-gray-300">Peak network capacity delivered</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20">
-                <Zap size={36} className="text-yellow-400" />
-              </div>
-              <div className="mb-4">
-                <Counter end={99.999} suffix="%" duration={2.5} />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Uptime Delivered</h3>
-              <p className="text-gray-300">Carrier-grade reliability achieved</p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 8 — Call to Action */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
-        <div className="container">
+      {/* Call to Action Section - Matching Your Image Style */}
+      <section className="py-16 bg-gray-900">
+        <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center max-w-4xl mx-auto"
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-16 border border-white/20">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-8"
-              >
-                <Network size={48} className="text-white" />
-              </motion.div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Ready to Transform Your Network Infrastructure?
+            </h2>
+            
+            <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+              Don't wait for network issues to impact your business. Get proactive network solutions with our comprehensive enterprise networking services.
+            </p>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="hero-text text-4xl md:text-5xl font-black text-white mb-8"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                to="/contact"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center"
               >
-                Let's Build the Network That Drives Your Business
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                viewport={{ once: true }}
-                className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+                Book a Free Consultation
+                <ArrowRight size={20} className="ml-2" />
+              </Link>
+              
+              <Link
+                to="/contact"
+                className="border border-gray-400 hover:border-white text-gray-300 hover:text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 inline-flex items-center"
               >
-                Ready to transform your network infrastructure? Our certified engineers are standing by to design and implement enterprise-grade solutions that scale with your ambitions.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <Link
-                  to="/contact"
-                  className="btn-primary inline-flex items-center text-lg px-12 py-6"
-                >
-                  Request a Consultation
-                  <ArrowRight size={24} className="ml-3" />
-                </Link>
-              </motion.div>
-
-              {/* Trust Indicators */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                viewport={{ once: true }}
-                className="flex flex-wrap justify-center items-center gap-8 mt-12 pt-8 border-t border-white/20"
-              >
-                <div className="flex items-center text-gray-300">
-                  <CheckCircle size={20} className="text-green-400 mr-2" />
-                  <span className="font-medium">CCIE Certified Engineers</span>
-                </div>
-                <div className="flex items-center text-gray-300">
-                  <CheckCircle size={20} className="text-green-400 mr-2" />
-                  <span className="font-medium">24/7 Global Support</span>
-                </div>
-                <div className="flex items-center text-gray-300">
-                  <CheckCircle size={20} className="text-green-400 mr-2" />
-                  <span className="font-medium">99.999% Uptime SLA</span>
-                </div>
-              </motion.div>
+                Contact us
+                <ArrowRight size={20} className="ml-2" />
+              </Link>
             </div>
           </motion.div>
         </div>
