@@ -9,8 +9,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showServicesDropdown, setShowServicesDropdown] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('cybersecurity');
-  const [infrastructureIndex, setInfrastructureIndex] = useState(0);
-  const [isAutoScrollPaused, setIsAutoScrollPaused] = useState(false);
+  // Removed infrastructureIndex and isAutoScrollPaused since we show all 5 infrastructure services
   const servicesRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const autoScrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
@@ -36,29 +35,17 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Enhanced auto-scroll for infrastructure services with pause functionality
-  useEffect(() => {
-    if (selectedCategory === 'infrastructure' && showServicesDropdown && !isAutoScrollPaused) {
-      const interval = setInterval(() => {
-        setInfrastructureIndex(prev => (prev + 4) % 8);
-      }, 4000);
-      return () => clearInterval(interval);
-    }
-  }, [selectedCategory, showServicesDropdown, isAutoScrollPaused]);
+  // Remove auto-scroll for infrastructure since we have only 5 services
+  // useEffect(() => {
+  //   if (selectedCategory === 'infrastructure' && showServicesDropdown && !isAutoScrollPaused) {
+  //     const interval = setInterval(() => {
+  //       setInfrastructureIndex(prev => (prev + 4) % 5);
+  //     }, 4000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [selectedCategory, showServicesDropdown, isAutoScrollPaused]);
 
-  // Resume auto-scroll after 5 seconds when paused
-  useEffect(() => {
-    if (isAutoScrollPaused) {
-      autoScrollTimeoutRef.current = setTimeout(() => {
-        setIsAutoScrollPaused(false);
-      }, 5000);
-      return () => {
-        if (autoScrollTimeoutRef.current) {
-          clearTimeout(autoScrollTimeoutRef.current);
-        }
-      };
-    }
-  }, [isAutoScrollPaused]);
+  // Removed auto-scroll logic since we show all 5 infrastructure services
 
   // Services dropdown handlers
   const handleServicesMouseEnter = () => {
@@ -130,18 +117,18 @@ const Header = () => {
       title: 'Infrastructure Solutions',
       services: [
         {
-          title: 'Next-Gen Data Center Design',
-          subtitle: 'Next-Gen Infrastructure',
+          title: 'Next-Generation Data Centers',
+          subtitle: 'Modern, scalable, and secure environments',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
           ),
-          link: '/services/infrastructure/data-center-design'
+          link: '/services/infrastructure/data-centers'
         },
         {
-          title: 'Network Engineering',
-          subtitle: 'BGP, MPLS, SD-WAN',
+          title: 'Network Engineering & Optimization',
+          subtitle: 'Advanced network design and performance tuning',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
@@ -150,48 +137,18 @@ const Header = () => {
           link: '/services/infrastructure/network-engineering'
         },
         {
-          title: 'Cloud Integration',
-          subtitle: 'AWS, Azure, GCP, OCI',
+          title: 'Cloud & Virtualization Solutions',
+          subtitle: 'Cloud migration and virtualization technologies',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
             </svg>
           ),
-          link: '/services/infrastructure/cloud-integration'
+          link: '/services/infrastructure/cloud-virtualization'
         },
         {
-          title: 'Virtualization',
-          subtitle: 'VMware, Proxmox, Nutanix',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-            </svg>
-          ),
-          link: '/services/infrastructure/virtualization'
-        },
-        {
-          title: 'Server Administration',
-          subtitle: 'Active Directory, Windows Server, Linux',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-            </svg>
-          ),
-          link: '/services/infrastructure/server-administration'
-        },
-        {
-          title: 'Infrastructure Monitoring',
-          subtitle: 'Zabbix, Prometheus, Grafana',
-          icon: (
-            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          ),
-          link: '/services/infrastructure/monitoring'
-        },
-        {
-          title: 'Backup & Recovery',
-          subtitle: 'Veeam-powered BDR',
+          title: 'Backup & Disaster Recovery',
+          subtitle: 'Secure, automated backup with rapid recovery',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
@@ -200,14 +157,14 @@ const Header = () => {
           link: '/services/infrastructure/backup-recovery'
         },
         {
-          title: 'Performance Optimization',
-          subtitle: 'Load Balancing & Tuning',
+          title: 'Infrastructure Monitoring & Management',
+          subtitle: 'Proactive monitoring and lifecycle management',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
           ),
-          link: '/services/infrastructure/performance-optimization'
+          link: '/services/infrastructure/monitoring-management'
         }
       ]
     },
@@ -265,31 +222,21 @@ const Header = () => {
     { id: 'development', label: 'Development' }
   ];
 
-  const nextInfrastructure = () => {
-    setInfrastructureIndex(prev => (prev + 4) % 8);
-    setIsAutoScrollPaused(true); // Pause auto-scroll for 5 seconds
-  };
-
-  const prevInfrastructure = () => {
-    setInfrastructureIndex(prev => (prev - 4 + 8) % 8);
-    setIsAutoScrollPaused(true); // Pause auto-scroll for 5 seconds
-  };
+  // Removed nextInfrastructure and prevInfrastructure functions since we show all 5 infrastructure services
 
   return (
     <header className={headerClasses}>
       <div className="container mx-auto px-4 flex items-center h-16">
         {/* Logo - Enhanced size and visibility */}
         <Link to="/" className="flex items-center space-x-3 mr-12">
-          <Shield className={`h-10 w-10 transition-colors duration-300 ${showServicesDropdown
-            ? (isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600')
-            : isNetworkEngineeringPage
-              ? 'text-blue-600'
+          <Shield className={`h-10 w-10 transition-colors duration-300 ${
+            showServicesDropdown || isScrolled || isNetworkEngineeringPage
+              ? (isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600')
               : 'text-white'
             }`} />
-          <span className={`text-2xl font-bold font-poppins transition-colors duration-300 ${showServicesDropdown
-            ? (isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600')
-            : isNetworkEngineeringPage
-              ? 'text-blue-600'
+          <span className={`text-2xl font-bold font-poppins transition-colors duration-300 ${
+            showServicesDropdown || isScrolled || isNetworkEngineeringPage
+              ? (isOffensiveSecurityPage ? 'text-red-600' : 'text-blue-600')
               : 'text-white'
             }`}>
             Atlas Defenders
@@ -385,35 +332,14 @@ const Header = () => {
                           {servicesData[selectedCategory as keyof typeof servicesData].title}
                         </h2>
 
-                        {/* Navigation arrows for Infrastructure */}
-                        {selectedCategory === 'infrastructure' && (
-                          <div className="flex items-center space-x-2">
-                            <button
-                              onClick={prevInfrastructure}
-                              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                            >
-                              <ChevronLeft size={20} className="text-gray-600" />
-                            </button>
-                            <div className="flex space-x-1">
-                              <div className={`w-2 h-2 rounded-full ${infrastructureIndex === 0 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
-                              <div className={`w-2 h-2 rounded-full ${infrastructureIndex === 4 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
-                            </div>
-                            <button
-                              onClick={nextInfrastructure}
-                              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                            >
-                              <ChevronRight size={20} className="text-gray-600" />
-                            </button>
-                          </div>
-                        )}
+
                       </div>
 
                       {/* Services Grid */}
-                      <div className="grid grid-cols-4 gap-8">
+                      <div className={`grid gap-8 ${selectedCategory === 'infrastructure' ? 'grid-cols-5' : 'grid-cols-4'}`}>
                         {selectedCategory === 'infrastructure' ? (
-                          // Infrastructure with carousel
+                          // Infrastructure - show all 5 services in 5 columns
                           servicesData.infrastructure.services
-                            .slice(infrastructureIndex, infrastructureIndex + 4)
                             .map((service, index) => (
                               <Link
                                 key={index}
