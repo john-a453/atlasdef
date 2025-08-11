@@ -9,7 +9,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showServicesDropdown, setShowServicesDropdown] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('cybersecurity');
-  // Removed infrastructureIndex and isAutoScrollPaused since we show all 5 infrastructure services
+  const [infrastructureIndex, setInfrastructureIndex] = useState(0);
+  const [isAutoScrollPaused, setIsAutoScrollPaused] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const autoScrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
@@ -35,17 +36,25 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Remove auto-scroll for infrastructure since we have only 5 services
-  // useEffect(() => {
-  //   if (selectedCategory === 'infrastructure' && showServicesDropdown && !isAutoScrollPaused) {
-  //     const interval = setInterval(() => {
-  //       setInfrastructureIndex(prev => (prev + 4) % 5);
-  //     }, 4000);
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [selectedCategory, showServicesDropdown, isAutoScrollPaused]);
+  // Auto-scroll for infrastructure services (4 at a time from 6 total)
+  useEffect(() => {
+    if (selectedCategory === 'infrastructure' && showServicesDropdown && !isAutoScrollPaused) {
+      const interval = setInterval(() => {
+        setInfrastructureIndex(prev => prev === 0 ? 1 : 0); // Toggle between showing services 0-3 and 2-5 (last 4)
+      }, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [selectedCategory, showServicesDropdown, isAutoScrollPaused]);
 
-  // Removed auto-scroll logic since we show all 5 infrastructure services
+  // Resume auto-scroll after 5 seconds when paused
+  useEffect(() => {
+    if (isAutoScrollPaused) {
+      const timeout = setTimeout(() => {
+        setIsAutoScrollPaused(false);
+      }, 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isAutoScrollPaused]);
 
   // Services dropdown handlers
   const handleServicesMouseEnter = () => {
@@ -124,7 +133,7 @@ const Header = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
           ),
-          link: '/services/infrastructure/data-centers'
+          link: '/services/infrastructure/data-center-design'
         },
         {
           title: 'Network Engineering & Optimization',
@@ -137,14 +146,14 @@ const Header = () => {
           link: '/services/infrastructure/network-engineering'
         },
         {
-          title: 'Cloud & Virtualization Solutions',
-          subtitle: 'Cloud migration and virtualization technologies',
+          title: 'Cloud Integration',
+          subtitle: 'AWS, Azure, GCP, OCI integration',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
             </svg>
           ),
-          link: '/services/infrastructure/cloud-virtualization'
+          link: '/services/infrastructure/cloud-integration'
         },
         {
           title: 'Backup & Disaster Recovery',
@@ -157,14 +166,24 @@ const Header = () => {
           link: '/services/infrastructure/backup-recovery'
         },
         {
-          title: 'Infrastructure Monitoring & Management',
+          title: 'Virtualization',
+          subtitle: 'VMware, Proxmox, Nutanix platforms',
+          icon: (
+            <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+            </svg>
+          ),
+          link: '/services/infrastructure/virtualization'
+        },
+        {
+          title: 'Server & System Administration',
           subtitle: 'Proactive monitoring and lifecycle management',
           icon: (
             <svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
             </svg>
           ),
-          link: '/services/infrastructure/monitoring-management'
+          link: '/services/infrastructure/server-administration'
         }
       ]
     },
@@ -222,7 +241,15 @@ const Header = () => {
     { id: 'development', label: 'Development' }
   ];
 
-  // Removed nextInfrastructure and prevInfrastructure functions since we show all 5 infrastructure services
+  const nextInfrastructure = () => {
+    setInfrastructureIndex(prev => prev === 0 ? 1 : 0); // Toggle between 0-3 and 1-4
+    setIsAutoScrollPaused(true); // Pause auto-scroll for 5 seconds
+  };
+
+  const prevInfrastructure = () => {
+    setInfrastructureIndex(prev => prev === 0 ? 1 : 0); // Toggle between 0-3 and 1-4
+    setIsAutoScrollPaused(true); // Pause auto-scroll for 5 seconds
+  };
 
   return (
     <header className={headerClasses}>
@@ -332,15 +359,37 @@ const Header = () => {
                           {servicesData[selectedCategory as keyof typeof servicesData].title}
                         </h2>
 
-
+                        {/* Navigation arrows for Infrastructure */}
+                        {selectedCategory === 'infrastructure' && (
+                          <div className="flex items-center space-x-2">
+                            <button
+                              onClick={prevInfrastructure}
+                              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                            >
+                              <ChevronLeft size={20} className="text-gray-600" />
+                            </button>
+                            <div className="flex space-x-1">
+                              <div className={`w-2 h-2 rounded-full ${infrastructureIndex === 0 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
+                              <div className={`w-2 h-2 rounded-full ${infrastructureIndex === 1 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
+                            </div>
+                            <button
+                              onClick={nextInfrastructure}
+                              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                            >
+                              <ChevronRight size={20} className="text-gray-600" />
+                            </button>
+                          </div>
+                        )}
                       </div>
 
                       {/* Services Grid */}
-                      <div className={`grid gap-8 ${selectedCategory === 'infrastructure' ? 'grid-cols-5' : 'grid-cols-4'}`}>
+                      <div className="grid grid-cols-4 gap-8">
                         {selectedCategory === 'infrastructure' ? (
-                          // Infrastructure - show all 5 services in 5 columns
-                          servicesData.infrastructure.services
-                            .map((service, index) => (
+                          // Infrastructure - show 4 services at a time with carousel (6 total services)
+                          (infrastructureIndex === 0 
+                            ? servicesData.infrastructure.services.slice(0, 4) // First 4: Data Centers, Network, Cloud, Backup
+                            : servicesData.infrastructure.services.slice(4, 6) // Last 2: Virtualization, Server Admin
+                          ).map((service, index) => (
                               <Link
                                 key={index}
                                 to={service.link}

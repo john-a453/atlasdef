@@ -902,16 +902,17 @@ const NetworkEngineeringPage = () => {
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="relative ml-auto w-3/4"
                 >
-                  <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-1 shadow-xl">
+                  <div className="relative bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-xl h-48 overflow-hidden">
                     <img
-                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                      alt="Network Monitoring Dashboard"
-                      className="w-full h-48 object-cover rounded-xl"
+                      src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                      alt="Cybersecurity Monitoring Dashboard - EDR/XDR Analytics"
+                      className="absolute inset-0 w-full h-full object-cover object-center"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        target.src = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80";
+                        target.src = "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
                       }}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-700/20 rounded-2xl"></div>
                   </div>
                 </motion.div>
 
@@ -1022,8 +1023,8 @@ const NetworkEngineeringPage = () => {
                           <div className="mt-4 flex justify-center">
                             <div className="group relative">
                               {/* Main Button */}
-                              <div className="w-8 h-8 bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-0.5 cursor-pointer border border-gray-700 hover:border-gray-600">
-                                <svg className="w-3.5 h-3.5 text-white transition-transform duration-300 group-hover:translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-0.5 cursor-pointer border-2 border-gray-800 hover:border-blue-600 hover:bg-blue-50">
+                                <svg className="w-3.5 h-3.5 text-gray-800 hover:text-blue-600 transition-all duration-300 group-hover:translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
                                   <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
                                 </svg>
                               </div>
