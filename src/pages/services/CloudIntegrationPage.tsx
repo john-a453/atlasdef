@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Cloud, Server, Database, ArrowRight, Zap, Users, Clock, CheckCircle, Shield, Globe } from 'lucide-react';
+import { Cloud, Server, Database, ArrowRight, Zap, Users, Clock, CheckCircle, Shield, Globe, Award, Lock, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 
 const CloudIntegrationPage = () => {
   useEffect(() => {
-    document.title = 'Cloud Integration | Atlas Defenders';
+    document.title = 'Seamless Cloud Integration for the Future | Atlas Defenders';
   }, []);
 
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -154,159 +154,313 @@ const CloudIntegrationPage = () => {
     }
   ];
 
+  // Technology Partners Data
+  const technologyPartners = [
+    { name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/2560px-Amazon_Web_Services_Logo.svg.png' },
+    { name: 'Microsoft Azure', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/2560px-Microsoft_Azure_Logo.svg.png' },
+    { name: 'Google Cloud', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/2560px-Google_Cloud_logo.svg.png' },
+    { name: 'Oracle Cloud', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png' },
+    { name: 'Linode', logo: 'https://www.linode.com/wp-content/uploads/2021/01/Linode-Logo-Black.svg' },
+    { name: 'DigitalOcean', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/2560px-DigitalOcean_logo.svg.png' },
+    { name: 'Hostinger', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Hostinger_logo.svg/2560px-Hostinger_logo.svg.png' }
+  ];
+
+  // Cloud Integration Services Data (Netgear Style)
+  const cloudServices = [
+    {
+      id: 'hybrid-cloud',
+      title: 'Hybrid Cloud Architecture',
+      subtitle: 'Seamless Integration',
+      description: 'Seamlessly integrate private and public cloud environments for maximum flexibility.',
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      features: ['Private-Public Integration', 'Seamless Data Flow', 'Unified Management', 'Cost Optimization']
+    },
+    {
+      id: 'cloud-virtualization',
+      title: 'Cloud Virtualization',
+      subtitle: 'Resource Optimization',
+      description: 'Optimize resources with cutting-edge virtualization technology.',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      features: ['VM Management', 'Container Orchestration', 'Resource Scaling', 'Performance Monitoring']
+    },
+    {
+      id: 'cloud-security',
+      title: 'Cloud Security & Compliance',
+      subtitle: 'Enterprise Protection',
+      description: 'Enterprise-grade security controls and compliance frameworks.',
+      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      features: ['Zero Trust Architecture', 'Compliance Automation', 'Threat Detection', 'Data Encryption']
+    },
+    {
+      id: 'cloud-backup',
+      title: 'Cloud Backup & Disaster Recovery',
+      subtitle: 'Business Continuity',
+      description: 'Continuous protection with rapid recovery options.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      features: ['Automated Backups', 'Point-in-Time Recovery', 'Cross-Region Replication', 'RTO/RPO Optimization']
+    },
+    {
+      id: 'multi-cloud',
+      title: 'Multi-Cloud Management',
+      subtitle: 'Centralized Control',
+      description: 'Centralized control of all your cloud platforms in one dashboard.',
+      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      features: ['Unified Dashboard', 'Cost Management', 'Performance Analytics', 'Policy Enforcement']
+    },
+    {
+      id: 'cloud-migration',
+      title: 'Cloud Migration Services',
+      subtitle: 'Seamless Transition',
+      description: 'Fast, secure, and seamless migration with minimal downtime.',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      features: ['Assessment & Planning', 'Zero-Downtime Migration', 'Data Validation', 'Post-Migration Support']
+    }
+  ];
+
+  // Certifications Data
+  const certifications = [
+    { name: 'ISO/IEC 27001', description: 'Information Security Management', icon: Shield },
+    { name: 'ISO/IEC 27017', description: 'Cloud Security Guidelines', icon: Cloud },
+    { name: 'ISO/IEC 27018', description: 'Protection of Personal Data in the Cloud', icon: Lock },
+    { name: 'SOC 2 Type II', description: 'Security, Availability, and Confidentiality Controls', icon: Award },
+    { name: 'GDPR', description: 'General Data Protection Regulation', icon: Globe },
+    { name: 'HIPAA', description: 'Health Insurance Portability and Accountability Act', icon: Shield },
+    { name: 'PCI DSS', description: 'Payment Card Industry Data Security Standard', icon: Lock }
+  ];
+
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-cyan-900 via-blue-900 to-indigo-900">
-        {/* Animated Background */}
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1"
-            alt="Cloud Infrastructure"
-            className="w-full h-full object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/90 via-blue-900/85 to-indigo-900/90"></div>
-        </div>
-
-        {/* Floating Cloud Effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-8 h-8 opacity-20"
-              style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                rotate: [0, 180, 360],
-                opacity: [0.1, 0.3, 0.1],
-              }}
-              transition={{
-                duration: 8 + Math.random() * 4,
-                delay: Math.random() * 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-full h-full text-cyan-400">
-                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
-              </svg>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Cloud Grid Pattern */}
+      {/* Hero Section - Authentik Style */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Gradient Background - Authentik Style */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700"></div>
+        
+        {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2306b6d4' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
         </div>
 
-        <div className="container relative z-10 text-white pt-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
-          >
+        <div className="container relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center min-h-screen py-20">
+            {/* Left Content - Authentik Style */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex items-center mb-8"
+              transition={{ duration: 0.8 }}
+              className="text-white"
             >
-              <div className="w-12 h-0.5 bg-cyan-400 mr-4"></div>
-              <span className="text-lg font-medium text-cyan-400 tracking-wide uppercase">
-                Cloud Transformation Excellence
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8 text-white"
-            >
-              Cloud Integration
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-2xl text-cyan-300 mb-8 font-medium"
-            >
-              Multi-Cloud Strategy & Hybrid Infrastructure
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-xl text-gray-300 mb-12 max-w-3xl leading-relaxed"
-            >
-              Seamlessly integrate AWS, Azure, GCP, and Oracle Cloud platforms with your existing infrastructure 
-              for optimal performance, security, and cost efficiency in your digital transformation journey.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-6"
-            >
-              <Link 
-                to="/contact"
-                className="group inline-flex items-center bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl transition-all duration-300 transform hover:scale-105"
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8"
               >
-                <span>Start Cloud Migration</span>
-                <motion.div
-                  className="ml-3"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                Seamless Cloud Integration for the Future
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-xl text-white/90 mb-12 leading-relaxed max-w-2xl"
+              >
+                Unifying your infrastructure, optimizing performance, and ensuring scalability — all in the cloud.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <Link 
+                  to="/contact"
+                  className="inline-flex items-center justify-center bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
-                  <ArrowRight size={20} />
-                </motion.div>
-              </Link>
+                  Get Started
+                </Link>
+                <Link 
+                  to="#services"
+                  className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
+                >
+                  Our Solutions
+                </Link>
+              </motion.div>
             </motion.div>
+
+            {/* Right Content - Login Card Style */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative"
+            >
+              <div className="bg-white rounded-2xl p-8 shadow-2xl max-w-md mx-auto">
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Cloud size={32} className="text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Welcome to Cloud Integration!</h3>
+                  <p className="text-gray-600">Transform your infrastructure with enterprise-grade cloud solutions</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 border border-blue-100">
+                    <div className="flex items-center mb-2">
+                      <Shield size={20} className="text-blue-600 mr-2" />
+                      <span className="font-semibold text-gray-900">Enterprise Security</span>
+                    </div>
+                    <p className="text-sm text-gray-600">Bank-level security with compliance frameworks</p>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-4 border border-purple-100">
+                    <div className="flex items-center mb-2">
+                      <Zap size={20} className="text-purple-600 mr-2" />
+                      <span className="font-semibold text-gray-900">High Performance</span>
+                    </div>
+                    <p className="text-sm text-gray-600">Optimized for speed and reliability</p>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-4 border border-indigo-100">
+                    <div className="flex items-center mb-2">
+                      <Globe size={20} className="text-indigo-600 mr-2" />
+                      <span className="font-semibold text-gray-900">Global Scale</span>
+                    </div>
+                    <p className="text-sm text-gray-600">Multi-region deployment capabilities</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Partners Section - Authentik Style */}
+      <section className="py-16 bg-gray-100">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-2xl font-semibold text-gray-700 mb-12">
+              Trusted by Global Technology Leaders
+            </h2>
+            
+            <div className="flex flex-wrap justify-center items-center gap-16 md:gap-20 py-8">
+              {technologyPartners.map((partner, index) => (
+                <motion.div
+                  key={partner.name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <div className="flex items-center justify-center min-h-16 min-w-32">
+                    <img
+                      src={partner.logo}
+                      alt={`${partner.name} logo`}
+                      style={{
+                        height: partner.name === 'Google Cloud' ? '80px' : 
+                               partner.name === 'DigitalOcean' ? '100px' : 
+                               partner.name === 'Hostinger' ? '100px' : '48px',
+                        width: 'auto',
+                        maxWidth: '200px'
+                      }}
+                      className="object-contain opacity-60 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Introduction Section */}
-      <section className="py-20 bg-gray-50">
+      {/* Cloud Integration Services Section - Netgear Style */}
+      <section className="py-20 bg-white" id="services">
         <div className="container">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center max-w-4xl mx-auto"
+            className="text-center mb-16"
           >
-            <div className="bg-white rounded-2xl p-12 shadow-lg border border-gray-200 relative overflow-hidden">
-              {/* Tech accent glow */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
-              
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-cyan-600 to-blue-600 rounded-2xl flex items-center justify-center relative">
-                  <Cloud size={32} className="text-white" />
-                  <motion.div
-                    className="absolute inset-0 bg-cyan-400/20 rounded-2xl"
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </div>
-              </div>
-              
-              <p className="text-xl text-gray-700 leading-relaxed font-light">
-                Cloud Integration is the cornerstone of digital transformation. At Atlas Defenders, we architect 
-                and implement multi-cloud strategies that leverage the best of AWS, Azure, GCP, and Oracle Cloud, 
-                ensuring seamless hybrid connectivity, optimal cost efficiency, and enterprise-grade security.
-              </p>
-            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Our Cloud Integration Services
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive cloud solutions designed to accelerate your digital transformation journey with enterprise-grade security and performance.
+            </p>
           </motion.div>
+
+          {/* Netgear-Style Services Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {cloudServices.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200"
+              >
+                {/* Service Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      {service.subtitle}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Service Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  {/* Features List */}
+                  <div className="space-y-2 mb-6">
+                    {service.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center text-sm text-gray-600">
+                        <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-3 flex-shrink-0"></div>
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button - Netgear Style */}
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center w-full bg-gray-900 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                  >
+                    Learn More
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -447,16 +601,9 @@ const CloudIntegrationPage = () => {
         </div>
       </section>
 
-      {/* Success Metrics Section */}
-      <section className="py-20 bg-gradient-to-br from-cyan-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
-
-        <div className="container relative z-10">
+      {/* Certifications & Compliance Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -464,44 +611,39 @@ const CloudIntegrationPage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Proven Cloud Success
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Certifications & Compliance
             </h2>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-              Our cloud integration solutions deliver measurable business value through improved 
-              performance, reduced costs, and enhanced scalability.
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              We ensure every cloud integration project aligns with international security and quality standards, 
+              giving our clients peace of mind and compliance readiness.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {metrics.map((metric, index) => {
-              const Icon = metric.icon;
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {certifications.map((cert, index) => {
+              const Icon = cert.icon;
               
               return (
                 <motion.div
-                  key={metric.label}
+                  key={cert.name}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="text-center"
+                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-200 group text-center"
                 >
-                  <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20">
-                    <Icon size={28} className="text-cyan-400" />
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Icon size={28} className="text-blue-600" />
                   </div>
                   
-                  <div className="mb-4">
-                    <Counter 
-                      end={metric.value} 
-                      suffix={metric.suffix}
-                      prefix={metric.prefix || ''}
-                      duration={2.5}
-                    />
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold text-white">
-                    {metric.label}
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                    {cert.name}
                   </h3>
+                  
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {cert.description}
+                  </p>
                 </motion.div>
               );
             })}
